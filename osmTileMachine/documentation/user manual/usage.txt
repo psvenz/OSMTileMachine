@@ -1,0 +1,2 @@
+osmTileMachine -operatingmode updateplanet
+	Runs osmupdate on the planet.pbf file. Downloads the planet.pbf first if missing.

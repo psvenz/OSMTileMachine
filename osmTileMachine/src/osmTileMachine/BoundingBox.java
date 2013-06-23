@@ -18,4 +18,7 @@ public class BoundingBox {
 		minLon = minLon - LonExpand;
 		maxLon = maxLon + LonExpand;
 	}
+	public String toString(){
+		return ("LAT: " + minLat + " TO " + maxLat + "; LON: " + minLon + " TO " + maxLon);
+	}
 }

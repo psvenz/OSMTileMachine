@@ -1,5 +1,9 @@
 osmTileMachine -operatingmode updateplanet
 	Runs osmupdate on the planet.pbf file. Downloads the planet.pbf first if missing.
+
+osmTileMachine -operatingmode verifyplanet
+
+osmTileMachine -operatingmode forceplanetdownload
 	
 	
 	osmupdate.exe needs to be renamed to osmu.exe and placed in PATH. (windows 7 has some security warning issues with files ending with "XXXXXupdate.exe"

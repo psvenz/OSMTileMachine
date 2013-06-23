@@ -13,12 +13,13 @@ public class TileArea {
 		description = param_desc;
 	}
 	
+	
+	
 	public double getExtractLatLonMargin(){
 		if (z > 9) return (getLatMax() - getLatMin()) * 0.8; // 80% margin 
 		else if (z == 9) return (getLatMax() - getLatMin()) * 0.2; // 30% margin 
 		else if (z == 8) return (getLatMax() - getLatMin()) * 0.2; // 20% margin 
-		else if (z == 7) return (getLatMax() - getLatMin()) * 0.1; // 10% margin 
-		else return (getLatMax() - getLatMin()) * 0.05; // 5% margin 		
+		else return (getLatMax() - getLatMin()) * 0.1; // 10% margin 		
 	}
 
 	public double getLatMax(){

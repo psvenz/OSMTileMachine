@@ -5,6 +5,17 @@ public class TileArea {
 	private int y;
 	private int z;
 	String description;
+
+	
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	public int getZ() {
+		return z;
+	}
 	public TileArea (int param_x, int param_y, int param_z, String param_desc)
 	{
 		x = param_x;
@@ -12,10 +23,20 @@ public class TileArea {
 		z = param_z;
 		description = param_desc;
 	}
+	public boolean equals(TileArea T2){
+		if (x != T2.getX()) return false;
+		if (y != T2.getY()) return false;
+		if (z != T2.getZ()) return false;
+		return true;
+	}
+	
+	public int hashCode(){
+		return (("X" + x + "Y" + y + "Z" + z).hashCode());
+	}
 	
 	public String toString()
 	{
-		return ("Tile: Z: " + z + " X: " + x + "   Y:" + y + "     Description: " + description);
+		return ("Tile: Z: " + z + "  X: " + x + "  Y:" + y + "  Description: " + description);
 	}
 	
 	public double getExtractLatLonMargin(){

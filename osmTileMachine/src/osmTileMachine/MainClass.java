@@ -13,29 +13,46 @@ public class MainClass {
 		if (args[0].equals("DEBUGSECTION"))
 		{
 			TileArea t = new TileArea(8903, 4703, 14, "Falun");
-			
-			TileArea tParent = t.getLowerZoomLevelArea(6);
-			
-
-			System.out.println("MIN LAT: " + t.getLatMin());
-			System.out.println("CEN LAT: " + t.getLatCenter());
-			System.out.println("MAX LAT: " + t.getLatMax());
-
-			System.out.println("MIN LON: " + t.getLonMin());
-			System.out.println("CEN LON: " + t.getLonCenter());
-			System.out.println("MAX LON: " + t.getLonMax());
-			
-			System.out.println(t.getBoundingBox().toString());
-			
-			
-			System.out.println("PARENT:");
-			System.out.println(tParent.getBoundingBox().toString());
-			System.out.println("With margin:");
-			
-			
-			System.out.println(tParent.getBoundingBoxWithMargin().toString());
-			
+	
+			TileArea tParent = t.getLowerZoomLevelArea(9);
 			System.out.println(tParent.toString());
+			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+			System.out.println("");
+
+			 tParent = t.getLowerZoomLevelArea(7);
+			System.out.println(tParent.toString());
+			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+			System.out.println("");
+
+			 tParent = t.getLowerZoomLevelArea(5);
+			System.out.println(tParent.toString());
+			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+			System.out.println("");
+
+			 tParent = t.getLowerZoomLevelArea(3);
+			System.out.println(tParent.toString());
+			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+			System.out.println("");
+
+			//			
+//
+//			System.out.println("MIN LAT: " + t.getLatMin());
+//			System.out.println("CEN LAT: " + t.getLatCenter());
+//			System.out.println("MAX LAT: " + t.getLatMax());
+//
+//			System.out.println("MIN LON: " + t.getLonMin());
+//			System.out.println("CEN LON: " + t.getLonCenter());
+//			System.out.println("MAX LON: " + t.getLonMax());
+//			
+//			System.out.println(t.getBoundingBox().toString());
+//			
+//			
+//			System.out.println("PARENT:");
+//			System.out.println("With margin:");
+//			
+//			
+//			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+			
 			
 			throw new Exception("Debug section reached end of code, exiting...");
 		}

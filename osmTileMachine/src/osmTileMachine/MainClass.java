@@ -12,29 +12,51 @@ public class MainClass {
 		// Quick and dirty debugging
 		if (args[0].equals("DEBUGSECTION"))
 		{
-			TileArea t = new TileArea(8903, 4703, 14, "Falun");
+			
+			
+			Tile t = new Tile(8903, 4703, 14, "Falun");
+			Tile t2 = new Tile(1, 2, 3, "Falun");
+			Tile t4 = new Tile(11, 10, 9, "Falun");
+			Tile t3 = new Tile(100, 101, 5, "Falun");
 	
-			TileArea tParent = t.getLowerZoomLevelArea(9);
-			System.out.println(tParent.toString());
-			System.out.println(tParent.getBoundingBoxWithMargin().toString());
-			System.out.println("");
+			TileSet st = new TileSet();
+			st.add(t);
+			st.add(t2);
+			st.add(t3);
+			st.add(t4);
+			st.add(t3);
+			st.add(t3);
+			
+			st.tileSetIteratorStart();
+			Tile tPop;
+			
+			while (st.tileSetIteratorHasNext())
+			{
+				tPop = st.tileSetIteratorGetTile();
+				System.out.println(tPop.toString());
+			}
 
-			 tParent = t.getLowerZoomLevelArea(7);
-			System.out.println(tParent.toString());
-			System.out.println(tParent.getBoundingBoxWithMargin().toString());
-			System.out.println("");
-
-			 tParent = t.getLowerZoomLevelArea(5);
-			System.out.println(tParent.toString());
-			System.out.println(tParent.getBoundingBoxWithMargin().toString());
-			System.out.println("");
-
-			 tParent = t.getLowerZoomLevelArea(3);
-			System.out.println(tParent.toString());
-			System.out.println(tParent.getBoundingBoxWithMargin().toString());
-			System.out.println("");
-
-			//			
+//			Tile tParent = t.getLowerZoomLevelArea(9);
+//			System.out.println(tParent.toString());
+//			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+//			System.out.println("");
+//
+//			 tParent = t.getLowerZoomLevelArea(7);
+//			System.out.println(tParent.toString());
+//			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+//			System.out.println("");
+//
+//			 tParent = t.getLowerZoomLevelArea(5);
+//			System.out.println(tParent.toString());
+//			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+//			System.out.println("");
+//
+//			 tParent = t.getLowerZoomLevelArea(3);
+//			System.out.println(tParent.toString());
+//			System.out.println(tParent.getBoundingBoxWithMargin().toString());
+//			System.out.println("");
+//
+//			//			
 //
 //			System.out.println("MIN LAT: " + t.getLatMin());
 //			System.out.println("CEN LAT: " + t.getLatCenter());

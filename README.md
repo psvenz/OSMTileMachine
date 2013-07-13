@@ -3,6 +3,8 @@ OSMTileMachine
 
 Render at tileset of any region of the world using openstreetmap data. No database or unix knowledge required. Runs on Windows.
 
+Will be scable and able to render a region of any size. Only limited by CPU time and disk space, not system RAM. 
+
 Project status: 
 Under development.
 

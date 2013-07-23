@@ -12,6 +12,11 @@ public class MainClass {
 		// Quick and dirty debugging
 		if (args[0].equals("DEBUGSECTION"))
 		{
+			TileSet ts = new TileSet();
+			ts.addSet(Geography.getTileSetForRegion("dalarna"));
+			
+			
+			
 			Tile t1 = new Tile(244, 194, 9, "Viseu194, portugal");			
 			Tile t2 = new Tile(244, 195, 9, "Viseu195, portugal");			
 			ExtractAction e1 = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t1.getBoundingBox(), ExtractAction.CUTMETHOD_COMPLEXWAYS, "planet_updated.o5m", "viseu_194.osm");
@@ -21,6 +26,8 @@ public class MainClass {
 			
 			al.addItem(e1);
 			al.addItem(e2);
+			
+			
 			System.out.println("printing list...");
 			System.out.println(al.getListInHumanReadableFormat());
 			System.out.println("printing list done...");

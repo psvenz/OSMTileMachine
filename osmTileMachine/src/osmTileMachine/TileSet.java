@@ -79,4 +79,28 @@ public class TileSet {
 		return theTileSetIterator.hasNext();
 	}
 
+	public String getSetInHumanReadableFormat() throws Exception{
+
+		
+		
+		
+		
+		String s = "Tileset:";
+		s = s + System.getProperty("line.separator");
+		this.tileSetIteratorStart();
+		int i = 0;
+		
+		while (this.tileSetIteratorHasNext())
+		{
+			i++;
+			s = s + "tile #" + i + ": ";
+			s = s + this.tileSetIteratorGetTile().toString();
+			s = s + System.getProperty("line.separator");
+		}
+		return s;
+		
+		
+		
+		
+	}
 }

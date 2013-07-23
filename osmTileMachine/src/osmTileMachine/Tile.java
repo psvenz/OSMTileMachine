@@ -36,7 +36,7 @@ public class Tile {
 	
 	public String toString()
 	{
-		return ("Tile: Z: " + z + "  X: " + x + "  Y:" + y + "  Description: " + description);
+		return ("z" + z + "x" + x + "y" + y);
 	}
 	
 	public BoundingBox getBoundingBox(){

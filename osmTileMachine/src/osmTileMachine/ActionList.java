@@ -30,7 +30,7 @@ public class ActionList {
 		s = s + System.getProperty("line.separator");
 		for (int i=0;i< theActionList.size();i++)
 		{
-			s = s + "Action #" + i + ": ";
+			s = s + "Action #" + (i+1) + ": ";
 			s = s + theActionList.get(i).getActionInHumanReadableFormat();
 			s = s + System.getProperty("line.separator");
 		}

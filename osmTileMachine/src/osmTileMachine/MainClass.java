@@ -19,6 +19,15 @@ public class MainClass {
 			TileSet ts5 = new TileSet();
 			ts5 = ts9.getAllParentTiles(5);
 
+			System.out.println("printing list TS9:");
+			System.out.println(ts9.getSetInHumanReadableFormat());
+			System.out.println("printing list done...");
+
+			
+			System.out.println("printing list TS5:");
+			System.out.println(ts5.getSetInHumanReadableFormat());
+			System.out.println("printing list done...");
+
 			
 			
 			Tile t1 = new Tile(244, 194, 9, "Viseu194, portugal");			

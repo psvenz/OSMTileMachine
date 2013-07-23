@@ -21,7 +21,9 @@ public class MainClass {
 			
 			al.addItem(e1);
 			al.addItem(e2);
-			
+			System.out.println("printing list...");
+			System.out.println(al.getListInHumanReadableFormat());
+			System.out.println("printing list done...");
 			
 			
 			Configuration tempsessionConfiguration = new Configuration();

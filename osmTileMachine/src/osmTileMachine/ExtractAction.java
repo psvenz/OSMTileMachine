@@ -70,5 +70,9 @@ public class ExtractAction extends Action{
 		this.tool = tool;
 	}
 
+	public String getActionInHumanReadableFormat() {
+		return "ExtractAction, input: " + inputFileName + ", output: " + outputFileName + ", bbox:" + boundingBox.toString(); 
+	}
+
 
 }

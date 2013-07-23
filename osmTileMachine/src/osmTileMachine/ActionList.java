@@ -25,4 +25,15 @@ public class ActionList {
 		return theActionList.remove(0);
 	}
 
+	public String getListInHumanReadableFormat(){
+		String s = "Action list:";
+		s = s + System.getProperty("line.separator");
+		for (int i=0;i< theActionList.size();i++)
+		{
+			s = s + "Action #" + i + ": ";
+			s = s + theActionList.get(i).getActionInHumanReadableFormat();
+			s = s + System.getProperty("line.separator");
+		}
+		return s;
+	}
 }

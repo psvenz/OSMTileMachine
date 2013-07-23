@@ -21,4 +21,16 @@ public class BoundingBox {
 	public String toString(){
 		return ("LAT: " + minLat + " TO " + maxLat + "; LON: " + minLon + " TO " + maxLon + "   osmconvert -b=" + minLon + "," + minLat + "," + maxLon + "," + maxLat);
 	}
+	public double getMinLon() {
+		return minLon;
+	}
+	public double getMaxLon() {
+		return maxLon;
+	}
+	public double getMinLat() {
+		return minLat;
+	}
+	public double getMaxLat() {
+		return maxLat;
+	}
 }

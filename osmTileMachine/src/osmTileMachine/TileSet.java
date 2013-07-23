@@ -47,6 +47,19 @@ public class TileSet {
 			throw new Exception("tileSetIteratorGetTile() failed, no objects to deliver");
 		}
 	}
+	public void addSet(TileSet s)
+	{
+		s.tileSetIteratorStart();
+		while (s.tileSetIteratorHasNext())
+		{
+			try {
+				this.add(s.tileSetIteratorGetTile());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public Boolean tileSetIteratorHasNext()
 	{

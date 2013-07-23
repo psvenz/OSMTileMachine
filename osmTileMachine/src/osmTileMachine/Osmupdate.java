@@ -30,10 +30,10 @@ public class Osmupdate {
 		public static void runUpdate(Configuration sessionConfiguration, Boolean useCache) throws Exception {
 			// TODO Auto-generated method stub
 
+			
 			Boolean successfulUpdate = false;
-			String updatingFilePrefix ="updating_";
 			String fileName = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + PlanetMaintainer.planetFilename + "\""; 
-			String fileNameUpdated = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + updatingFilePrefix + PlanetMaintainer.planetFilename + "\""; 
+			String fileNameUpdated = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + PlanetMaintainer.updatedplanetFilename + "\""; 
 
 			ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 			e.setCommand(sessionConfiguration.getOsmupdateFilename());

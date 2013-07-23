@@ -12,12 +12,32 @@ public class MainClass {
 		// Quick and dirty debugging
 		if (args[0].equals("DEBUGSECTION"))
 		{
+			Tile t1 = new Tile(244, 194, 9, "Viseu194, portugal");			
+			Tile t2 = new Tile(244, 195, 9, "Viseu195, portugal");			
+			ExtractAction e1 = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t1.getBoundingBox(), ExtractAction.CUTMETHOD_COMPLEXWAYS, "planet_updated.o5m", "viseu_194.osm");
+			ExtractAction e2 = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t2.getBoundingBox(), ExtractAction.CUTMETHOD_COMPLEXWAYS, "planet_updated.o5m", "viseu_195.osm");
+			
+			ActionList al = new ActionList();
+			
+			al.addItem(e1);
+			al.addItem(e2);
 			
 			
-			Tile t = new Tile(8903, 4703, 14, "Falun");
-			Tile t2 = new Tile(1, 2, 3, "Falun");
-			Tile t4 = new Tile(11, 10, 9, "Falun");
-			Tile t3 = new Tile(100, 101, 5, "Falun");
+			
+			Configuration tempsessionConfiguration = new Configuration();
+			tempsessionConfiguration.setDebugOutput(true);
+//			tempsessionConfiguration.parseInputArguments(args);
+			
+			while (al.actionsLeft()){
+				al.getNextAction().runAction(tempsessionConfiguration);
+			}
+			
+			
+			/*
+			
+			Tile t2 = new Tile(1, 1, 2, "Falun");
+			Tile t4 = new Tile(1, 1, 3, "Falun");
+			Tile t3 = new Tile(1, 1, 4, "Falun");
 	
 			TileSet st = new TileSet();
 			st.add(t);
@@ -26,15 +46,54 @@ public class MainClass {
 			st.add(t4);
 			st.add(t3);
 			st.add(t3);
+
+			Tile x = new Tile(1, 1, 3, "Falun");
+			Tile x2 = new Tile(1, 1, 4, "Falun");
+			Tile x4 = new Tile(1, 1, 5, "Falun");
+			Tile x3 = new Tile(1, 1, 6, "Falun");
+
 			
+			TileSet st2 = new TileSet();
+			st2.add(x);
+			st2.add(x2);
+			st2.add(x3);
+			st2.add(x4);
+			st2.add(x3);
+			st2.add(x3);
+
 			st.tileSetIteratorStart();
 			Tile tPop;
 			
+			System.out.println("st contents:");
 			while (st.tileSetIteratorHasNext())
 			{
 				tPop = st.tileSetIteratorGetTile();
 				System.out.println(tPop.toString());
 			}
+			
+			System.out.println("st2 contents:");
+			st2.tileSetIteratorStart();
+			while (st2.tileSetIteratorHasNext())
+			{
+				tPop = st2.tileSetIteratorGetTile();
+				System.out.println(tPop.toString());
+			}
+
+			
+			System.out.println("Merging st2 into st1...");
+			st.addSet(st2);
+			st.addSet(st2);
+			st.addSet(st2);
+			st.addSet(st2);
+
+			System.out.println("st1 contents:");
+			st.tileSetIteratorStart();
+			while (st.tileSetIteratorHasNext())
+			{
+				tPop = st.tileSetIteratorGetTile();
+				System.out.println(tPop.toString());
+			}
+
 
 //			Tile tParent = t.getLowerZoomLevelArea(9);
 //			System.out.println(tParent.toString());
@@ -75,6 +134,7 @@ public class MainClass {
 //			
 //			System.out.println(tParent.getBoundingBoxWithMargin().toString());
 			
+			*/
 			
 			throw new Exception("Debug section reached end of code, exiting...");
 		}

@@ -5,6 +5,7 @@ import java.io.File;
 public class PlanetMaintainer {
 
 	public static String planetFilename = "planet.pbf";
+	public static String updatedplanetFilename = "planet_updated.o5m";
 	public static void forcePlanetDownload(Configuration sessionConfiguration) throws Exception {
 		// TODO Auto-generated method stub
 		String fileName = sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename; 
@@ -93,7 +94,7 @@ public class PlanetMaintainer {
 
 	}
 
-	public static void oldupdatePlanet(Configuration sessionConfiguration) {
+	public static void deleteme_oldupdatePlanet(Configuration sessionConfiguration) {
 		// TODO Auto-generated method stub
 		MessagePrinter.debug(sessionConfiguration, "updatePlanet called...");
 		// Ensure good status of planet before updating...

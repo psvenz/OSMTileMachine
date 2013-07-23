@@ -23,10 +23,10 @@ public class Tile {
 		z = param_z;
 		description = param_desc;
 	}
-	public boolean equals(Tile T2){
-		if (x != T2.getX()) return false;
-		if (y != T2.getY()) return false;
-		if (z != T2.getZ()) return false;
+	public boolean equals(Object T2){
+		if (x != ((Tile) T2).getX()) return false;
+		if (y != ((Tile) T2).getY()) return false;
+		if (z != ((Tile) T2).getZ()) return false;
 		return true;
 	}
 	

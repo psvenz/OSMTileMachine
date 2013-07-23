@@ -12,9 +12,13 @@ public class MainClass {
 		// Quick and dirty debugging
 		if (args[0].equals("DEBUGSECTION"))
 		{
-			TileSet ts = new TileSet();
-			ts.addSet(Geography.getTileSetForRegion("dalarna"));
+			TileSet ts9 = new TileSet();
+			ts9.addSet(Geography.getTileSetForRegion("dalarna"));
+
 			
+			TileSet ts5 = new TileSet();
+			ts5 = ts9.getAllParentTiles(5);
+
 			
 			
 			Tile t1 = new Tile(244, 194, 9, "Viseu194, portugal");			

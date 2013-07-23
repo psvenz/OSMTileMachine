@@ -60,6 +60,18 @@ public class TileSet {
 			}
 		}
 	}
+	
+	public TileSet getAllParentTiles(int z) throws Exception
+	{
+		TileSet newTileSet = new TileSet();
+		this.tileSetIteratorStart();
+		while (this.tileSetIteratorHasNext())
+		{
+			newTileSet.add(this.tileSetIteratorGetTile().getLowerZoomLevelTile(z));
+		}
+		
+		return newTileSet;
+	}
 
 	public Boolean tileSetIteratorHasNext()
 	{

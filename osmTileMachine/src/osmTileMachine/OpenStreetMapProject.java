@@ -17,7 +17,9 @@ public final class OpenStreetMapProject {
 		
 		
 //		addressList.add("ftp://ftp.sunet.se/ls-lR.gz");
-		addressList.add("http://download.geofabrik.de/europe/portugal-latest.osm.pbf");
+		
+		addressList.add("http://download.geofabrik.de/europe/sweden-latest.osm.pbf");
+//		addressList.add("http://download.geofabrik.de/europe/portugal-latest.osm.pbf");
 		return addressList;
 			
 		

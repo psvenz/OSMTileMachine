@@ -75,7 +75,7 @@ public class SplitAndRenderStrategy {
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.getLowerZoomLevelTile(8).toString() + ".o5m", t.toString() + ".o5m");
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.getLowerZoomLevelTile(8).toString() + ".o5m", t.toString() + ".osm");
 			actionList.addItem(extractAction);
 		}
 

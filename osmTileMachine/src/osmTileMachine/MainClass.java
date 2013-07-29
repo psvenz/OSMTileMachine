@@ -19,18 +19,18 @@ public class MainClass {
 			Configuration tempsessionConfiguration = new Configuration();
 			tempsessionConfiguration.setDebugOutput(true);
 
-			PlanetMaintainer.updatePlanet(tempsessionConfiguration);
-			ActionList ExtractDalarnaActionList = SplitAndRenderStrategy.CreateActionList(ts9, PlanetMaintainer.updatedplanetFilename);
+//			PlanetMaintainer.updatePlanet(tempsessionConfiguration);
+			ActionList ExtractDalarnaActionList = SplitAndRenderStrategy.CreateActionList(tempsessionConfiguration, ts9, PlanetMaintainer.updatedplanetFilename);
 
 			System.out.println("printing list...");
 			System.out.println(ExtractDalarnaActionList.getListInHumanReadableFormat());
 			System.out.println("printing list done...");
 
-			System.out.println("Executing actionlist...");
+//			System.out.println("Executing actionlist...");
 
-			while (ExtractDalarnaActionList.actionsLeft()){
-				ExtractDalarnaActionList.getNextAction().runAction(tempsessionConfiguration);
-			}
+//			while (ExtractDalarnaActionList.actionsLeft()){
+//				ExtractDalarnaActionList.getNextAction().runAction(tempsessionConfiguration);
+//			}
 			
 			/*			
 

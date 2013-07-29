@@ -97,5 +97,13 @@ public class Configuration {
 	public String getOsmupdateFilename(){
 		return "osmu";
 	}
+	public String getRuleSetFilename() {
+		// TODO Auto-generated method stub
+		return "Default.mrules";
+	}
+	public String getOutputDirectoryName() {
+		// TODO Auto-generated method stub
+		return "Tiles";
+	}
 
 }

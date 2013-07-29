@@ -4,7 +4,7 @@ public class SplitAndRenderStrategy {
 	private static double smallMargin = 0.2; //Degrees
 	private static double largeMargin = 1.2; //Degrees
 	
-	public static ActionList CreateActionList(TileSet RequestedTileSet, String inputFileName) throws Exception
+	public static ActionList CreateActionList(Configuration sessionConfiguration, TileSet RequestedTileSet, String inputFileName) throws Exception
 	{
 
 		ActionList actionList = new ActionList();
@@ -75,9 +75,14 @@ public class SplitAndRenderStrategy {
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
+			
 			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.getLowerZoomLevelTile(8).toString() + ".o5m", t.toString() + ".osm");
 			actionList.addItem(extractAction);
+		
+			RenderAction renderAction = new RenderAction(RenderAction.TOOL_MAPERITIVE, t.getX(), t.getY(), t.getZ(), 14, sessionConfiguration.getRuleSetFilename(), sessionConfiguration.getOutputDirectoryName(), t.toString() + ".osm");
+			actionList.addItem(renderAction);
 		}
+		
 
 		
 		
@@ -86,4 +91,5 @@ public class SplitAndRenderStrategy {
 		
 		return actionList;
 	}
+
 }

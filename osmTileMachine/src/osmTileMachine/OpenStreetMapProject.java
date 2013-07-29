@@ -39,4 +39,8 @@ public final class OpenStreetMapProject {
 		return 1000*60*60*24*8; //Next planet is available in one week + one spare day
 	}
 
+	public static boolean avoidServer(String url)
+	{
+		return url.contains("http://planet.openstreetmap.org");
+	}
 }

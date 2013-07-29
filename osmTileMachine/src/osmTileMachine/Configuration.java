@@ -88,7 +88,7 @@ public class Configuration {
 	}
 	public String getWorkingDirectory() {
 		// TODO Auto-generated method stub
-		return "C:\\Users\\peter\\Documents\\working directory for osmTileMachine";
+		return System.getProperty("user.dir");
 	}
 	public boolean getDebugOutput() {
 		// TODO Auto-generated method stub

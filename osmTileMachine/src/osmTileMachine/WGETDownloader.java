@@ -13,21 +13,18 @@ public class WGETDownloader {
 		boolean mirrorFound = false;
 		long backofftime = 5;
 		while (mirrorFound == false){
-
 			try 
 			{
 				MessagePrinter.notify(sessionConfiguration, "Finding fastest mirror...");
 				fastestMirrorURL = findFastestMirror(sessionConfiguration, mirrors);
 				mirrorFound = true;
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				mirrorFound = false;
 				MessagePrinter.error(sessionConfiguration, "No mirror found!");
 				MessagePrinter.error(sessionConfiguration, "Waiting " + backofftime + " seconds before retrying");
 				try {
 					Thread.sleep(1000*backofftime);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				backofftime = backofftime * 3;
@@ -37,39 +34,19 @@ public class WGETDownloader {
 		}
 		MessagePrinter.debug(sessionConfiguration, "The fastest mirror is " + fastestMirrorURL);
 		MessagePrinter.notify(sessionConfiguration, "Starting download from " + fastestMirrorURL);
+		
+		
 		// Try actual wget download here
-		String downloadFilename = fileName;
 		
-		ExternalToolLauncher tool = new ExternalToolLauncher(sessionConfiguration); 
-		
+		ExternalToolLauncher tool = new ExternalToolLauncher(sessionConfiguration); 	
 		tool.setCommand("wget");
-
-//		tool.addArgument("--output-document=\"" + downloadFilename + "\" --output-file=\"" + sessionConfiguration.getWorkingDirectory() + File.separator + "wgetlogfile.txt\" " + fastestMirrorURL);
-
-		tool.addArgument("--dot-style=giga");
-		
+		tool.addArgument("--dot-style=giga");	
 		tool.addArgument("-O");
-		tool.addArgument(downloadFilename);
+		tool.addArgument(fileName);
 		tool.addArgument(fastestMirrorURL);
-	
 		tool.run();
-//		String systemCommand = "wget  " + 
-//				"--output-document=\"" + downloadFilename + "\" --output-file=\"" + sessionConfiguration.getWorkingDirectory() + File.separator + "wgetlogfile.txt\" " + fastestMirrorURL;
+		
 
-
-/*		Process p = null;
-		File f = new File(downloadFilename);
-		f.delete();
-		Boolean successfulDownload = false;
-		try {
-			MessagePrinter.debug(sessionConfiguration, "System call: " + systemCommand);
-			p = Runtime.getRuntime().exec(systemCommand);
-			p.waitFor();
-			if (p.exitValue() == 0) successfulDownload = true;
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		Boolean successfulDownload = false;
 		if (tool.ExitValue() == 0){
 			successfulDownload = true;
@@ -79,22 +56,20 @@ public class WGETDownloader {
 	}
 
 
-	public static boolean testToolAvailability() {
-		Process p;
-		int returnCode = -1;
-		try 
-		{
-			p = Runtime.getRuntime().exec("wget --version");
-			p.waitFor();
-			returnCode = p.exitValue();
-
-		} catch (IOException | InterruptedException e) {
+	public static boolean testToolAvailability(Configuration sessionConfiguration) {
+		
+		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
+		try {
+			e.setCommand("wget");
+			e.addArgument("--version");
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
+			e1.printStackTrace();
 		}
-		// TODO Auto-generated method stub
-		if (returnCode == 0) 
+		e.addArgument("--help");
+		e.run();
+
+		if (e.ExitValue() == 0) 
 		{
 			return true;
 		}
@@ -102,7 +77,7 @@ public class WGETDownloader {
 		{
 			return false;
 		}
-
+		
 	}
 
 
@@ -117,66 +92,41 @@ public class WGETDownloader {
 		}
 
 		//Probe all mirrors and find the fastest one
-		String systemCommand = "";
+		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
+		
 
-		float largestFile = 0;
+		double largestFile = 0;
 		String largestUrl = "";
+		String testFileName = "downloadperformancetestfile.tmp";
+		
+		for (String mirrorURL : mirrors) {
+			e.setCommand("wget");
+			e.addArgument("--timeout=5");
+			e.addArgument("--tries=0");
+			e.addArgument("--output-document=" + testFileName);
+			e.addArgument("--dot-style=mega");
+			e.addArgument(mirrorURL);
 
-		for (String string : mirrors) {
-			systemCommand = "wget --timeout=5 --tries=0 " + 
-					"--output-document=\"" + sessionConfiguration.getWorkingDirectory() + File.separator + "downloadperformancetestfile.tmp\" --output-file=\"" + sessionConfiguration.getWorkingDirectory() + File.separator + "wgetlogfile.txt\" " + string;
-			MessagePrinter.debug(sessionConfiguration, "System command: " + systemCommand);
-
-			Process p = null;
-			File f = new File(sessionConfiguration.getWorkingDirectory() + File.separator + "downloadperformancetestfile.tmp");
+			File f = new File(sessionConfiguration.getWorkingDirectory() + File.separator + testFileName);
 			f.delete();
 			MessagePrinter.debug(sessionConfiguration, "Waiting before download speed test");
-			try 
-			{
-				Thread.sleep(100);
-			} catch (InterruptedException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				MessagePrinter.error(sessionConfiguration, "Thread sleep failed.");
-			}
-			MessagePrinter.debug(sessionConfiguration, "Calling system " + systemCommand);
+			TimeConsumer.sleepSeconds(0.1);
+			double downloadTime = 4;
+			e.runAndKill(downloadTime);
 
-			try {
-				p = Runtime.getRuntime().exec(systemCommand);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				MessagePrinter.error(sessionConfiguration, "Could not spawn wget process");
-			}
-
-			MessagePrinter.debug(sessionConfiguration, "Sleeping");
-
-			int downloadTime = 4000; //milliseconds
-
-			try {
-				Thread.sleep(downloadTime);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				MessagePrinter.error(sessionConfiguration, "Thread sleep failed.");
-			}
-
-			MessagePrinter.debug(sessionConfiguration, "Killing wget");
-
-
-			p.destroy();
-			p.waitFor();
-
-			long fileSize;
+			double fileSize;
 			fileSize =  f.length();
 			f.delete();
-			MessagePrinter.notify(sessionConfiguration, string + " download speed is  " +Long.toString((fileSize)/(downloadTime)) + " kB/s");
+			MessagePrinter.notify(sessionConfiguration, mirrorURL + " download speed is  " +Long.toString((long) (fileSize/ (1000*downloadTime))) + " kB/s");
 
+
+			// If we should avoid a server, only use it if it is 10 times faster than the other mirrors...
+			if (OpenStreetMapProject.avoidServer(mirrorURL)) fileSize = fileSize / 10;
+			
 			if (fileSize > largestFile)
 			{
 				largestFile = fileSize;
-				largestUrl = string;
+				largestUrl = mirrorURL;
 			}
 
 		}

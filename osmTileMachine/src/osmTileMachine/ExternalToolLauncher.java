@@ -3,6 +3,7 @@ package osmTileMachine;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.io.*;
 
@@ -43,13 +44,6 @@ public class ExternalToolLauncher {
 			ProcessBuilder pb = new java.lang.ProcessBuilder(argumentList);
 			pb.directory(new File(sessionConfiguration.getWorkingDirectory()));
 			pb.redirectErrorStream(true);
-			
-			
-			
-//			Runtime rt = Runtime.getRuntime();
-
-
-//			File dir = new File(sessionConfiguration.getWorkingDirectory());
 
 			String argumentsPrintFriendly = "";
 			for (int i = 0; i<args.length;i++)
@@ -58,29 +52,16 @@ public class ExternalToolLauncher {
 			}
 			MessagePrinter.debug(sessionConfiguration, "ExternalToolLauncher: Calling external tool: " + argumentsPrintFriendly);
 
-//			Process proc = rt.exec(args, null, dir);
-//			Process proc = rt.exec(args[], null, dir);
-			
-			
+
 			Process proc = pb.start();
-			
-			
-			
-			
-			
-			// any error message?
-//			StreamGobbler errorGobbler = new 
-	//				StreamGobbler(proc.getErrorStream(), args[0], sessionConfiguration.getDebugOutput());            
 
 			// any output?
 			StreamGobbler outputGobbler = new 
 					StreamGobbler(proc.getInputStream(),args[0], sessionConfiguration.getDebugOutput());
 
-			// kick them off
-//			errorGobbler.start();
 			outputGobbler.start();
-			
-			
+
+
 			// any error???
 			int exitVal = proc.waitFor();
 			outputGobbler.join();
@@ -92,11 +73,46 @@ public class ExternalToolLauncher {
 			t.printStackTrace();
 		}
 	}
+	
+	public void runAndKill(double TimeoutSeconds)
+	{
+		String[] args = argumentList.toArray(new String[argumentList.size()]);
+		try
+		{            
+
+			ProcessBuilder pb = new java.lang.ProcessBuilder(argumentList);
+			pb.directory(new File(sessionConfiguration.getWorkingDirectory()));
+			pb.redirectErrorStream(true);
+
+			String argumentsPrintFriendly = "";
+			for (int i = 0; i<args.length;i++)
+			{
+				argumentsPrintFriendly = argumentsPrintFriendly + " " + args[i];
+			}
+			MessagePrinter.debug(sessionConfiguration, "ExternalToolLauncher: Calling external tool: " + argumentsPrintFriendly);
 
 
+			Process proc = pb.start();
 
+			// any output?
+			StreamGobbler outputGobbler = new 
+					StreamGobbler(proc.getInputStream(),args[0], sessionConfiguration.getDebugOutput());
 
+			outputGobbler.start();
 
+			TimeConsumer.sleepSeconds(TimeoutSeconds);
+			
+			proc.destroy();
+			proc.waitFor();
+			
+			outputGobbler.join();
+			MessagePrinter.debug(sessionConfiguration, "ExternalToolLauncher: Process killed after " + TimeoutSeconds + " seconds.");
+		} catch (Throwable t)
+		{
+			MessagePrinter.debug(sessionConfiguration, "ExternalToolLauncher exception!");
+			t.printStackTrace();
+		}
+	}
 }
 
 

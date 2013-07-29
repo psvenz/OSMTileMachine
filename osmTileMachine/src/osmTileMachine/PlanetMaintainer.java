@@ -6,10 +6,9 @@ public class PlanetMaintainer {
 
 	public static String planetFilename = "planet.pbf";
 	public static String updatedplanetFilename = "planet_updated.o5m";
+	
 	public static void forcePlanetDownload(Configuration sessionConfiguration) throws Exception {
-		// TODO Auto-generated method stub
-		String fileName = sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename; 
-		InternetDownloader.downloadFile(sessionConfiguration, fileName, OpenStreetMapProject.getPlanetMirrors());
+		InternetDownloader.downloadFile(sessionConfiguration, planetFilename, OpenStreetMapProject.getPlanetMirrors());
 	}
 
 	public static void updatePlanet(Configuration sessionConfiguration) throws Exception{
@@ -179,42 +178,42 @@ public class PlanetMaintainer {
 		// assume planet is OK until fault has been found
 
 		// File exists
-		File f = new File(sessionConfiguration.getWorkingDirectory() + File.separator + "planet.pbf");
+		File f = new File(sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename);
 		if (f.exists() == false){
 			planetGood = false;
-			MessagePrinter.debug(sessionConfiguration, sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename + " does not exist... FAIL!");
+			MessagePrinter.debug(sessionConfiguration,  planetFilename + " does not exist... FAIL!");
 		}
 		else {
-			MessagePrinter.debug(sessionConfiguration, sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename + " exists... OK!");
+			MessagePrinter.debug(sessionConfiguration,  planetFilename + " exists... OK!");
 
 		}
 
 		// Size is at least the right size
 		if (f.length() < OpenStreetMapProject.ApproximatePlanetSize()*0.9){
 			planetGood = false;
-			MessagePrinter.debug(sessionConfiguration, sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename + " too small to be OK!");
+			MessagePrinter.debug(sessionConfiguration,  planetFilename + " too small to be OK!");
 		}
 		else {
-			MessagePrinter.debug(sessionConfiguration, sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename + " file size OK (" + f.length()/1000000 + " MB)");			
+			MessagePrinter.debug(sessionConfiguration,  planetFilename + " file size OK (" + f.length()/1000000 + " MB)");			
 		}
 
 
 		// Max lastmodified is -14 to 1 days compared to current time.
 		double fileDate = (f.lastModified() - System.currentTimeMillis())/(1000*60*60*24); //fileDate unit is days
 
-		MessagePrinter.debug(sessionConfiguration, sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename + " age is " + -fileDate*24 + " hours");			
+		MessagePrinter.debug(sessionConfiguration,  planetFilename + " age is " + -fileDate*24 + " hours");			
 
 		if (fileDate < - 14)
 		{
 			planetGood = false;
-			MessagePrinter.debug(sessionConfiguration, sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename + " is too old. (Last modified " + -fileDate + " days ago...)");			
+			MessagePrinter.debug(sessionConfiguration, planetFilename + " is too old. (Last modified " + -fileDate + " days ago...)");			
 
 		}
 
 		if (fileDate > 1)
 		{
 			planetGood = false;
-			MessagePrinter.debug(sessionConfiguration, sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename + " is too new. (Last modified " + -fileDate + " days ago...)");			
+			MessagePrinter.debug(sessionConfiguration, planetFilename + " is too new. (Last modified " + -fileDate + " days ago...)");			
 
 		}
 

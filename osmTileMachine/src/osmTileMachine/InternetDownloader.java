@@ -5,24 +5,24 @@ import java.util.ArrayList;
 
 public class InternetDownloader {
 
-	public static void downloadFile(Configuration sessionConfiguration, String fileName, ArrayList<String> mirrors) throws Exception 
+	public static void downloadFile(Configuration sessionConfiguration, String localFileName, ArrayList<String> mirrors) throws Exception 
 	{
 		
 		
-		if (WGETDownloader.testToolAvailability()){
+		if (WGETDownloader.testToolAvailability(sessionConfiguration)){
 			Boolean successDownload = false;
 			long backofftime = 30; // If wget cannot succeed, backoff (seconds)
 			
 			while (successDownload == false){
 				try {
 					String whileDownloadingSuffix = ".downloading";
-					File fFinished = new File(fileName);
+					File fFinished = new File(localFileName);
 					fFinished.delete();
-					WGETDownloader.TryDownload(sessionConfiguration, fileName + whileDownloadingSuffix, mirrors);
+					WGETDownloader.TryDownload(sessionConfiguration, localFileName + whileDownloadingSuffix, mirrors);
 					successDownload = true;
 					MessagePrinter.notify(sessionConfiguration, "File downloaded successfully!");
 					
-					File fDownloading = new File(fileName + whileDownloadingSuffix);
+					File fDownloading = new File(localFileName + whileDownloadingSuffix);
 					fDownloading.renameTo(fFinished);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

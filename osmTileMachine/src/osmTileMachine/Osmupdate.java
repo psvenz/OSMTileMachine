@@ -31,7 +31,7 @@ public class Osmupdate {
 			e.setCommand(executablefileName);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			return false;
 		}
 		e.addArgument("--help");
 		e.run();

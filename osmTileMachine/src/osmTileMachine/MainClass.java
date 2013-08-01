@@ -186,8 +186,6 @@ public class MainClass {
 
 
 		Configuration sessionConfiguration = new Configuration();
-		sessionConfiguration.setDebugOutput(true);
-
 
 		try
 		{
@@ -214,6 +212,27 @@ public class MainClass {
 			} else {
 				MessagePrinter.notify(sessionConfiguration, "Planet NOT OK!");
 			}
+		}
+		else if (sessionConfiguration.getOperatingMode() == Configuration.OPERATINGMODE_RENDERAREA){
+			TileSet ts = new TileSet();
+			ts.addSet(Geography.getTileSetForRegion(sessionConfiguration.getRequestedArea()));
+
+			System.out.println("Updating planet...");
+
+			PlanetMaintainer.updatePlanet(sessionConfiguration);
+			
+			System.out.println("Generating actionlist...");
+			ActionList ExtractAreaActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, PlanetMaintainer.updatedplanetFilename);
+			System.out.println(ExtractAreaActionList.getListInHumanReadableFormat());
+			
+			System.out.println("Executing actionlist...");
+			int i = 0;
+			while (ExtractAreaActionList.actionsLeft()){
+				ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);
+				i++;
+				System.out.print(i + " ");
+			}
+		
 		}
 		else
 		{

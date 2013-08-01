@@ -11,6 +11,7 @@ public class Configuration {
 
 	private int operatingMode;
 	private boolean enableDebugOutput;
+	private String requestedArea;
 
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
@@ -57,6 +58,21 @@ public class Configuration {
 					throw new ParseException(operatingModeString + " is not a valid operatingmode.", i);
 				}
 				i++;
+			}
+			else if (arg.toLowerCase().contentEquals("-area") ||  arg.toLowerCase().contentEquals("-a"))
+			{
+				if (i+1 == args.length) // nothing follows -operatingmode 
+				{
+					throw new ParseException("area argument missing", i);
+				}
+				setRequestedArea(args[i+1]);
+				i++;
+			}
+			else if (arg.toLowerCase().contentEquals("-debug") ||  arg.toLowerCase().contentEquals("-d"))
+			{
+				
+				setDebugOutput(true);
+				
 			}
 			else
 			{
@@ -110,6 +126,12 @@ public class Configuration {
 	public String getMaperitiveExecutableFileName() {
 		// TODO Auto-generated method stub
 		return "C:\\Users\\peter\\Documents\\Maperitive installation directory\\maperitive.exe";
+	}
+	public String getRequestedArea() {
+		return requestedArea;
+	}
+	public void setRequestedArea(String requestedArea) {
+		this.requestedArea = requestedArea;
 	}
 
 }

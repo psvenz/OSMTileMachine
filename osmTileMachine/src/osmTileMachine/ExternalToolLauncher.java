@@ -69,8 +69,8 @@ public class ExternalToolLauncher {
 			exitValue = exitVal;
 		} catch (Throwable t)
 		{
-			MessagePrinter.debug(sessionConfiguration, "ExternalToolLauncher exception!");
-			t.printStackTrace();
+			MessagePrinter.debug(sessionConfiguration, "ExternalToolLauncher exception! Stack trace:" + t.getStackTrace().toString());
+//			t.printStackTrace();
 		}
 	}
 	

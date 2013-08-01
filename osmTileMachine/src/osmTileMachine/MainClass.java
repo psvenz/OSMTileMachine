@@ -17,7 +17,7 @@ public class MainClass {
 			ts9.addSet(Geography.getTileSetForRegion("dalarna"));
 
 			Configuration tempsessionConfiguration = new Configuration();
-			tempsessionConfiguration.setDebugOutput(true);
+			tempsessionConfiguration.setDebugOutput(false);
 
 			PlanetMaintainer.updatePlanet(tempsessionConfiguration);
 			ActionList ExtractDalarnaActionList = SplitAndRenderStrategy.CreateActionList(tempsessionConfiguration, ts9, PlanetMaintainer.updatedplanetFilename);
@@ -27,9 +27,11 @@ public class MainClass {
 			System.out.println("printing list done...");
 
 			System.out.println("Executing actionlist...");
-
+			int i = 0;
 			while (ExtractDalarnaActionList.actionsLeft()){
 				ExtractDalarnaActionList.getNextAction().runAction(tempsessionConfiguration);
+				i++;
+				System.out.print(i + " ");
 			}
 			
 			/*			

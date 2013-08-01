@@ -8,12 +8,14 @@ public class PlanetMaintainer {
 	public static String updatedplanetFilename = "planet_updated.o5m";
 	
 	public static void forcePlanetDownload(Configuration sessionConfiguration) throws Exception {
+		MessagePrinter.notify(sessionConfiguration, "Downloading planet file...");
 		InternetDownloader.downloadFile(sessionConfiguration, planetFilename, OpenStreetMapProject.getPlanetMirrors());
+		MessagePrinter.notify(sessionConfiguration, "Planet file downloaded!");
 	}
 
 	public static void updatePlanet(Configuration sessionConfiguration) throws Exception{
 
-		MessagePrinter.debug(sessionConfiguration, "updatePlanet called...");
+		MessagePrinter.notify(sessionConfiguration, "Updating planet file...");
 		if (Osmupdate.testToolAvailability(sessionConfiguration) == false) throw new Exception("updatePlanet failed, could not find osmupdate tool (osmu.exe)");
 		MessagePrinter.debug(sessionConfiguration, "osmupdate testToolAvailability OK");
 
@@ -93,84 +95,6 @@ public class PlanetMaintainer {
 
 	}
 
-	public static void deleteme_oldupdatePlanet(Configuration sessionConfiguration) {
-		// TODO Auto-generated method stub
-		MessagePrinter.debug(sessionConfiguration, "updatePlanet called...");
-		// Ensure good status of planet before updating...
-		boolean planetStatusOK = false;
-		boolean reDownloaded = false;
-		while (planetStatusOK == false) {
-			MessagePrinter.debug(sessionConfiguration, "Verifying existing " + planetFilename);
-
-			if (PlanetMaintainer.verifyPlanet(sessionConfiguration)){
-				planetStatusOK = true;
-				MessagePrinter.debug(sessionConfiguration, "planet verified OK");
-
-			}
-			else
-			{
-				MessagePrinter.debug(sessionConfiguration, "planet verified FAIL");
-
-				if (reDownloaded == true)
-				{
-					// Already tried redownload, planet may be broken this week, wait until next release...
-					try {
-						MessagePrinter.debug(sessionConfiguration, "Planet still not OK,Already tried redownload, planet may be broken this week, wait until next release, sleeping " + OpenStreetMapProject.timeUntilNextPlanetRelease()/1000 + " seconds before attempting redownload.");
-						Thread.sleep(OpenStreetMapProject.timeUntilNextPlanetRelease());
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
-				try {
-					MessagePrinter.debug(sessionConfiguration, "Attempting redownload of planet...");
-					forcePlanetDownload(sessionConfiguration);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				reDownloaded = true;
-			}
-		}
-
-		// planet exists and verified OK, continue update...
-		MessagePrinter.debug(sessionConfiguration, "planet exists and verifyed OK, continue update...");
-		if (Osmupdate.testToolAvailability(sessionConfiguration) == true){
-
-			Boolean updateSuccessful = false;
-			int tries = 0;
-			while ((tries < 5) && (updateSuccessful == false)){
-
-
-
-				try {
-					tries++;
-					MessagePrinter.debug(sessionConfiguration, "Running osmupdate...");
-					Osmupdate.runUpdate(sessionConfiguration, false);
-					updateSuccessful = true;
-					MessagePrinter.debug(sessionConfiguration, "Osmupdate finished OK!");
-
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					MessagePrinter.error(sessionConfiguration, "Update failed...");
-					MessagePrinter.error(sessionConfiguration, "Waiting 3600 seconds before trying again.");
-					try {
-						Thread.sleep(1000*3600);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-			}			
-		}
-		else{
-			MessagePrinter.error(sessionConfiguration, "osmupdate not found in path! (please rename osmupdate.exe to osmu.exe)");
-		}
-
-
-	}
 
 	public static boolean verifyPlanet(Configuration sessionConfiguration){
 		MessagePrinter.debug(sessionConfiguration, "Verifying planet...");

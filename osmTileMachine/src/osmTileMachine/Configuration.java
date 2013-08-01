@@ -7,6 +7,7 @@ public class Configuration {
 	public static final int OPERATINGMODE_FORCEPLANETDOWNLOAD = 1;
 	public static final int OPERATINGMODE_UPDATEPLANET = 2;
 	public static final int OPERATINGMODE_VERIFYPLANET = 3;
+	public static final int OPERATINGMODE_RENDERAREA = 4;
 
 	private int operatingMode;
 	private boolean enableDebugOutput;
@@ -42,6 +43,10 @@ public class Configuration {
 				else if (operatingModeString.contentEquals("UPDATEPLANET")) {
 					setOperatingMode(OPERATINGMODE_UPDATEPLANET);
 					if (enableDebugOutput) System.out.println("Operating mode is UPDATEPLANET");
+				}
+				else if (operatingModeString.contentEquals("RENDERAREA")) {
+					setOperatingMode(OPERATINGMODE_RENDERAREA);
+					if (enableDebugOutput) System.out.println("Operating mode is RENDERAREA");
 				}
 				else if (operatingModeString.contentEquals("VERIFYPLANET")) {
 					setOperatingMode(OPERATINGMODE_VERIFYPLANET);
@@ -94,16 +99,17 @@ public class Configuration {
 		// TODO Auto-generated method stub
 		return enableDebugOutput;
 	}
-	public String getOsmupdateFilename(){
-		return "osmu";
-	}
 	public String getRuleSetFilename() {
 		// TODO Auto-generated method stub
-		return "Default.mrules";
+		return "GoogleMaps.mrules";
 	}
 	public String getOutputDirectoryName() {
 		// TODO Auto-generated method stub
-		return "Tiles";
+		return "wwwroot";
+	}
+	public String getMaperitiveExecutableFileName() {
+		// TODO Auto-generated method stub
+		return "C:\\Users\\peter\\Documents\\Maperitive installation directory\\maperitive.exe";
 	}
 
 }

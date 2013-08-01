@@ -60,6 +60,8 @@ public class Osmupdate {
 		e.addArgument("-v");
 		e.addArgument("--hour");
 		e.addArgument("--day");
+		e.addArgument("--minute");
+		
 		if (useCache) e.addArgument("--keep-tempfiles");
 		e.addArgument(fileName);
 		e.addArgument(fileNameUpdated);

@@ -16,6 +16,7 @@ public class RenderAction extends Action{
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		this.zMax = zMax;
 		this.dataFileName = dataFileName;
 		this.ruleSetFileName = ruleSetFileName;
 		this.outputDirectoryName = outputDirectoryName;
@@ -53,5 +54,9 @@ public class RenderAction extends Action{
 
 	public String getDataFileName() {
 		return dataFileName;
+	}
+
+	public int getzMax() {
+		return zMax;
 	}
 }

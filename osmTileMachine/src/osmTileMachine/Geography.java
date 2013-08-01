@@ -18,10 +18,12 @@ public class Geography {
 			t = new Tile(275, 143, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(276, 143, 9, "Dalarna"); tileSet.add(t);
 
+			t = new Tile(273, 144, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(274, 144, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(275, 144, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(276, 144, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(277, 144, 9, "Dalarna"); tileSet.add(t);
+			t = new Tile(278, 144, 9, "Dalarna"); tileSet.add(t);
 
 			t = new Tile(273, 145, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(274, 145, 9, "Dalarna"); tileSet.add(t);

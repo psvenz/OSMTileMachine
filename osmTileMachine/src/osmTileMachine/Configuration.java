@@ -116,8 +116,10 @@ public class Configuration {
 		return enableDebugOutput;
 	}
 	public String getRuleSetFilename() {
-		// TODO Auto-generated method stub
-		return "GoogleMaps.mrules";
+
+	return "bikemap_rules.txt";
+		
+//		return "GoogleMaps.mrules";
 	}
 	public String getOutputDirectoryName() {
 		// TODO Auto-generated method stub

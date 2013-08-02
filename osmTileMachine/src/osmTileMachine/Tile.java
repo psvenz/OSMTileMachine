@@ -57,6 +57,17 @@ public class Tile {
 		
 		return new Tile(newX, newY , requestedZ, description);
 	}
+
+	public static Tile getTile(double middle_lon,  double middle_lat, int requestedZ)
+	{
+		
+		
+	   int newX = (int)Math.floor( (middle_lon + 180) / 360 * (1<<requestedZ) ) ;
+	   int newY = (int)Math.floor( (1 - Math.log(Math.tan(Math.toRadians(middle_lat)) + 1 / Math.cos(Math.toRadians(middle_lat))) / Math.PI) / 2 * (1<<requestedZ) ) ;
+		
+		return new Tile(newX, newY , requestedZ, "");
+	}
+
 	
 	public double getLatMax(){
 		return tile2lat(y,z);

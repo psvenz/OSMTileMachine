@@ -12,7 +12,7 @@ public class Geography {
 			t = new Tile(273, 142, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(274, 142, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(275, 142, 9, "Dalarna"); tileSet.add(t);
-			
+
 			t = new Tile(273, 143, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(274, 143, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(275, 143, 9, "Dalarna"); tileSet.add(t);
@@ -41,7 +41,7 @@ public class Geography {
 			t = new Tile(278, 146, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(279, 146, 9, "Dalarna"); tileSet.add(t);
 
-			
+
 			t = new Tile(273, 147, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(274, 147, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(275, 147, 9, "Dalarna"); tileSet.add(t);
@@ -50,7 +50,7 @@ public class Geography {
 			t = new Tile(278, 147, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(279, 147, 9, "Dalarna"); tileSet.add(t);
 
-			
+
 			t = new Tile(273, 148, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(274, 148, 9, "Dalarna"); tileSet.add(t);
 			t = new Tile(275, 148, 9, "Dalarna"); tileSet.add(t);
@@ -60,8 +60,56 @@ public class Geography {
 			t = new Tile(279, 148, 9, "Dalarna"); tileSet.add(t);
 
 			t = new Tile(277, 149, 9, "Dalarna"); tileSet.add(t);
-		}
+		} 
 		
+		else if (nameOfRegion.equalsIgnoreCase("vänern"))
+		{
+			BoundingBox bbox = new BoundingBox(12.306, 58.38, 14.094, 59.42);
+			tileSet = getTileSetForRegion(bbox);
+		}
+		else if (nameOfRegion.equalsIgnoreCase("Niemisel"))
+		{
+			BoundingBox bbox = new BoundingBox(21.6, 65.9, 22.41, 66.9);
+			tileSet = getTileSetForRegion(bbox);
+		}
+
+
+		return tileSet;
+	}
+
+
+	public static TileSet getTileSetForRegion(BoundingBox boundingBox)
+	{
+		TileSet tileSet = new TileSet();
+		Tile t; 
+
+		double xMinCoord = boundingBox.getMinLon();
+		double xMaxCoord = boundingBox.getMaxLon();
+		double yMinCoord = boundingBox.getMaxLat();
+		double yMaxCoord = boundingBox.getMinLat();
+
+		Tile topLeftTile = Tile.getTile(xMinCoord, yMinCoord, SplitAndRenderStrategy.getLowestRenderLevel());
+		Tile bottomRightTile = Tile.getTile(xMaxCoord, yMaxCoord, SplitAndRenderStrategy.getLowestRenderLevel());
+
+		int xMin = topLeftTile.getX();
+		int xMax = bottomRightTile.getX();
+
+
+		int yMin = topLeftTile.getY();
+		int yMax = bottomRightTile.getY();
+
+		for (int x = xMin ;x<=xMax;x++)			
+		{
+			for (int y = yMin;y<=yMax;y++)			
+			{
+				t = new Tile(x, y, SplitAndRenderStrategy.getLowestRenderLevel(), "");
+				tileSet.add(t);
+			}
+
+
+		}
+
+
 
 		return tileSet;
 	}

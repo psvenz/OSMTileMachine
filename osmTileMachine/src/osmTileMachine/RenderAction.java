@@ -25,7 +25,7 @@ public class RenderAction extends Action{
 	void runAction(Configuration sessionConfiguration) throws Exception {
 		if (this.tool == TOOL_MAPERITIVE)
 		{
-			Maperivite.runRenderAction(sessionConfiguration, this);
+			Maperitive.runRenderAction(sessionConfiguration, this);
 		}
 			
 	}

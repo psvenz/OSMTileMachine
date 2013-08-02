@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Maperivite {
+public class Maperitive {
 
 	public static void runRenderAction(Configuration sessionConfiguration,
 			RenderAction renderAction) 

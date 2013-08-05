@@ -92,7 +92,6 @@ public class WGETDownloader {
 		}
 
 		//Probe all mirrors and find the fastest one
-		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 		
 
 		double largestFile = 0;
@@ -100,6 +99,7 @@ public class WGETDownloader {
 		String testFileName = "downloadperformancetestfile.tmp";
 		
 		for (String mirrorURL : mirrors) {
+			ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 			e.setCommand("wget");
 			e.addArgument("--timeout=5");
 			e.addArgument("--tries=0");

@@ -5,7 +5,7 @@ import java.io.File;
 public class PlanetMaintainer {
 
 	public static String planetFilename = "planet.pbf";
-	public static String updatedplanetFilename = "planet_updated.o5m";
+	public static String updatedplanetFilename = "planet_updated.pbf";
 	
 	public static void forcePlanetDownload(Configuration sessionConfiguration) throws Exception {
 		MessagePrinter.notify(sessionConfiguration, "Downloading planet file...");

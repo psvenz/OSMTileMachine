@@ -12,6 +12,8 @@ public class Osmconvert {
 			e.addArgument("--complex-ways");
 		}
 		
+		e.addArgument("--drop-author");
+		
 		e.addArgument("-o=" + extractAction.getOutputFileName());
 		e.run();
 		

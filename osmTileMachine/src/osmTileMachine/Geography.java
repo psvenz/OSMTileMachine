@@ -72,6 +72,11 @@ public class Geography {
 			BoundingBox bbox = new BoundingBox(21.6, 65.9, 22.41, 66.9);
 			tileSet = getTileSetForRegion(bbox);
 		}
+		else if (nameOfRegion.equalsIgnoreCase("germany"))
+		{
+			BoundingBox bbox = new BoundingBox(5, 47, 16, 55);
+			tileSet = getTileSetForRegion(bbox);
+		}
 
 
 		return tileSet;

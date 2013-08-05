@@ -1,8 +1,8 @@
 package osmTileMachine;
 
 public class SplitAndRenderStrategy {
-	private static double smallMargin = 0.2; //Degrees
-	private static double largeMargin = 1.2; //Degrees
+	private static double smallMargin = 0.05; //Degrees
+	private static double largeMargin = 0.9; //Degrees
 	
 	public static ActionList CreateActionList(Configuration sessionConfiguration, TileSet RequestedTileSet, String inputFileName) throws Exception
 	{
@@ -20,7 +20,7 @@ public class SplitAndRenderStrategy {
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, inputFileName, t.toString() + ".o5m");
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, inputFileName, t.toString() + ".pbf");
 			actionList.addItem(extractAction);
 		}
 
@@ -31,7 +31,7 @@ public class SplitAndRenderStrategy {
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(4).toString() + ".o5m", t.toString() + ".o5m");
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(4).toString() + ".pbf", t.toString() + ".pbf");
 			actionList.addItem(extractAction);
 		}
 
@@ -42,7 +42,7 @@ public class SplitAndRenderStrategy {
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(5).toString() + ".o5m", t.toString() + ".o5m");
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(5).toString() + ".pbf", t.toString() + ".pbf");
 			actionList.addItem(extractAction);
 		}
 
@@ -53,7 +53,7 @@ public class SplitAndRenderStrategy {
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.getLowerZoomLevelTile(6).toString() + ".o5m", t.toString() + ".o5m");
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(6).toString() + ".pbf", t.toString() + ".pbf");
 			actionList.addItem(extractAction);
 		}
 
@@ -64,7 +64,7 @@ public class SplitAndRenderStrategy {
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.getLowerZoomLevelTile(7).toString() + ".o5m", t.toString() + ".o5m");
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(7).toString() + ".pbf", t.toString() + ".o5m");
 			actionList.addItem(extractAction);
 		}
 
@@ -96,7 +96,7 @@ public class SplitAndRenderStrategy {
 		return 9;
 	}
 	private static int getHighestRenderLevel() {
-		return 14;
+		return 13;
 	}
 
 }

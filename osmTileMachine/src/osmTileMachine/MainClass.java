@@ -217,10 +217,12 @@ public class MainClass {
 			TileSet ts = new TileSet();
 			ts.addSet(Geography.getTileSetForRegion(sessionConfiguration.getRequestedArea()));
 
-			System.out.println("Updating planet...");
+//			System.out.println("Updating planet...");
+//			PlanetMaintainer.updatePlanet(sessionConfiguration);
 
-			PlanetMaintainer.updatePlanet(sessionConfiguration);
-			
+			System.out.println("skipping updating planet...");
+//			PlanetMaintainer.updatePlanet(sessionConfiguration);
+
 			System.out.println("Generating actionlist...");
 			ActionList ExtractAreaActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, PlanetMaintainer.updatedplanetFilename);
 			System.out.println(ExtractAreaActionList.getListInHumanReadableFormat());

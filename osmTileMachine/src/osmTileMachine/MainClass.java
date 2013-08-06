@@ -29,9 +29,9 @@ public class MainClass {
 			System.out.println("Executing actionlist...");
 			int i = 0;
 			while (ExtractDalarnaActionList.actionsLeft()){
+				System.out.print((i+1) + " ");
 				ExtractDalarnaActionList.getNextAction().runAction(tempsessionConfiguration);
 				i++;
-				System.out.print(i + " ");
 			}
 			
 			/*			
@@ -217,10 +217,10 @@ public class MainClass {
 			TileSet ts = new TileSet();
 			ts.addSet(Geography.getTileSetForRegion(sessionConfiguration.getRequestedArea()));
 
-//			System.out.println("Updating planet...");
-//			PlanetMaintainer.updatePlanet(sessionConfiguration);
+			System.out.println("Updating planet...");
+			PlanetMaintainer.updatePlanet(sessionConfiguration);
 
-			System.out.println("skipping updating planet...");
+//			System.out.println("skipping updating planet...");
 //			PlanetMaintainer.updatePlanet(sessionConfiguration);
 
 			System.out.println("Generating actionlist...");
@@ -230,9 +230,10 @@ public class MainClass {
 			System.out.println("Executing actionlist...");
 			int i = 0;
 			while (ExtractAreaActionList.actionsLeft()){
+				System.out.print((i+1) + " ");
+
 				ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);
 				i++;
-				System.out.print(i + " ");
 			}
 		
 		}

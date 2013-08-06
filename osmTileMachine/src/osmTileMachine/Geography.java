@@ -78,6 +78,12 @@ public class Geography {
 			tileSet = getTileSetForRegion(bbox);
 		}
 
+		else if (nameOfRegion.equalsIgnoreCase("scandinavia"))
+		{
+			BoundingBox bbox = new BoundingBox(4.8, 54.54, 31.6, 71.11);
+			tileSet = getTileSetForRegion(bbox);
+		}
+
 
 		return tileSet;
 	}
@@ -110,7 +116,6 @@ public class Geography {
 				t = new Tile(x, y, SplitAndRenderStrategy.getLowestRenderLevel(), "");
 				tileSet.add(t);
 			}
-
 
 		}
 

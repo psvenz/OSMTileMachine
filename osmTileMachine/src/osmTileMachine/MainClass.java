@@ -230,7 +230,7 @@ public class MainClass {
 			System.out.println("Executing actionlist...");
 			int i = 0;
 			while (ExtractAreaActionList.actionsLeft()){
-				System.out.print((i+1) + " ");
+				System.out.println((i+1) + " ");
 
 				ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);
 				i++;

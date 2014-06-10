@@ -59,4 +59,11 @@ public class RenderAction extends Action{
 	public int getzMax() {
 		return zMax;
 	}
+	
+	public String toString()
+	{
+		return  "Z: " + z + " X: " + x + " Y: " + y;
+	}
+	
+	
 }

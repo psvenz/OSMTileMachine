@@ -20,7 +20,7 @@ public class Maperitive {
 		if (renderAction.getzMax() == Maperitive.DYNAMIC_ZMAX)
 		{
 			zMax = SplitAndRenderStrategy.getDynamicMaxZoomLevel(renderAction);
-			System.out.print("zMax for "+renderAction.toString()+ ": " +zMax);
+			System.out.print("zMax for "+renderAction.toString()+ ": " +zMax + "\r\n");
 		}
 		
 		content = "use-script-dir" + "\r\n"

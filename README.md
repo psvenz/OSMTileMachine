@@ -6,7 +6,7 @@ Render at tileset of any region of the world using openstreetmap data. No databa
 Will be scable and able to render a region of any size. Only limited by CPU time and disk space, not system RAM. 
 
 Project status: 
-Under development.
+Working proof of concept.
 
 ----------------------
 Input:

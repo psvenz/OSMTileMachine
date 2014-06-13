@@ -14,8 +14,8 @@ public final class OpenStreetMapProject {
 //		addressList.add("http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf");
 //		addressList.add("http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf");
 //		
-//		addressList.add("http://download.geofabrik.de/europe-latest.osm.pbf");
-		addressList.add("http://zvenzzon.mine.nu/misc/z6x34y18.pbf");
+		addressList.add("http://download.geofabrik.de/europe-latest.osm.pbf");
+//		addressList.add("http://zvenzzon.mine.nu/misc/z6x34y18.pbf");
 
 		
 //		addressList.add("ftp://ftp.sunet.se/ls-lR.gz");

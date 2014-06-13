@@ -84,6 +84,12 @@ public class Geography {
 			tileSet = getTileSetForRegion(bbox);
 		}
 
+		else if (nameOfRegion.equalsIgnoreCase("falun"))
+		{
+			BoundingBox bbox = new BoundingBox(15.1364136,60.3812903, 16.1553955, 60.7591595);
+			tileSet = getTileSetForRegion(bbox);
+		}
+
 
 		return tileSet;
 	}

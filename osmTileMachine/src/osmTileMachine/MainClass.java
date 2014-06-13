@@ -218,10 +218,9 @@ public class MainClass {
 			ts.addSet(Geography.getTileSetForRegion(sessionConfiguration.getRequestedArea()));
 
 			System.out.println("Updating planet...");
-			PlanetMaintainer.updatePlanet(sessionConfiguration);
-
-//			System.out.println("skipping updating planet...");
 //			PlanetMaintainer.updatePlanet(sessionConfiguration);
+
+
 
 			System.out.println("Generating actionlist...");
 			ActionList ExtractAreaActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, PlanetMaintainer.updatedplanetFilename);
@@ -232,10 +231,14 @@ public class MainClass {
 			while (ExtractAreaActionList.actionsLeft()){
 				System.out.println((i+1) + " ");
 
-				ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);
+				if (i < -1 ) ExtractAreaActionList.getNextAction(); //developers ability to skip early actions
+				else
+				{
+					ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);
+				}
 				i++;
 			}
-		
+
 		}
 		else
 		{

@@ -123,7 +123,7 @@ public class Configuration {
 	}
 	public String getOutputDirectoryName() {
 		// TODO Auto-generated method stub
-		return "x:\\wwwroot";
+		return "z:\\";
 	}
 	public String getMaperitiveExecutableFileName() {
 		// TODO Auto-generated method stub

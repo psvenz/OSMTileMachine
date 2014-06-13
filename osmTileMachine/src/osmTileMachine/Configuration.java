@@ -1,5 +1,6 @@
 package osmTileMachine;
 
+// import java.io.File;
 import java.text.ParseException;
 
 public class Configuration {
@@ -109,7 +110,7 @@ public class Configuration {
 	}
 	public String getWorkingDirectory() {
 		// TODO Auto-generated method stub
-		return System.getProperty("user.dir");
+		return System.getProperty("user.dir") + "\\workdir";
 	}
 	public boolean getDebugOutput() {
 		// TODO Auto-generated method stub
@@ -117,17 +118,18 @@ public class Configuration {
 	}
 	public String getRuleSetFilename() {
 
-	return "bikemap_rules.txt";
+	return System.getProperty("user.dir") + "\\rules\\mtbmap.se.rules";
+//	return "rules\\bikemap_rules.txt";
 		
 //		return "GoogleMaps.mrules";
 	}
 	public String getOutputDirectoryName() {
 		// TODO Auto-generated method stub
-		return "z:\\";
+		return System.getProperty("user.dir") +"\\" + "webroot";
 	}
 	public String getMaperitiveExecutableFileName() {
 		// TODO Auto-generated method stub
-		return "C:\\Users\\peter\\Documents\\Maperitive installation directory\\maperitive.exe";
+		return "tools\\maperitive\\maperitive.exe";
 	}
 	public String getRequestedArea() {
 		return requestedArea;

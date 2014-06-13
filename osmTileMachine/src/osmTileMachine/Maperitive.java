@@ -13,13 +13,13 @@ public class Maperitive {
 			RenderAction renderAction) 
 	{
 		Tile tileToRender = new Tile(renderAction.getX(), renderAction.getY(), renderAction.getZ(), "Temporary tile for maperitive");
-		File scriptFile = new File(tileToRender.toString() + ".maperitivescript");
+		File scriptFile = new File(sessionConfiguration.getWorkingDirectory() + File.separator + tileToRender.toString() + ".maperitivescript");
 		String content;
 
 		int zMax = renderAction.getzMax();
 		if (renderAction.getzMax() == Maperitive.DYNAMIC_ZMAX)
 		{
-			zMax = SplitAndRenderStrategy.getDynamicMaxZoomLevel(renderAction);
+			zMax = SplitAndRenderStrategy.getDynamicMaxZoomLevel(sessionConfiguration, renderAction);
 			System.out.print("zMax for "+renderAction.toString()+ ": " +zMax + "\r\n");
 		}
 		

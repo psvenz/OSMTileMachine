@@ -3,7 +3,7 @@ package osmTileMachine;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Time;
+//import java.sql.Time;
 import java.util.ArrayList;
 import java.io.*;
 

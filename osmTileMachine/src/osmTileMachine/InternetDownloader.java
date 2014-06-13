@@ -16,13 +16,13 @@ public class InternetDownloader {
 			while (successDownload == false){
 				try {
 					String whileDownloadingSuffix = ".downloading";
-					File fFinished = new File(localFileName);
+					File fFinished = new File(sessionConfiguration.getWorkingDirectory() + File.separator + localFileName);
 					fFinished.delete();
 					WGETDownloader.TryDownload(sessionConfiguration, localFileName + whileDownloadingSuffix, mirrors);
 					successDownload = true;
 					MessagePrinter.notify(sessionConfiguration, "File downloaded successfully!");
 					
-					File fDownloading = new File(localFileName + whileDownloadingSuffix);
+					File fDownloading = new File(sessionConfiguration.getWorkingDirectory() + File.separator + localFileName + whileDownloadingSuffix);
 					fDownloading.renameTo(fFinished);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

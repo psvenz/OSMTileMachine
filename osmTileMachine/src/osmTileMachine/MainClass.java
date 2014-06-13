@@ -218,7 +218,7 @@ public class MainClass {
 			ts.addSet(Geography.getTileSetForRegion(sessionConfiguration.getRequestedArea()));
 
 			System.out.println("Updating planet...");
-//			PlanetMaintainer.updatePlanet(sessionConfiguration);
+			PlanetMaintainer.updatePlanet(sessionConfiguration);
 
 
 

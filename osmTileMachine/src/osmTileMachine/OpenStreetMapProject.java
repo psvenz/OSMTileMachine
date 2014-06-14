@@ -8,13 +8,13 @@ public final class OpenStreetMapProject {
 
 		ArrayList<String> addressList = new ArrayList<String>();
 
-//		addressList.add("ftp://ftp.spline.de/pub/openstreetmap/pbf/planet-latest.osm.pbf");
-//		addressList.add("http://ftp.osuosl.org/pub/openstreetmap/pbf/planet-latest.osm.pbf");
-//		addressList.add("http://ftp.snt.utwente.nl/pub/misc/openstreetmap/planet-latest.osm.pbf");
-//		addressList.add("http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf");
-//		addressList.add("http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf");
+		addressList.add("ftp://ftp.spline.de/pub/openstreetmap/pbf/planet-latest.osm.pbf");
+		addressList.add("http://ftp.osuosl.org/pub/openstreetmap/pbf/planet-latest.osm.pbf");
+		addressList.add("http://ftp.snt.utwente.nl/pub/misc/openstreetmap/planet-latest.osm.pbf");
+		addressList.add("http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf");
+		addressList.add("http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf");
 //		
-		addressList.add("http://download.geofabrik.de/europe-latest.osm.pbf");
+//		addressList.add("http://download.geofabrik.de/europe-latest.osm.pbf");
 //		addressList.add("http://zvenzzon.mine.nu/misc/z6x34y18.pbf");
 
 		

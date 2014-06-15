@@ -25,7 +25,7 @@ public class Maperitive {
 		
 		content = "use-script-dir" + "\r\n"
 				+ "clear-map" + "\r\n"
-				+ "use-ruleset location="+ sessionConfiguration.getRuleSetFilename() + "\r\n"
+				+ "use-ruleset location=" + '"' + sessionConfiguration.getRuleSetFilename() + '"' + "\r\n"
 				+ "load-source " + renderAction.getDataFileName() +  "\r\n"
 				+ "set-geo-bounds " 
 				+ (tileToRender.getLonMin()+0.0001) + ","

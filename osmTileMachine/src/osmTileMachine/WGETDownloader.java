@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class WGETDownloader {
 
+	static String wgetFileName = "tools" + File.separator + "wget" + File.separator + "wget";
+
 	public static void TryDownload(Configuration sessionConfiguration, String fileName, ArrayList<String> mirrors) throws Exception
 	{
 		String fastestMirrorURL = null;
@@ -38,7 +40,10 @@ public class WGETDownloader {
 		// Try actual wget download here
 		
 		ExternalToolLauncher tool = new ExternalToolLauncher(sessionConfiguration); 	
-		tool.setCommand("wget");
+		
+		File f = new File(wgetFileName);
+		String pathf = f.getCanonicalFile().toString();
+		tool.setCommand(pathf);
 		tool.addArgument("--dot-style=giga");	
 		tool.addArgument("-O");
 		tool.addArgument(fileName);
@@ -59,7 +64,10 @@ public class WGETDownloader {
 		
 		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 		try {
-			e.setCommand("wget");
+			File f = new File(wgetFileName);
+			String pathf = f.getCanonicalFile().toString();
+			e.setCommand(pathf);
+//			e.setCommand("tools" + File.separator + "wget" + File.separator + "wget");
 			e.addArgument("--version");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -99,7 +107,10 @@ public class WGETDownloader {
 		
 		for (String mirrorURL : mirrors) {
 			ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
-			e.setCommand("wget");
+			
+			File fn = new File(wgetFileName);
+			String pathf = fn.getCanonicalFile().toString();
+			e.setCommand(pathf);
 			e.addArgument("--timeout=5");
 			e.addArgument("--tries=0");
 			e.addArgument("--output-document=" + testFileName);
@@ -110,7 +121,7 @@ public class WGETDownloader {
 			f.delete();
 			MessagePrinter.debug(sessionConfiguration, "Waiting before download speed test");
 			TimeConsumer.sleepSeconds(0.1);
-			double downloadTime = 4;
+			double downloadTime = 10;
 			e.runAndKill(downloadTime);
 
 			double fileSize;

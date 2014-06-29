@@ -1,2 +1,0 @@
-Please place wget.exe in this folder
-Download binaries from http://gnuwin32.sourceforge.net/packages/wget.htm

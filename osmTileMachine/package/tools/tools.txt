@@ -1,0 +1,6 @@
+Required tools and location:
+
+1. maperitive		Place in tools/maperitive folder
+2. wget.exe			Place in path, for example c:\windows
+3. osmconvert.exe	place in path, for example c:\windows
+4. osmupdate.exe	RENAME TO osmu.exe or osmup.exe and then place in path, for example c:\windows

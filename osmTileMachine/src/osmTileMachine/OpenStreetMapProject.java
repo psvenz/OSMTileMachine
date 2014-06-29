@@ -41,6 +41,8 @@ public final class OpenStreetMapProject {
 		return 1000*60*60*24*8; //Next planet is available in one week + one spare day
 	}
 
+	//Known servers to avoid
+	// If we should avoid a server, only use it if it is 10 times faster than the other mirrors...
 	public static boolean avoidServer(String url)
 	{
 		return url.contains("http://planet.openstreetmap.org");

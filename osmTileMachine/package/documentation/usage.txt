@@ -1,0 +1,31 @@
+Example usage:
+osmTileMachine -operatingmode renderarea -area dalarna -debug
+	Renders a map of dalarna. 
+
+Parameter description: 
+
+	-operatingmode 
+		updateplanet
+			Runs osmupdate on the planet.pbf file. Downloads the planet.pbf first if missing.
+		
+		verifyplanet
+			Verifies that planet.pbf exists with some very simple checks
+		
+		forceplanetdownload
+			Always download a new planet.pbf, even if a local copy might already exist.
+			
+		renderarea
+			Renders a map. Automatically download/update of source first if needed.
+
+	-area sets the area to cover in the map rendering
+		Supported areas:
+		Niemisel
+		Falun
+		Dalarna
+		Scandinavia
+		Niemisel
+		Vänern
+		
+	-debug will give a verbose output in console
+	
+	

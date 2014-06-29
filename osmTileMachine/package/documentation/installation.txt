@@ -11,3 +11,6 @@ Required tools and location:
 
 4. osmupdate.exe	RENAME TO osmu.exe or osmup.exe and then place in path, for example c:\windows
 					Download from http://wiki.openstreetmap.org/wiki/Osmupdate
+
+5. Microsoft .NET 	Maperitive will need .NET version 4.
+					Download via Windows Update, or from microsoft.com

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Leaflet OSMTileMachine webroot Example</title>
+	<title>Leaflet OSMTileMachine Example</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
 	 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
@@ -22,10 +22,10 @@
 	<div id="map"></div>
 
 	<script>
-		var map = L.map('map').setView([60.7591595, 16.1553955], 9);
+		var map = L.map('map').setView([50.123332, 10.1233], 9);
 
 		L.tileLayer('Tiles/{z}/{x}/{y}.png', {
-			maxZoom: 16,
+			maxZoom: 13,
 			attribution: 'Map data © OpenStreetMap contributors'
 		}).addTo(map);
 

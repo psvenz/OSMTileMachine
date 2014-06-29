@@ -101,9 +101,11 @@ public class SplitAndRenderStrategy {
 		return Maperitive.DYNAMIC_ZMAX;
 	}
 
+
 	public static int getDynamicMaxZoomLevel(Configuration sessionConfiguration, RenderAction renderAction) {
-		// TODO Auto-generated method stub
-		File inputFile = new File( sessionConfiguration.getWorkingDirectory() + "\\" +renderAction.getDataFileName());
+		return 13; //Limited in proof of concept demo
+
+	/*	File inputFile = new File( sessionConfiguration.getWorkingDirectory() + "\\" +renderAction.getDataFileName());
 		long sizeKB = inputFile.length()/1024;
 		if (sizeKB > 10000)
 		{
@@ -115,9 +117,7 @@ public class SplitAndRenderStrategy {
 		}
 		else {
 			return 12;
-		}
+		}*/
+		
 	}
-
-
-
 }

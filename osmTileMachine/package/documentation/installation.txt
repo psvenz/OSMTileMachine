@@ -15,5 +15,5 @@ Required tools and location:
 5. Microsoft .NET 	Maperitive will need .NET version 4.
 					Download via Windows Update, or from microsoft.com
 					
-6. Java				Java runtime needed.
-					Download Java from www.java.com
+6. Java				Java SE JRE version 8 needed.
+					Download Java from www.oracle.com

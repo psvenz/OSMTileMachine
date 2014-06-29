@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+osmTileMachine/package/webroot/Tiles*
+osmTileMachine/package/workdir/*
+osmTileMachine/package/tools/maperitive/*

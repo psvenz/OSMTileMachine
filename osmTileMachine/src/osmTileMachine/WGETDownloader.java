@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 public class WGETDownloader {
 
-	static String wgetFileName = "tools" + File.separator + "wget" + File.separator + "wget";
+//	static String wgetFileName = "tools" + File.separator + "wget" + File.separator + "wget";
+	static String wgetFileName = "wget";
 
 	public static void TryDownload(Configuration sessionConfiguration, String fileName, ArrayList<String> mirrors) throws Exception
 	{
@@ -41,9 +42,11 @@ public class WGETDownloader {
 		
 		ExternalToolLauncher tool = new ExternalToolLauncher(sessionConfiguration); 	
 		
-		File f = new File(wgetFileName);
-		String pathf = f.getCanonicalFile().toString();
-		tool.setCommand(pathf);
+//		File f = new File(wgetFileName);
+//		String pathf = f.getCanonicalFile().toString();
+//		tool.setCommand(pathf);
+		tool.setCommand(wgetFileName);
+
 		tool.addArgument("--dot-style=giga");	
 		tool.addArgument("-O");
 		tool.addArgument(fileName);
@@ -64,9 +67,10 @@ public class WGETDownloader {
 		
 		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 		try {
-			File f = new File(wgetFileName);
-			String pathf = f.getCanonicalFile().toString();
-			e.setCommand(pathf);
+//			File f = new File(wgetFileName);
+//			String pathf = f.getCanonicalFile().toString();
+
+			e.setCommand(wgetFileName);
 //			e.setCommand("tools" + File.separator + "wget" + File.separator + "wget");
 			e.addArgument("--version");
 		} catch (Exception e1) {
@@ -108,9 +112,10 @@ public class WGETDownloader {
 		for (String mirrorURL : mirrors) {
 			ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 			
-			File fn = new File(wgetFileName);
-			String pathf = fn.getCanonicalFile().toString();
-			e.setCommand(pathf);
+//			File fn = new File(wgetFileName);
+//			String pathf = fn.getCanonicalFile().toString();
+//			e.setCommand(pathf);
+			e.setCommand(wgetFileName);
 			e.addArgument("--timeout=5");
 			e.addArgument("--tries=0");
 			e.addArgument("--output-document=" + testFileName);

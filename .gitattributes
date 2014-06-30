@@ -21,4 +21,5 @@
 *.rtf	 diff=astextplain
 *.RTF  diff=astextplain
 *.java  diff=astextplain
-*.html text
+*.html diff=astextplain
+osmTileMachine/package/webroot/index.html diff=astextplain

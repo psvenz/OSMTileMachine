@@ -3,7 +3,8 @@ package osmTileMachine;
 import java.io.File;
 
 public class SplitAndRenderStrategy {
-	private static double smallMargin = 0.05; //Degrees
+	private static double smallMargin = 0.03; //Degrees
+//	private static double smallMargin = 0.05; //Degrees
 	private static double largeMargin = 0.9; //Degrees
 
 	public static ActionList CreateActionList(Configuration sessionConfiguration, TileSet RequestedTileSet, String inputFileName) throws Exception
@@ -66,19 +67,30 @@ public class SplitAndRenderStrategy {
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(7).toString() + ".pbf", t.toString() + ".o5m");
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(7).toString() + ".pbf", t.toString() + ".pbf");
 			actionList.addItem(extractAction);
 		}
 
-
+		
 		// Add actions to create data for zoomlevel 9
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(9);
 		thisZoomLevelTileSet.tileSetIteratorStart();
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(8).toString() + ".pbf", t.toString() + ".o5m");
+			actionList.addItem(extractAction);
+		}
 
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.getLowerZoomLevelTile(8).toString() + ".o5m", t.toString() + ".osm");
+
+		// Add actions to create data for zoomlevel 10
+		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(10);
+		thisZoomLevelTileSet.tileSetIteratorStart();
+		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
+		{
+			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
+
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.getLowerZoomLevelTile(9).toString() + ".o5m", t.toString() + ".osm");
 			actionList.addItem(extractAction);
 
 			RenderAction renderAction = new RenderAction(RenderAction.TOOL_MAPERITIVE, t.getX(), t.getY(), t.getZ(), getHighestRenderLevel(), sessionConfiguration.getRuleSetFilename(), sessionConfiguration.getOutputDirectoryName(), t.toString() + ".osm");
@@ -95,7 +107,7 @@ public class SplitAndRenderStrategy {
 	}
 
 	public static int getLowestRenderLevel() {
-		return 9;
+		return 10;
 	}
 	private static int getHighestRenderLevel() {
 		return Maperitive.DYNAMIC_ZMAX;

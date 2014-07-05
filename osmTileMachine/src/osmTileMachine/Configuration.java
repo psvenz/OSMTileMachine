@@ -59,7 +59,7 @@ public class Configuration {
 					throw new ParseException(operatingModeString + " is not a valid operatingmode.", i);
 				}
 				i++;
-			}
+			} 
 			else if (arg.toLowerCase().contentEquals("-area") ||  arg.toLowerCase().contentEquals("-a"))
 			{
 				if (i+1 == args.length) // nothing follows -operatingmode 

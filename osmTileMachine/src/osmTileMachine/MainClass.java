@@ -55,7 +55,7 @@ public class MainClass {
 			while (ExtractAreaActionList.actionsLeft()){
 				System.out.println((i+1) + " ");
 
-				if (i < -1 ) ExtractAreaActionList.getNextAction(); //developers ability to skip early actions
+				if (i < -2 ) ExtractAreaActionList.getNextAction(); //developers ability to skip early actions
 				else
 				{
 					ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);

@@ -119,9 +119,7 @@ public class Configuration {
 	public String getRuleSetFilename() {
 
 	return System.getProperty("user.dir") + "\\rules\\mtbmap.se.rules";
-//	return "rules\\bikemap_rules.txt";
-		
-//		return "GoogleMaps.mrules";
+	
 	}
 	public String getOutputDirectoryName() {
 		// TODO Auto-generated method stub

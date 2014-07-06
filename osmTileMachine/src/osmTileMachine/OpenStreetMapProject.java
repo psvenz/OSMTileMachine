@@ -4,34 +4,45 @@ import java.util.ArrayList;
 
 public final class OpenStreetMapProject {
 
-	public static ArrayList<String> getPlanetMirrors() {
+	public static ArrayList<String> getSourceFileMirrors(Configuration sessionConfiguration) {
 
 		ArrayList<String> addressList = new ArrayList<String>();
 
-		addressList.add("ftp://ftp.spline.de/pub/openstreetmap/pbf/planet-latest.osm.pbf");
-		addressList.add("http://ftp.osuosl.org/pub/openstreetmap/pbf/planet-latest.osm.pbf");
-		addressList.add("http://ftp.snt.utwente.nl/pub/misc/openstreetmap/planet-latest.osm.pbf");
-		addressList.add("http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf");
-		addressList.add("http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf");
-//		
-//		addressList.add("http://download.geofabrik.de/europe-latest.osm.pbf");
-//		addressList.add("http://zvenzzon.mine.nu/misc/z6x34y18.pbf");
+		String s = sessionConfiguration.getSource();
 
-		
-//		addressList.add("ftp://ftp.sunet.se/ls-lR.gz");
-		
-//		addressList.add("http://download.geofabrik.de/europe/sweden-latest.osm.pbf");
-//		addressList.add("http://download.geofabrik.de/europe/portugal-latest.osm.pbf");
+		if (s.equalsIgnoreCase("sweden"))
+		{
+			addressList.add("http://download.geofabrik.de/europe/sweden-latest.osm.pbf");			
+		}
+
+		else if (s.equalsIgnoreCase("europe"))
+		{
+			addressList.add("http://download.geofabrik.de/europe-latest.osm.pbf");
+			addressList.add("http://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/europe-latest.osm.pbf");
+
+		}
+		else if (s.equalsIgnoreCase("germany"))
+		{
+
+			addressList.add("http://download.geofabrik.de/europe/germany-latest.osm.pbf");
+			addressList.add("http://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/germany-latest.osm.pbf");
+
+		}
+		else //planet as well
+		{
+			addressList.add("ftp://ftp.spline.de/pub/openstreetmap/pbf/planet-latest.osm.pbf");
+			addressList.add("http://ftp.osuosl.org/pub/openstreetmap/pbf/planet-latest.osm.pbf");
+			addressList.add("http://ftp.snt.utwente.nl/pub/misc/openstreetmap/planet-latest.osm.pbf");
+			addressList.add("http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf");
+			addressList.add("http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf");	
+		}
+
+
 		return addressList;
-			
-		
-		
-			
-//		return null;
-		// TODO Auto-generated method stub
-		
+
+
 	}
-	
+
 	public static long ApproximatePlanetSize(){
 		return 10*1000000; //10 MB is an OK planet.pbf file size. Smaller is invalid!
 	}

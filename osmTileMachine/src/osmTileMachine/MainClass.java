@@ -17,13 +17,13 @@ public class MainClass {
 
 		if (sessionConfiguration.getDownload())
 		{
-			PlanetMaintainer.forcePlanetDownload(sessionConfiguration);
+			SourceFileMaintainer.forcePlanetDownload(sessionConfiguration);
 		}		
 
 
 		if (sessionConfiguration.getUpdate())
 		{
-			PlanetMaintainer.updatePlanet(sessionConfiguration);
+			SourceFileMaintainer.updatePlanet(sessionConfiguration);
 		}
 
 		if (sessionConfiguration.getRender())			
@@ -32,7 +32,7 @@ public class MainClass {
 			ts.addSet(Geography.getTileSetForRegion(sessionConfiguration.getRequestedArea()));
 
 			System.out.println("Generating actionlist...");
-			ActionList ExtractAreaActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, PlanetMaintainer.updatedplanetFilename);
+			ActionList ExtractAreaActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, SourceFileMaintainer.updatedplanetFilename);
 			System.out.println(ExtractAreaActionList.getListInHumanReadableFormat());
 			
 			System.out.println("Executing actionlist...");

@@ -18,6 +18,8 @@ public class Configuration {
 
 	private int maxZoom;
 
+	private String source;
+
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
 		if (args.length == 0)
@@ -53,6 +55,19 @@ public class Configuration {
 				setRender(true);
 				i++;
 			}
+
+			
+			else if (arg.toLowerCase().contentEquals("-source"))
+			{
+				if (i+1 == args.length) // nothing follows -source 
+				{
+					throw new ParseException("source argument missing", i);
+				}
+				setSource(args[i+1]);
+				i++;
+			}
+
+			
 			else if (arg.toLowerCase().contentEquals("-debug"))
 			{
 				setDebugOutput(true);
@@ -67,7 +82,7 @@ public class Configuration {
 				i++;
 			}
 
-			
+
 			else if (arg.toLowerCase().contentEquals("-maxzoom"))
 			{
 				if (i+1 == args.length) // nothing follows -maxzoom 
@@ -105,7 +120,7 @@ public class Configuration {
 		// TODO Auto-generated method stub
 		return render;
 	}
-	
+
 	private void setUpdate(boolean b) {
 		// TODO Auto-generated method stub
 		updateSource = b;
@@ -137,8 +152,18 @@ public class Configuration {
 		setDownload(false);
 		setUpdate(false);
 		setMaxZoom(13);
+		setSource("planet");
 	}
 
+	private void setSource(String string) {
+		// TODO Auto-generated method stub
+		source=string;
+	}
+	public String getSource()
+	{
+		return source;
+	}
+	
 	public void setDebugOutput(boolean b) {
 		// TODO Auto-generated method stub
 		enableDebugOutput = b;

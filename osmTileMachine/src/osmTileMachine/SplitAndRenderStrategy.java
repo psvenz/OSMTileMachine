@@ -1,6 +1,6 @@
 package osmTileMachine;
 
-import java.io.File;
+//import java.io.File;
 
 public class SplitAndRenderStrategy {
 	private static double smallMargin = 0.03; //Degrees

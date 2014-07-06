@@ -1,6 +1,5 @@
 Example usage:
-osmTileMachine -download -update -renderarea Falun -debug
-	Renders a map of dalarna. 
+osmTileMachine -source sweden -download -update -renderarea Falun -debug 
 
 Parameter description: 
 
@@ -29,4 +28,11 @@ Parameter description:
 		
 		-maxzoom
 			Max render depth. Recommended: 13 to 16.
-	
+			
+		-source xxxxx
+			Sets download location.
+			Valid download sources: 
+				planet (default)
+				europe
+				sweden
+				germany

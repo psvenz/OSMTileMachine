@@ -2,14 +2,14 @@ package osmTileMachine;
 
 import java.io.File;
 
-public class PlanetMaintainer {
+public class SourceFileMaintainer {
 
-	public static String planetFilename = "planet.pbf";
+	public static String sourceFileName = "planet.pbf";
 	public static String updatedplanetFilename = "planet_updated.pbf";
 	
 	public static void forcePlanetDownload(Configuration sessionConfiguration) throws Exception {
 		MessagePrinter.notify(sessionConfiguration, "Downloading planet file...");
-		InternetDownloader.downloadFile(sessionConfiguration, planetFilename, OpenStreetMapProject.getPlanetMirrors());
+		InternetDownloader.downloadFile(sessionConfiguration, sourceFileName, OpenStreetMapProject.getSourceFileMirrors(sessionConfiguration));
 		MessagePrinter.notify(sessionConfiguration, "Planet file downloaded!");
 	}
 
@@ -32,7 +32,7 @@ public class PlanetMaintainer {
 			if (verifyPlanet(sessionConfiguration) == false){
 				try {
 					MessagePrinter.debug(sessionConfiguration, "Downloading planet.");
-					PlanetMaintainer.forcePlanetDownload(sessionConfiguration);
+					SourceFileMaintainer.forcePlanetDownload(sessionConfiguration);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					throw new Exception("PlanetMaintainer: could not execute forcePlanetDownload");
@@ -59,7 +59,7 @@ public class PlanetMaintainer {
 			// Fail after 20 attempts, probably broken local copy of planet, download a new one
 			if (attemptNumber > 20) {
 				try {
-					PlanetMaintainer.forcePlanetDownload(sessionConfiguration);
+					SourceFileMaintainer.forcePlanetDownload(sessionConfiguration);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					throw new Exception("PlanetMaintainer: could not execute forcePlanetDownload");
@@ -102,42 +102,42 @@ public class PlanetMaintainer {
 		// assume planet is OK until fault has been found
 
 		// File exists
-		File f = new File(sessionConfiguration.getWorkingDirectory() + File.separator + planetFilename);
+		File f = new File(sessionConfiguration.getWorkingDirectory() + File.separator + sourceFileName);
 		if (f.exists() == false){
 			planetGood = false;
-			MessagePrinter.debug(sessionConfiguration,  planetFilename + " does not exist... FAIL!");
+			MessagePrinter.debug(sessionConfiguration,  sourceFileName + " does not exist... FAIL!");
 		}
 		else {
-			MessagePrinter.debug(sessionConfiguration,  planetFilename + " exists... OK!");
+			MessagePrinter.debug(sessionConfiguration,  sourceFileName + " exists... OK!");
 
 		}
 
 		// Size is at least the right size
 		if (f.length() < OpenStreetMapProject.ApproximatePlanetSize()*0.9){
 			planetGood = false;
-			MessagePrinter.debug(sessionConfiguration,  planetFilename + " too small to be OK!");
+			MessagePrinter.debug(sessionConfiguration,  sourceFileName + " too small to be OK!");
 		}
 		else {
-			MessagePrinter.debug(sessionConfiguration,  planetFilename + " file size OK (" + f.length()/1000000 + " MB)");			
+			MessagePrinter.debug(sessionConfiguration,  sourceFileName + " file size OK (" + f.length()/1000000 + " MB)");			
 		}
 
 
 		// Max lastmodified is -14 to 1 days compared to current time.
 		double fileDate = (f.lastModified() - System.currentTimeMillis())/(1000*60*60*24); //fileDate unit is days
 
-		MessagePrinter.debug(sessionConfiguration,  planetFilename + " age is " + -fileDate*24 + " hours");			
+		MessagePrinter.debug(sessionConfiguration,  sourceFileName + " age is " + -fileDate*24 + " hours");			
 
 		if (fileDate < - 14)
 		{
 			planetGood = false;
-			MessagePrinter.debug(sessionConfiguration, planetFilename + " is too old. (Last modified " + -fileDate + " days ago...)");			
+			MessagePrinter.debug(sessionConfiguration, sourceFileName + " is too old. (Last modified " + -fileDate + " days ago...)");			
 
 		}
 
 		if (fileDate > 1)
 		{
 			planetGood = false;
-			MessagePrinter.debug(sessionConfiguration, planetFilename + " is too new. (Last modified " + -fileDate + " days ago...)");			
+			MessagePrinter.debug(sessionConfiguration, sourceFileName + " is too new. (Last modified " + -fileDate + " days ago...)");			
 
 		}
 

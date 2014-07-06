@@ -4,16 +4,16 @@ import java.io.File;
 
 public class SourceFileMaintainer {
 
-	public static String sourceFileName = "planet.pbf";
-	public static String updatedplanetFilename = "planet_updated.pbf";
+	public static String sourceFileName = "sourcefile.pbf";
+	public static String updatedSourceFilename = "sourcefile_updated.pbf";
 	
-	public static void forcePlanetDownload(Configuration sessionConfiguration) throws Exception {
+	public static void forceSourceDownload(Configuration sessionConfiguration) throws Exception {
 		MessagePrinter.notify(sessionConfiguration, "Downloading planet file...");
 		InternetDownloader.downloadFile(sessionConfiguration, sourceFileName, OpenStreetMapProject.getSourceFileMirrors(sessionConfiguration));
 		MessagePrinter.notify(sessionConfiguration, "Planet file downloaded!");
 	}
 
-	public static void updatePlanet(Configuration sessionConfiguration) throws Exception{
+	public static void updateSourceFile(Configuration sessionConfiguration) throws Exception{
 
 		MessagePrinter.notify(sessionConfiguration, "Updating planet file...");
 		if (Osmupdate.testToolAvailability(sessionConfiguration) == false) throw new Exception("updatePlanet failed, could not find osmupdate tool (osmu.exe)");
@@ -32,7 +32,7 @@ public class SourceFileMaintainer {
 			if (verifyPlanet(sessionConfiguration) == false){
 				try {
 					MessagePrinter.debug(sessionConfiguration, "Downloading planet.");
-					SourceFileMaintainer.forcePlanetDownload(sessionConfiguration);
+					SourceFileMaintainer.forceSourceDownload(sessionConfiguration);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					throw new Exception("PlanetMaintainer: could not execute forcePlanetDownload");
@@ -59,7 +59,7 @@ public class SourceFileMaintainer {
 			// Fail after 20 attempts, probably broken local copy of planet, download a new one
 			if (attemptNumber > 20) {
 				try {
-					SourceFileMaintainer.forcePlanetDownload(sessionConfiguration);
+					SourceFileMaintainer.forceSourceDownload(sessionConfiguration);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					throw new Exception("PlanetMaintainer: could not execute forcePlanetDownload");
@@ -113,7 +113,7 @@ public class SourceFileMaintainer {
 		}
 
 		// Size is at least the right size
-		if (f.length() < OpenStreetMapProject.ApproximatePlanetSize()*0.9){
+		if (f.length() < OpenStreetMapProject.approximateSourceSize()*0.9){
 			planetGood = false;
 			MessagePrinter.debug(sessionConfiguration,  sourceFileName + " too small to be OK!");
 		}

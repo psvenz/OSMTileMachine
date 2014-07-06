@@ -43,8 +43,8 @@ public final class OpenStreetMapProject {
 
 	}
 
-	public static long ApproximatePlanetSize(){
-		return 10*1000000; //10 MB is an OK planet.pbf file size. Smaller is invalid!
+	public static long approximateSourceSize(){
+		return 10*1000000; //10 MB is an OK source file size. Smaller is invalid!
 	}
 
 	public static long timeUntilNextPlanetRelease() {

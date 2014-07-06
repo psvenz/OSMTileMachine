@@ -4,13 +4,13 @@ osmTileMachine -source sweden -download -update -renderarea Falun -debug
 Parameter description: 
 
 		-download
-			Runs WGET and downloads the planet.pbf file. 
+			Runs WGET and downloads the openstreetmap data source file. 
 		
 		-update
-			Updating planet.pbf and produces planet_updated.pbf with the help from osmupdate tool.
+			Updating the openstreetmap data source file and produces an up-to-the-minute fresh data file with the help from osmupdate tool.
 		
 		-renderarea yyyyy
-			Splits planet_updated.pbf into smaller and smaller data files until each file could fit into memory of the render tool, then 
+			Splits the updated data source file into smaller and smaller data files until each file could fit into memory of the render tool, then 
 			feeds the datafiles to the render tool. (maperitive)
 
 			Valid area sets the area to cover:

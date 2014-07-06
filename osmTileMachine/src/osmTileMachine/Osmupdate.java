@@ -53,7 +53,7 @@ public class Osmupdate {
 
 		Boolean successfulUpdate = false;
 		String fileName = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + SourceFileMaintainer.sourceFileName + "\""; 
-		String fileNameUpdated = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + SourceFileMaintainer.updatedplanetFilename + "\""; 
+		String fileNameUpdated = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + SourceFileMaintainer.updatedSourceFilename + "\""; 
 
 		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 		e.setCommand(toolFileName);

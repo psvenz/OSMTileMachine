@@ -1,2 +1,2 @@
-java -jar osmtilemachine.jar -operatingmode renderarea -area germany -debug
+java -jar osmtilemachine.jar -source sweden -download -update -renderarea Falun
 pause

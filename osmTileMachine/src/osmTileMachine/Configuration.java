@@ -4,15 +4,17 @@ package osmTileMachine;
 import java.text.ParseException;
 
 public class Configuration {
-	public static final int OPERATINGMODE_NOTSET = 0;
-	public static final int OPERATINGMODE_FORCEPLANETDOWNLOAD = 1;
-	public static final int OPERATINGMODE_UPDATEPLANET = 2;
-	public static final int OPERATINGMODE_VERIFYPLANET = 3;
-	public static final int OPERATINGMODE_RENDERAREA = 4;
 
-	private int operatingMode;
+	private boolean downloadSource;
+
+	private boolean updateSource;
+
+	private boolean render;
+
 	private boolean enableDebugOutput;
 	private String requestedArea;
+
+	private int firstAction;
 
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
@@ -21,7 +23,7 @@ public class Configuration {
 			throw new ParseException("No input arguments given, see documentation for usage.",0);
 		}
 		int i = 0;
-		
+
 		while (i < args.length)
 		{
 			String arg;
@@ -30,51 +32,39 @@ public class Configuration {
 			if (enableDebugOutput) System.out.println("Parsing argument number " + String.valueOf(i) + ": " + arg);
 
 
-			if (arg.toLowerCase().contentEquals("-operatingmode") ||  arg.toLowerCase().contentEquals("-o"))
+			if (arg.toLowerCase().contentEquals("-download") ||  arg.toLowerCase().contentEquals("-d"))
 			{
-				if (i+1 == args.length) // nothing follows -operatingmode 
-				{
-					throw new ParseException("operatingmode argument missing", i);
-				}
-				String operatingModeString = args[i+1].toUpperCase();
-				if (operatingModeString.contentEquals("FORCEPLANETDOWNLOAD")) 
-				{
-					setOperatingMode(OPERATINGMODE_FORCEPLANETDOWNLOAD);	
-					if (enableDebugOutput) System.out.println("Operating mode is FORCEPLANETDOWNLOAD");
-				}
-				else if (operatingModeString.contentEquals("UPDATEPLANET")) {
-					setOperatingMode(OPERATINGMODE_UPDATEPLANET);
-					if (enableDebugOutput) System.out.println("Operating mode is UPDATEPLANET");
-				}
-				else if (operatingModeString.contentEquals("RENDERAREA")) {
-					setOperatingMode(OPERATINGMODE_RENDERAREA);
-					if (enableDebugOutput) System.out.println("Operating mode is RENDERAREA");
-				}
-				else if (operatingModeString.contentEquals("VERIFYPLANET")) {
-					setOperatingMode(OPERATINGMODE_VERIFYPLANET);
-					if (enableDebugOutput) System.out.println("Operating mode is VERIFYPLANET");
-				}
-				else 
-				{
-					throw new ParseException(operatingModeString + " is not a valid operatingmode.", i);
-				}
-				i++;
+				setDownload(true);
 			} 
-			else if (arg.toLowerCase().contentEquals("-area") ||  arg.toLowerCase().contentEquals("-a"))
+			else if (arg.toLowerCase().contentEquals("-update") ||  arg.toLowerCase().contentEquals("-u"))
+			{
+				setUpdate(true);
+			} 
+
+			else if (arg.toLowerCase().contentEquals("-renderarea") ||  arg.toLowerCase().contentEquals("-r"))
 			{
 				if (i+1 == args.length) // nothing follows -operatingmode 
 				{
 					throw new ParseException("area argument missing", i);
 				}
 				setRequestedArea(args[i+1]);
+				setRender(true);
 				i++;
 			}
-			else if (arg.toLowerCase().contentEquals("-debug") ||  arg.toLowerCase().contentEquals("-d"))
+			else if (arg.toLowerCase().contentEquals("-debug"))
 			{
-				
 				setDebugOutput(true);
-				
 			}
+			else if (arg.toLowerCase().contentEquals("-firstaction"))
+			{
+				if (i+1 == args.length) // nothing follows -operatingmode 
+				{
+					throw new ParseException("jumptoaction argument missing", i);
+				}
+				setFirstAction(Integer.parseUnsignedInt(args[i+1]));
+				i++;
+			}
+
 			else
 			{
 				throw new ParseException(arg + " is not a valid input argument.", i);
@@ -85,24 +75,51 @@ public class Configuration {
 		if (enableDebugOutput) System.out.println("Successfully parsed all input arguments.");
 
 	}
-	public void setOperatingMode(int i) throws ParseException {
+	private void setFirstAction(int i) {
 		// TODO Auto-generated method stub
-		if (operatingMode != OPERATINGMODE_NOTSET)
-		{
-			throw new ParseException("Cannot set operatingmode again.",0);
-		}
-		operatingMode = i;
+		firstAction = i;
+	}
+	private void setRender(boolean b) {
+		// TODO Auto-generated method stub
+		render = b;
+	}
+
+	public boolean getRender() {
+		// TODO Auto-generated method stub
+		return render;
 	}
 	
+	private void setUpdate(boolean b) {
+		// TODO Auto-generated method stub
+		updateSource = b;
+	}
+
+	public boolean getUpdate()
+	{
+		return updateSource;
+	}
+
+	public int getFirstAction()
+	{
+		return firstAction;
+	}
+
+	public boolean getDownload()
+	{
+		return downloadSource;
+	}
+
+	private void setDownload(boolean b) {
+		// TODO Auto-generated method stub
+		downloadSource = b;
+	}
+
 	public Configuration()
 	{
 		//Creator
-		this.operatingMode = OPERATINGMODE_NOTSET;
+		setDownload(false);
+		setUpdate(false);
 	}
-	public int getOperatingMode() {
-		return operatingMode;
-	}
-
 
 	public void setDebugOutput(boolean b) {
 		// TODO Auto-generated method stub
@@ -118,8 +135,8 @@ public class Configuration {
 	}
 	public String getRuleSetFilename() {
 
-	return System.getProperty("user.dir") + "\\rules\\mtbmap.se.rules";
-	
+		return System.getProperty("user.dir") + "\\rules\\mtbmap.se.rules";
+
 	}
 	public String getOutputDirectoryName() {
 		// TODO Auto-generated method stub

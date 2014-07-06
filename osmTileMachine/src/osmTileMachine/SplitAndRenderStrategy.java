@@ -114,8 +114,9 @@ public class SplitAndRenderStrategy {
 	}
 
 
-	public static int getDynamicMaxZoomLevel(Configuration sessionConfiguration, RenderAction renderAction) {
-		return 13; //Limited in proof of concept demo
+	public static int getMaxZoomLevel(Configuration sessionConfiguration, RenderAction renderAction) {
+		return sessionConfiguration.getMaxZoom();
+//		return 13; //Limited in proof of concept demo
 
 	/*	File inputFile = new File( sessionConfiguration.getWorkingDirectory() + "\\" +renderAction.getDataFileName());
 		long sizeKB = inputFile.length()/1024;

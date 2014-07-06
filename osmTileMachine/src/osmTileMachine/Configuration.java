@@ -16,6 +16,8 @@ public class Configuration {
 
 	private int firstAction;
 
+	private int maxZoom;
+
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
 		if (args.length == 0)
@@ -57,11 +59,22 @@ public class Configuration {
 			}
 			else if (arg.toLowerCase().contentEquals("-firstaction"))
 			{
-				if (i+1 == args.length) // nothing follows -operatingmode 
+				if (i+1 == args.length) // nothing follows -firstaction 
 				{
-					throw new ParseException("jumptoaction argument missing", i);
+					throw new ParseException("firstaction argument missing", i);
 				}
 				setFirstAction(Integer.parseUnsignedInt(args[i+1]));
+				i++;
+			}
+
+			
+			else if (arg.toLowerCase().contentEquals("-maxzoom"))
+			{
+				if (i+1 == args.length) // nothing follows -maxzoom 
+				{
+					throw new ParseException("maxzoom argument missing", i);
+				}
+				setMaxZoom(Integer.parseUnsignedInt(args[i+1]));
 				i++;
 			}
 
@@ -74,6 +87,10 @@ public class Configuration {
 		}	
 		if (enableDebugOutput) System.out.println("Successfully parsed all input arguments.");
 
+	}
+	private void setMaxZoom(int i) {
+		// TODO Auto-generated method stub
+		maxZoom = i;
 	}
 	private void setFirstAction(int i) {
 		// TODO Auto-generated method stub
@@ -119,6 +136,7 @@ public class Configuration {
 		//Creator
 		setDownload(false);
 		setUpdate(false);
+		setMaxZoom(13);
 	}
 
 	public void setDebugOutput(boolean b) {
@@ -151,6 +169,10 @@ public class Configuration {
 	}
 	public void setRequestedArea(String requestedArea) {
 		this.requestedArea = requestedArea;
+	}
+	public int getMaxZoom() {
+		// TODO Auto-generated method stub
+		return maxZoom;
 	}
 
 }

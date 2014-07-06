@@ -27,5 +27,6 @@ Parameter description:
 		-firstaction nn
 			Will skip early actions and start with the specified action (resume previous operation, or for debug purposes)
 		
-	
+		-maxzoom
+			Max render depth. Recommended: 13 to 16.
 	

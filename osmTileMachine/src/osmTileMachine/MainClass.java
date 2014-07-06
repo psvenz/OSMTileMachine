@@ -40,7 +40,7 @@ public class MainClass {
 			while (ExtractAreaActionList.actionsLeft()){
 				System.out.println((i+1) + " ");
 
-				if (i < sessionConfiguration.getFirstAction() ) ExtractAreaActionList.getNextAction(); //Debug ability to skip early actions, or for resuming aborted operations
+				if (i < (sessionConfiguration.getFirstAction()-1) ) ExtractAreaActionList.getNextAction(); //Debug ability to skip early actions, or for resuming aborted operations
 				else
 				{
 					ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);

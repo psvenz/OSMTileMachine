@@ -19,7 +19,7 @@ public class Maperitive {
 		int zMax = renderAction.getzMax();
 		if (renderAction.getzMax() == Maperitive.DYNAMIC_ZMAX)
 		{
-			zMax = SplitAndRenderStrategy.getDynamicMaxZoomLevel(sessionConfiguration, renderAction);
+			zMax = SplitAndRenderStrategy.getMaxZoomLevel(sessionConfiguration, renderAction);
 			System.out.print("zMax for "+renderAction.toString()+ ": " +zMax + "\r\n");
 		}
 		

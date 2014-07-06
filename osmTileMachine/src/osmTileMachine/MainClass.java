@@ -34,16 +34,21 @@ public class MainClass {
 			System.out.println("Generating actionlist...");
 			ActionList ExtractAreaActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, SourceFileMaintainer.updatedSourceFilename);
 			System.out.println(ExtractAreaActionList.getListInHumanReadableFormat());
-			
+
 			System.out.println("Executing actionlist...");
 			int i = 0;
 			while (ExtractAreaActionList.actionsLeft()){
-				System.out.println((i+1) + " ");
+				System.out.print((i+1) + "/"+ ExtractAreaActionList.originalSize());
 
-				if (i < (sessionConfiguration.getFirstAction()-1) ) ExtractAreaActionList.getNextAction(); //Debug ability to skip early actions, or for resuming aborted operations
+				if (i < (sessionConfiguration.getFirstAction()-1) ) 
+				{
+					ExtractAreaActionList.getNextAction(); //Debug ability to skip early actions, or for resuming aborted operations
+					System.out.println(" Skipped");
+				}
 				else
 				{
 					ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);
+					System.out.println(" Done");
 				}
 				i++;
 			}

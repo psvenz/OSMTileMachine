@@ -5,19 +5,29 @@ import java.util.ArrayList;
 public class ActionList {
 
 	private ArrayList<Action> theActionList;
+	private int maxSize;
 
 	public ActionList(){
 		theActionList = new ArrayList<Action>();
+		maxSize = 0;
 	}
 
 	public void addItem(Action a){
 		theActionList.add(a);
+		if (maxSize < size())
+			{
+				maxSize = size();
+			}
 	}
 	
 	public int size(){
 		return theActionList.size();
 	}
-	
+
+	public int originalSize(){
+		return maxSize;
+	}
+
 	public boolean actionsLeft(){
 		return theActionList.size() > 0;
 	}

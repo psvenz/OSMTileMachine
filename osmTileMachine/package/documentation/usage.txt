@@ -3,8 +3,19 @@ osmTileMachine -source sweden -download -update -renderarea Falun -debug
 
 Parameter description: 
 
-		-download
-			Runs WGET and downloads the openstreetmap data source file. 
+		-source xxxxx
+			Sets datasource location.
+			Valid download sources: 
+				downloadplanet (default)
+				downloadeurope
+				downloadsweden
+				downloadgermany
+
+			Valid internet resources:
+				URL starting with http:// or ftp://
+				
+			Valud local files:
+				Any filename inside the workdir directory (pbf filetype)
 		
 		-update
 			Updating the openstreetmap data source file and produces an up-to-the-minute fresh data file with the help from osmupdate tool.
@@ -21,7 +32,7 @@ Parameter description:
 			Niemisel
 			Vänern
 		
-		-debug will give a verbose output in console
+		-verbose will give a verbose output in console
 
 		-firstaction nn
 			Will skip early actions and start with the specified action (resume previous operation, or for debug purposes)
@@ -29,10 +40,3 @@ Parameter description:
 		-maxzoom
 			Max render depth. Recommended: 13 to 16.
 			
-		-source xxxxx
-			Sets download location.
-			Valid download sources: 
-				planet (default)
-				europe
-				sweden
-				germany

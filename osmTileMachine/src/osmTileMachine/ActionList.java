@@ -12,6 +12,14 @@ public class ActionList {
 		maxSize = 0;
 	}
 
+	public void append(ActionList b)
+	{
+		while (b.actionsLeft())
+		{
+			addItem(b.getNextAction());
+		}
+	}
+	
 	public void addItem(Action a){
 		theActionList.add(a);
 		if (maxSize < size())

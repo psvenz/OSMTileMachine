@@ -4,31 +4,30 @@ import java.util.ArrayList;
 
 public final class OpenStreetMapProject {
 
-	public static ArrayList<String> getSourceFileMirrors(Configuration sessionConfiguration) {
+	public static ArrayList<String> getSourceFileMirrors(Configuration sessionConfiguration, String s) {
 
 		ArrayList<String> addressList = new ArrayList<String>();
 
-		String s = sessionConfiguration.getSource();
 
-		if (s.equalsIgnoreCase("sweden"))
+		if (s.equalsIgnoreCase("downloadsweden"))
 		{
 			addressList.add("http://download.geofabrik.de/europe/sweden-latest.osm.pbf");			
 		}
 
-		else if (s.equalsIgnoreCase("europe"))
+		else if (s.equalsIgnoreCase("downloadeurope"))
 		{
 			addressList.add("http://download.geofabrik.de/europe-latest.osm.pbf");
 			addressList.add("http://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/europe-latest.osm.pbf");
 
 		}
-		else if (s.equalsIgnoreCase("germany"))
+		else if (s.equalsIgnoreCase("downloadgermany"))
 		{
 
 			addressList.add("http://download.geofabrik.de/europe/germany-latest.osm.pbf");
 			addressList.add("http://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/germany-latest.osm.pbf");
 
 		}
-		else //planet as well
+		else //downloadplanet as well
 		{
 			addressList.add("ftp://ftp.spline.de/pub/openstreetmap/pbf/planet-latest.osm.pbf");
 			addressList.add("http://ftp.osuosl.org/pub/openstreetmap/pbf/planet-latest.osm.pbf");

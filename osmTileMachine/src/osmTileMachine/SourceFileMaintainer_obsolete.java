@@ -1,21 +1,22 @@
 package osmTileMachine;
+/*
 
+package osmTileMachine;
 import java.io.File;
-
 public class SourceFileMaintainer {
 
 	public static String sourceFileName = "sourcefile.pbf";
 	public static String updatedSourceFilename = "sourcefile_updated.pbf";
 	
 	public static void forceSourceDownload(Configuration sessionConfiguration) throws Exception {
-		MessagePrinter.notify(sessionConfiguration, "Downloading planet file...");
+		MessagePrinter.notify(sessionConfiguration, "Downloading source file...");
 		InternetDownloader.downloadFile(sessionConfiguration, sourceFileName, OpenStreetMapProject.getSourceFileMirrors(sessionConfiguration));
 		MessagePrinter.notify(sessionConfiguration, "Planet file downloaded!");
 	}
 
 	public static void updateSourceFile(Configuration sessionConfiguration) throws Exception{
 
-		MessagePrinter.notify(sessionConfiguration, "Updating planet file...");
+		MessagePrinter.notify(sessionConfiguration, "Updating source file...");
 		if (Osmupdate.testToolAvailability(sessionConfiguration) == false) throw new Exception("updatePlanet failed, could not find osmupdate tool (osmu.exe)");
 		MessagePrinter.debug(sessionConfiguration, "osmupdate testToolAvailability OK");
 
@@ -31,7 +32,7 @@ public class SourceFileMaintainer {
 			// Verifyplanet fail => download a new planet
 			if (verifyPlanet(sessionConfiguration) == false){
 				try {
-					MessagePrinter.debug(sessionConfiguration, "Downloading planet.");
+					MessagePrinter.debug(sessionConfiguration, "Downloading source.");
 					SourceFileMaintainer.forceSourceDownload(sessionConfiguration);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -144,3 +145,4 @@ public class SourceFileMaintainer {
 		return planetGood;
 	}
 }
+*/

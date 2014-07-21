@@ -47,13 +47,12 @@ public class Osmupdate {
 
 	}
 
-	public static void runUpdate(Configuration sessionConfiguration, Boolean useCache) throws Exception {
+	public static void runUpdate(Configuration sessionConfiguration, Boolean useCache, String fileName, String fileNameUpdated) throws Exception {
 		// TODO Auto-generated method stub
 
-
 		Boolean successfulUpdate = false;
-		String fileName = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + SourceFileMaintainer.sourceFileName + "\""; 
-		String fileNameUpdated = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + SourceFileMaintainer.updatedSourceFilename + "\""; 
+//		String fileName = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + SourceFileMaintainer.sourceFileName + "\""; 
+//		String fileNameUpdated = "\"" + sessionConfiguration.getWorkingDirectory() + File.separator + SourceFileMaintainer.updatedSourceFilename + "\""; 
 
 		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 		e.setCommand(toolFileName);
@@ -72,9 +71,6 @@ public class Osmupdate {
 			successfulUpdate = true;
 		}
 
-
 		if (successfulUpdate == false) throw new Exception("Update failed...");
-
 	}
-
 }

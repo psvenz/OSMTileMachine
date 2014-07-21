@@ -5,19 +5,18 @@ import java.text.ParseException;
 
 public class Configuration {
 
-	private boolean downloadSource;
+	public final int SOURCETYPE_UNSPECIFIED = 0;
+	public final int SOURCETYPE_DOWNLOAD = 1;
+	public final int SOURCETYPE_URL = 2;
+	public final int SOURCETYPE_LOCALFILE = 3;
 
+	private int sourceType;
 	private boolean updateSource;
-
 	private boolean render;
-
 	private boolean enableDebugOutput;
 	private String requestedArea;
-
 	private int firstAction;
-
 	private int maxZoom;
-
 	private String source;
 
 	public void parseInputArguments(String[] args) throws ParseException {
@@ -36,16 +35,12 @@ public class Configuration {
 			if (enableDebugOutput) System.out.println("Parsing argument number " + String.valueOf(i) + ": " + arg);
 
 
-			if (arg.toLowerCase().contentEquals("-download") ||  arg.toLowerCase().contentEquals("-d"))
-			{
-				setDownload(true);
-			} 
-			else if (arg.toLowerCase().contentEquals("-update") ||  arg.toLowerCase().contentEquals("-u"))
+			if (arg.toLowerCase().contentEquals("-update"))
 			{
 				setUpdate(true);
 			} 
 
-			else if (arg.toLowerCase().contentEquals("-renderarea") ||  arg.toLowerCase().contentEquals("-r"))
+			else if (arg.toLowerCase().contentEquals("-renderarea"))
 			{
 				if (i+1 == args.length) // nothing follows -operatingmode 
 				{
@@ -56,19 +51,34 @@ public class Configuration {
 				i++;
 			}
 
-			
+
 			else if (arg.toLowerCase().contentEquals("-source"))
 			{
 				if (i+1 == args.length) // nothing follows -source 
 				{
 					throw new ParseException("source argument missing", i);
 				}
-				setSource(args[i+1]);
+
+				
+				if (args[i+1].startsWith("download"))
+				{
+					setSource(args[i+1]);
+					setSourceType(SOURCETYPE_DOWNLOAD);
+				}
+				else if (args[i+1].toLowerCase().startsWith("http://") || args[i+1].toLowerCase().startsWith("ftp://"))
+				{
+					setSource(args[i+1]);
+					setSourceType(SOURCETYPE_URL);
+				}
+				else
+				{
+					//Assuming local file as source
+					setSource(args[i+1]);
+					setSourceType(SOURCETYPE_LOCALFILE);
+				}
 				i++;
 			}
-
-			
-			else if (arg.toLowerCase().contentEquals("-debug"))
+			else if (arg.toLowerCase().contentEquals("-verbose"))
 			{
 				setDebugOutput(true);
 			}
@@ -100,6 +110,12 @@ public class Configuration {
 
 			i++;			
 		}	
+
+		if (getSourceType() == SOURCETYPE_UNSPECIFIED)
+		{
+			MessagePrinter.error(this, "source unspecified, mandatory input argument");
+			throw new ParseException("Cannot continue without a specified source.", i);
+		}
 		if (enableDebugOutput) System.out.println("Successfully parsed all input arguments.");
 
 	}
@@ -136,26 +152,25 @@ public class Configuration {
 		return firstAction;
 	}
 
-	public boolean getDownload()
+	public int getSourceType()
 	{
-		return downloadSource;
+		return sourceType;
 	}
 
-	private void setDownload(boolean b) {
+	private void setSourceType(int i) {
 		// TODO Auto-generated method stub
-		downloadSource = b;
+		sourceType = i;
 	}
 
 	public Configuration()
 	{
 		//Creator
-		setDownload(false);
+		setSourceType(SOURCETYPE_UNSPECIFIED);
 		setUpdate(false);
 		setMaxZoom(13);
-		setSource("planet");
 	}
 
-	private void setSource(String string) {
+	public void setSource(String string) {
 		// TODO Auto-generated method stub
 		source=string;
 	}
@@ -163,7 +178,7 @@ public class Configuration {
 	{
 		return source;
 	}
-	
+
 	public void setDebugOutput(boolean b) {
 		// TODO Auto-generated method stub
 		enableDebugOutput = b;

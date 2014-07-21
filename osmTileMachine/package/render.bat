@@ -1,2 +1,2 @@
-java -jar osmtilemachine.jar -source sweden -download -update -renderarea Falun
+java -jar osmtilemachine.jar -source downloadsweden -update -renderarea Falun -verbose
 pause

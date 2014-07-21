@@ -1,29 +1,34 @@
 package osmTileMachine;
+import java.io.File;
 import java.lang.System;
 public class MainClass {
 	public static void main(String[] args) throws Exception
 	{
 
+		ActionList mainActionList = new ActionList();
+
 		Configuration sessionConfiguration = new Configuration();
 
-		try
-		{
-			sessionConfiguration.parseInputArguments(args);
-		}catch(Exception e)
-		{
-			System.out.println("Error parsing input arguments!");
-			System.out.println(e);
-		}
+		sessionConfiguration.parseInputArguments(args);
 
-		if (sessionConfiguration.getDownload())
+
+		if (sessionConfiguration.getSourceType() == sessionConfiguration.SOURCETYPE_DOWNLOAD)
 		{
-			SourceFileMaintainer.forceSourceDownload(sessionConfiguration);
+			String newSourceFileName = sessionConfiguration.getWorkingDirectory() + File.separator + "datasource.pbf";
+			mainActionList.addItem(new DownloadAction(newSourceFileName, OpenStreetMapProject.getSourceFileMirrors(sessionConfiguration, sessionConfiguration.getSource())));
+			sessionConfiguration.setSource(newSourceFileName);
 		}		
-
-
+		else
+		{
+			
+		}
+		
+		
 		if (sessionConfiguration.getUpdate())
 		{
-			SourceFileMaintainer.updateSourceFile(sessionConfiguration);
+			String newSourceFileName = sessionConfiguration.getWorkingDirectory() + File.separator + "datasource_updated.pbf";
+			mainActionList.addItem(new DataUpdateAction(sessionConfiguration.getSource(), newSourceFileName));	
+			sessionConfiguration.setSource(newSourceFileName);
 		}
 
 		if (sessionConfiguration.getRender())			
@@ -31,28 +36,31 @@ public class MainClass {
 			TileSet ts = new TileSet();
 			ts.addSet(Geography.getTileSetForRegion(sessionConfiguration.getRequestedArea()));
 
-			System.out.println("Generating actionlist...");
-			ActionList ExtractAreaActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, SourceFileMaintainer.updatedSourceFilename);
-			System.out.println(ExtractAreaActionList.getListInHumanReadableFormat());
+			ActionList splitAndRenderActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, sessionConfiguration.getSource());
+			mainActionList.append(splitAndRenderActionList);
+		}
 
-			System.out.println("Executing actionlist...");
-			int i = 0;
-			while (ExtractAreaActionList.actionsLeft()){
-				System.out.print("(" + (i+1) + "/"+ ExtractAreaActionList.originalSize() +") ");
+		System.out.println(mainActionList.getListInHumanReadableFormat());
 
-				if (i < (sessionConfiguration.getFirstAction()-1) ) 
-				{
-					ExtractAreaActionList.getNextAction(); //Debug ability to skip early actions, or for resuming aborted operations
-					System.out.println("Skipped");
-				}
-				else
-				{
-					ExtractAreaActionList.getNextAction().runAction(sessionConfiguration);
-					System.out.println("Done");
-				}
-				i++;
+		
+
+		System.out.println("Executing actionlist...");
+		int i = 0;
+		while (mainActionList.actionsLeft()){
+			System.out.print("(" + (i+1) + "/"+ mainActionList.originalSize() +") ");
+
+			if (i < (sessionConfiguration.getFirstAction()-1) ) 
+			{
+				mainActionList.getNextAction(); //Debug ability to skip early actions, or for resuming aborted operations
+				System.out.println("Skipped");
 			}
-
+			else
+			{
+				mainActionList.getNextAction().runAction(sessionConfiguration);
+				System.out.println("Done");
+			}
+			i++;
 		}
 	}
 }
+

@@ -32,8 +32,7 @@
 	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
 	var osm = new L.TileLayer(osmUrl, {minZoom: 5, maxZoom: 9, attribution: osmAttrib});		
 
-	// start the map in South-East England
-	map.setView(new L.LatLng(51.3, 0.7),5);
+	map.setView(new L.LatLng(60.55, 15.6),10);
 	map.addLayer(osm);
 
 

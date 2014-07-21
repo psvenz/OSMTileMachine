@@ -1,6 +1,7 @@
 package osmTileMachine;
 import java.io.File;
 import java.lang.System;
+import java.util.ArrayList;
 public class MainClass {
 	public static void main(String[] args) throws Exception
 	{
@@ -18,9 +19,13 @@ public class MainClass {
 			mainActionList.addItem(new DownloadAction(newSourceFileName, OpenStreetMapProject.getSourceFileMirrors(sessionConfiguration, sessionConfiguration.getSource())));
 			sessionConfiguration.setSource(newSourceFileName);
 		}		
-		else
+		else if (sessionConfiguration.getSourceType() == sessionConfiguration.SOURCETYPE_URL)
 		{
-			
+			String newSourceFileName = sessionConfiguration.getWorkingDirectory() + File.separator + "datasource.pbf";
+			ArrayList<String> addressList = new ArrayList<String>();
+			addressList.add(sessionConfiguration.getSource());
+			mainActionList.addItem(new DownloadAction(newSourceFileName,addressList));
+			sessionConfiguration.setSource(newSourceFileName);			
 		}
 		
 		

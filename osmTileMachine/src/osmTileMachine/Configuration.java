@@ -88,7 +88,7 @@ public class Configuration {
 				{
 					throw new ParseException("firstaction argument missing", i);
 				}
-				setFirstAction(Integer.parseUnsignedInt(args[i+1]));
+				setFirstAction(Integer.parseInt(args[i+1]));
 				i++;
 			}
 
@@ -99,7 +99,7 @@ public class Configuration {
 				{
 					throw new ParseException("maxzoom argument missing", i);
 				}
-				setMaxZoom(Integer.parseUnsignedInt(args[i+1]));
+				setMaxZoom(Integer.parseInt(args[i+1]));
 				i++;
 			}
 

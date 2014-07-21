@@ -1,0 +1,42 @@
+Example usage:
+osmTileMachine -source sweden -download -update -renderarea Falun -debug 
+
+Parameter description: 
+
+		-source xxxxx
+			Sets datasource location.
+			Valid download sources: 
+				downloadplanet (default)
+				downloadeurope
+				downloadsweden
+				downloadgermany
+
+			Valid internet resources:
+				URL starting with http:// or ftp://
+				
+			Valud local files:
+				Any filename inside the workdir directory (pbf filetype)
+		
+		-update
+			Updating the openstreetmap data source file and produces an up-to-the-minute fresh data file with the help from osmupdate tool.
+		
+		-renderarea yyyyy
+			Splits the updated data source file into smaller and smaller data files until each file could fit into memory of the render tool, then 
+			feeds the datafiles to the render tool. (maperitive)
+
+			Valid area sets the area to cover:
+			Niemisel
+			Falun
+			Dalarna
+			Scandinavia
+			Niemisel
+			Vänern
+		
+		-verbose will give a verbose output in console
+
+		-firstaction nn
+			Will skip early actions and start with the specified action (resume previous operation, or for debug purposes)
+		
+		-maxzoom
+			Max render depth. Recommended: 13 to 16.
+			

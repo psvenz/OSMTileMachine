@@ -18,6 +18,7 @@ public class Configuration {
 	private int firstAction;
 	private int maxZoom;
 	private String source;
+	private String webrootDirectoryName;
 
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
@@ -82,6 +83,7 @@ public class Configuration {
 			{
 				setDebugOutput(true);
 			}
+			
 			else if (arg.toLowerCase().contentEquals("-firstaction"))
 			{
 				if (i+1 == args.length) // nothing follows -firstaction 
@@ -89,6 +91,15 @@ public class Configuration {
 					throw new ParseException("firstaction argument missing", i);
 				}
 				setFirstAction(Integer.parseInt(args[i+1]));
+				i++;
+			}
+			else if (arg.toLowerCase().contentEquals("-webroot"))
+			{
+				if (i+1 == args.length) // nothing follows 
+				{
+					throw new ParseException("webroot argument missing", i);
+				}
+				setWebrootDirectoryName(args[i+1]);
 				i++;
 			}
 
@@ -168,6 +179,7 @@ public class Configuration {
 		setSourceType(SOURCETYPE_UNSPECIFIED);
 		setUpdate(false);
 		setMaxZoom(13);
+		webrootDirectoryName = System.getProperty("user.dir") +"\\" + "webroot";
 	}
 
 	public void setSource(String string) {
@@ -196,10 +208,17 @@ public class Configuration {
 		return System.getProperty("user.dir") + "\\rules\\mtbmap.se.rules";
 
 	}
-	public String getOutputDirectoryName() {
+	
+	public String getWebrootDirectoryName() {
 		// TODO Auto-generated method stub
-		return System.getProperty("user.dir") +"\\" + "webroot";
+		return webrootDirectoryName;
 	}
+
+	private void setWebrootDirectoryName(String s) {
+		// TODO Auto-generated method stub
+		webrootDirectoryName = s;
+	}
+
 	public String getMaperitiveExecutableFileName() {
 		// TODO Auto-generated method stub
 		return "tools\\maperitive\\maperitive.exe";

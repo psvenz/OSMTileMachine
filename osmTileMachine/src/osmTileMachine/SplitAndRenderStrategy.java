@@ -93,7 +93,7 @@ public class SplitAndRenderStrategy {
 			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.getLowerZoomLevelTile(9).toString() + ".o5m", t.toString() + ".osm");
 			actionList.addItem(extractAction);
 
-			RenderAction renderAction = new RenderAction(RenderAction.TOOL_MAPERITIVE, t.getX(), t.getY(), t.getZ(), getHighestRenderLevel(), sessionConfiguration.getRuleSetFilename(), sessionConfiguration.getOutputDirectoryName(), t.toString() + ".osm");
+			RenderAction renderAction = new RenderAction(RenderAction.TOOL_MAPERITIVE, t.getX(), t.getY(), t.getZ(), getHighestRenderLevel(), sessionConfiguration.getRuleSetFilename(), sessionConfiguration.getWebrootDirectoryName(), t.toString() + ".osm");
 			actionList.addItem(renderAction);
 		}
 

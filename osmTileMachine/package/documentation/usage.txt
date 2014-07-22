@@ -40,3 +40,5 @@ Parameter description:
 		-maxzoom
 			Max render depth. Recommended: 13 to 16.
 			
+		-webroot xxxxx
+			Specifies a custom webroot directory. for example c:\webroot

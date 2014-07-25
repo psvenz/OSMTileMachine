@@ -11,11 +11,11 @@ public class DataUpdateAction extends Action{
 		outputFileName = o;
 	}
 	
-	@Override
-	int getActionType() {
+//	@Override
+//	int getActionType() {
 		// TODO Auto-generated method stub
-		return ACTIONTYPE_DATAUPDATEACTION;
-	}
+//		return ACTIONTYPE_DATAUPDATEACTION;
+//	}
 
 
 	
@@ -39,6 +39,7 @@ public class DataUpdateAction extends Action{
 		if (SuccessfulUpdate == false) 
 		{
 			Osmupdate.runUpdate(sessionConfiguration, useCache, inputFileName, outputFileName);
+			SuccessfulUpdate = true;
 		}
 	
 	}

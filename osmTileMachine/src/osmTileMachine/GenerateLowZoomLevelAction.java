@@ -79,14 +79,14 @@ public class GenerateLowZoomLevelAction extends Action{
 //			G.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, bgcolor, observer)
 			
 			g.setColor(Color.black);
-			g.fillRect(0, 0, 256, 256);
+			g.fillRect(0, 0, 512, 512);
 			
 			g.drawImage(imgQ1, 0, 255, 256, 512, 0, 0, 255, 255, Color.black, null);
 			g.drawImage(imgQ2, 0, 0, 256, 256, 0, 0, 255, 255, Color.black,null);
 			g.drawImage(imgQ3, 255, 255, 512, 512, 0, 0, 255, 255, Color.black,null);
 			g.drawImage(imgQ4, 255, 0, 512, 256, 0, 0, 255, 255, Color.black,null);
 		
-			imgStiched = scaleWithInstance(imgStiched, 256, 256, Image.SCALE_SMOOTH);
+			imgStiched = scaleWithInstance(imgStiched, 256, 256, Image.SCALE_AREA_AVERAGING);
 			ImageIO.write(imgStiched, "png", targetFile);
 		}
 	}

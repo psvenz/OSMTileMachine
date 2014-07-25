@@ -99,7 +99,31 @@ public class SplitAndRenderStrategy {
 
 
 
-
+		// lower zoom levels requested? 
+		if (sessionConfiguration.getLowZoom()){
+			TileSet z9 = RequestedTileSet.getAllParentTiles(9);
+			TileSet z8 = RequestedTileSet.getAllParentTiles(8);
+			TileSet z7 = RequestedTileSet.getAllParentTiles(7);
+			TileSet z6 = RequestedTileSet.getAllParentTiles(6);
+			TileSet z5 = RequestedTileSet.getAllParentTiles(5);
+			TileSet z4 = RequestedTileSet.getAllParentTiles(4);
+			TileSet z3 = RequestedTileSet.getAllParentTiles(3);
+			TileSet z2 = RequestedTileSet.getAllParentTiles(2);
+			TileSet z1 = RequestedTileSet.getAllParentTiles(1);
+			TileSet z0 = RequestedTileSet.getAllParentTiles(0);
+			
+			actionList.addItem(new GenerateLowZoomLevelAction(z9, " z9"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z8, " z8"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z7, " z7"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z6, " z6"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z5, " z5"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z4, " z4"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z3, " z3"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z2, " z2"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z1, " z1"));
+			actionList.addItem(new GenerateLowZoomLevelAction(z0, " z0"));
+			
+		}
 
 
 

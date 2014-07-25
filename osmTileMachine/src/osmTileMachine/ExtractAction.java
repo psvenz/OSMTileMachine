@@ -1,9 +1,10 @@
 package osmTileMachine;
 
 public class ExtractAction extends Action{
-	int getActionType() {
-		return ACTIONTYPE_EXTRACTACTION;
-	}
+
+//	int getActionType() {
+//		return ACTIONTYPE_EXTRACTACTION;
+//	}
 	
 	public final static int TOOL_OSMCONVERT = 1;
 	public final static int CUTMETHOD_CLIP = 1;

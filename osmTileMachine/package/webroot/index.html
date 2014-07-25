@@ -28,16 +28,16 @@
 
 
 	// create the tile layer with correct attribution
-	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-	var osm = new L.TileLayer(osmUrl, {minZoom: 5, maxZoom: 9, attribution: osmAttrib});		
+//	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+//	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+//	var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 3, attribution: osmAttrib});		
 
 	map.setView(new L.LatLng(60.55, 15.6),10);
-	map.addLayer(osm);
+//	map.addLayer(osm);
 
 
 		L.tileLayer('Tiles/{z}/{x}/{y}.png', {
-			minZoom: 10, maxZoom: 15,
+			minZoom: 0, maxZoom: 15,
 			attribution: 'Map data © OpenStreetMap contributors'
 		}).addTo(map);
 

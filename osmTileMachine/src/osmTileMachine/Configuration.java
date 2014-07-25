@@ -1,5 +1,6 @@
 package osmTileMachine;
 
+import java.io.File;
 // import java.io.File;
 import java.text.ParseException;
 
@@ -19,6 +20,7 @@ public class Configuration {
 	private int maxZoom;
 	private String source;
 	private String webrootDirectoryName;
+	private boolean lowZoom;
 
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
@@ -82,6 +84,10 @@ public class Configuration {
 			else if (arg.toLowerCase().contentEquals("-verbose"))
 			{
 				setDebugOutput(true);
+			}
+			else if (arg.toLowerCase().contentEquals("-generatelowzoom"))
+			{
+				setLowZoom(true);
 			}
 			
 			else if (arg.toLowerCase().contentEquals("-firstaction"))
@@ -180,6 +186,17 @@ public class Configuration {
 		setUpdate(false);
 		setMaxZoom(13);
 		webrootDirectoryName = System.getProperty("user.dir") +"\\" + "webroot";
+		setLowZoom(false);
+	}
+
+	private void setLowZoom(boolean b) {
+		// TODO Auto-generated method stub
+		lowZoom = b;
+	}
+
+	public boolean getLowZoom() {
+		// TODO Auto-generated method stub
+		return lowZoom;
 	}
 
 	public void setSource(String string) {
@@ -213,6 +230,12 @@ public class Configuration {
 		// TODO Auto-generated method stub
 		return webrootDirectoryName;
 	}
+
+	public String getTileDirectoryName() {
+		// TODO Auto-generated method stub
+		return webrootDirectoryName + File.separator + "Tiles";
+	}
+
 
 	private void setWebrootDirectoryName(String s) {
 		// TODO Auto-generated method stub

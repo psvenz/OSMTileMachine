@@ -8,11 +8,11 @@ public class DownloadAction extends Action{
 	private ArrayList<String> urls;
 	private String outputFilename;
 	
-	@Override
-	int getActionType() {
-		// TODO Auto-generated method stub
-		return ACTIONTYPE_DOWNLOADACTION;
-	}
+//	@Override
+//	int getActionType() {
+//		// TODO Auto-generated method stub
+//		return ACTIONTYPE_DOWNLOADACTION;
+//	}
 
 	@Override
 	void runAction(Configuration sessionConfiguration) throws Exception {

@@ -31,6 +31,9 @@ Parameter description:
 			Scandinavia
 			Niemisel
 			Vänern
+			
+		-generatelowzoom
+			will create zoom levels 0-9 from level 10 tiles by stiching four tiles together to one and size reduced to 50%.
 		
 		-verbose will give a verbose output in console
 

@@ -3,9 +3,11 @@ package osmTileMachine;
 
 public class RenderAction extends Action{
 	public final static int TOOL_MAPERITIVE = 1;
-	int getActionType() {
-		return ACTIONTYPE_RENDERACTION;
-	}
+
+//	int getActionType() {
+//		return ACTIONTYPE_RENDERACTION;
+//	}
+
 	private int x, y, z, zMax, tool;
 	private String ruleSetFileName, outputDirectoryName;
 	private String dataFileName;

@@ -48,28 +48,29 @@ features
 //		hiking route minor : relation[type=route route=foot @isOneOf(network, rwn, lwn)]
 //		hiking route other : trailblazed=yes
 		bridleway : highway=bridleway AND (NOT mtb:scale)
-		foot path major : ((highway=path) AND (NOT trail_visibility OR @isOneOf(trail_visibility, excellent, good))) OR (highway=bridleway AND mtb:scale)
-		foot path minor : (highway=path) AND (trail_visibility AND NOT @isOneOf(trail_visibility, excellent, good))
+		foot path major : (highway=path OR ((@isOneOf(highway, track, bridleway, footway, cycleway) AND mtb:scale))) AND (NOT trail_visibility OR @isOneOf(trail_visibility, excellent, good))
+		foot path minor : (highway=path OR ((@isOneOf(highway, track, bridleway, footway, cycleway) AND mtb:scale))) AND (trail_visibility AND NOT @isOneOf(trail_visibility, excellent, good))
+//		foot path major : ((highway=path OR (highway=track AND mtb:scale)) AND (NOT trail_visibility OR @isOneOf(trail_visibility, excellent, good)) OR (highway=bridleway AND mtb:scale)
+//		foot path minor : (highway=path) AND (trail_visibility AND NOT @isOneOf(trail_visibility, excellent, good))
 		foot path footway : (highway=footway)
 		road caronly : highway=motorway OR highway=motorway_link OR highway=trunk OR highway=trunk_link OR highway=primary OR highway=primary_link
 		road carprefered: highway=secondary OR highway=secondary_link
 		road tertiary : highway=tertiary 
 		road medium : highway=unclassified
 		road mini : highway=service OR highway=road OR highway=living_street OR highway=residential
-		road cycleway : highway=cycleway
-		mtbsuitable gravelroad_fast : (highway=track AND (tracktype=grade1 OR tracktype=grade2 OR NOT tracktype)) OR ((@isOneOf(highway, residential, service, unclassified, tertiary, cycleway, living_street) AND @isOneOf(surface, unpaved, gravel)))
-
-		mtbsuitable gravelroad_slow : (highway=track AND (tracktype=grade3 OR tracktype=grade4 OR tracktype=grade5)) OR ((@isOneOf(highway, residential, service, unclassified, tertiary, cycleway, living_street) AND @isOneOf(surface, ground, earth, sand, stone, grass, dirt, mud, rock, rocky, stone)))
+		road cycleway : highway=cycleway AND NOT mtb:scale
+		mtbsuitable gravelroad_fast : (highway=track AND (tracktype=grade1 OR tracktype=grade2 OR NOT tracktype) AND NOT mtb:scale) OR ((@isOneOf(highway, residential, service, unclassified, tertiary, cycleway, living_street) AND @isOneOf(surface, unpaved, gravel) AND NOT (@isOneOf(highway, track, bridleway, footway, cycleway) AND mtb:scale)))
+		mtbsuitable gravelroad_slow : (highway=track AND (tracktype=grade3 OR tracktype=grade4 OR tracktype=grade5) AND NOT mtb:scale) OR ((@isOneOf(highway, residential, service, unclassified, tertiary, cycleway, living_street) AND @isOneOf(surface, ground, earth, sand, stone, grass, dirt, mud, rock, rocky, stone) AND NOT (@isOneOf(highway, track, bridleway, footway, cycleway) AND mtb:scale)))
 		railway : railway=rail
 
-		mtbscale mtb0 : @isOneOf(highway, path, bridleway) AND @isOneOf(mtb:scale, 0, 0-)
-		mtbscale mtb0p : @isOneOf(highway, path, bridleway) AND @isOneOf(mtb:scale, 0+,1-)
-		mtbscale mtb1 : @isOneOf(highway, path, bridleway) AND @isOneOf(mtb:scale, 1)
-		mtbscale mtb1p : @isOneOf(highway, path, bridleway) AND @isOneOf(mtb:scale, 1+, 2-)
-		mtbscale mtb2 : @isOneOf(highway, path, bridleway) AND @isOneOf(mtb:scale, 2, 2+)
-		mtbscale mtb3 : @isOneOf(highway, path, bridleway) AND @isOneOf(mtb:scale, 3, 3-,3+)
-		mtbscale mtb4 : @isOneOf(highway, path, bridleway) AND @isOneOf(mtb:scale, 4, 4-,4+)
-		mtbscale mtb5 : @isOneOf(highway, path, bridleway) AND @isOneOf(mtb:scale, 5, 5-,5+)
+		mtbscale mtb0 : @isOneOf(highway, path, bridleway, track, cycleway, footway) AND @isOneOf(mtb:scale, 0, 0-)
+		mtbscale mtb0p : @isOneOf(highway, path, bridleway, track, cycleway, footway) AND @isOneOf(mtb:scale, 0+,1-)
+		mtbscale mtb1 : @isOneOf(highway, path, bridleway, track, cycleway, footway) AND @isOneOf(mtb:scale, 1)
+		mtbscale mtb1p : @isOneOf(highway, path, bridleway, track, cycleway, footway) AND @isOneOf(mtb:scale, 1+, 2-)
+		mtbscale mtb2 : @isOneOf(highway, path, bridleway, track, cycleway, footway) AND @isOneOf(mtb:scale, 2, 2+)
+		mtbscale mtb3 : @isOneOf(highway, path, bridleway, track, cycleway, footway) AND @isOneOf(mtb:scale, 3, 3-,3+)
+		mtbscale mtb4 : @isOneOf(highway, path, bridleway, track, cycleway, footway) AND @isOneOf(mtb:scale, 4, 4-,4+)
+		mtbscale mtb5 : @isOneOf(highway, path, bridleway, track, cycleway, footway) AND @isOneOf(mtb:scale, 5, 5-,5+)
 		
 	areas
 		land : place=island OR natural=land OR natural=island 			

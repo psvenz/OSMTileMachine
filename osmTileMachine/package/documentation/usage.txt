@@ -14,7 +14,7 @@ Parameter description:
 			Valid internet resources:
 				URL starting with http:// or ftp://
 				
-			Valud local files:
+			Valid local files:
 				Any filename inside the workdir directory (pbf filetype)
 		
 		-update

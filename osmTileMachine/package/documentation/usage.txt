@@ -45,3 +45,9 @@ Parameter description:
 			
 		-webroot xxxxx
 			Specifies a custom webroot directory. for example c:\webroot
+			
+		-keepdownloaded
+			If a download is ordered, the file will be kept. If not set, the downloaded file will be removed when it is no longer needed.
+
+		-keepintermediate
+			During extraction, a lot of datafiles are produced. Use this flag to keep the files.  If not set, all produces intermediate files will be deleted when they are no longer needed.

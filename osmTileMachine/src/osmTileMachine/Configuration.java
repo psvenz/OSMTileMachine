@@ -19,6 +19,8 @@ public class Configuration {
 	private int firstAction;
 	private int maxZoom;
 	private String source;
+	private boolean keepDownload;
+	private boolean keepIntermediateFiles;
 	private String webrootDirectoryName;
 	private boolean lowZoom;
 
@@ -85,6 +87,16 @@ public class Configuration {
 			{
 				setDebugOutput(true);
 			}
+			else if (arg.toLowerCase().contentEquals("-keepdownloaded"))
+			{
+				setKeepDownload(true);
+			}			
+			else if (arg.toLowerCase().contentEquals("-keepintermediate"))
+			{
+				setKeepIntermediateFiles(true);
+			}
+			
+			
 			else if (arg.toLowerCase().contentEquals("-generatelowzoom"))
 			{
 				setLowZoom(true);
@@ -187,6 +199,8 @@ public class Configuration {
 		setMaxZoom(13);
 		webrootDirectoryName = System.getProperty("user.dir") +"\\" + "webroot";
 		setLowZoom(false);
+		setKeepDownload(false);
+		setKeepIntermediateFiles(false);
 	}
 
 	private void setLowZoom(boolean b) {
@@ -255,6 +269,18 @@ public class Configuration {
 	public int getMaxZoom() {
 		// TODO Auto-generated method stub
 		return maxZoom;
+	}
+	public boolean getKeepDownload() {
+		return keepDownload;
+	}
+	private void setKeepDownload(boolean keepDownload) {
+		this.keepDownload = keepDownload;
+	}
+	public boolean getKeepIntermediateFiles() {
+		return keepIntermediateFiles;
+	}
+	private void setKeepIntermediateFiles(boolean keepIntermediateFiles) {
+		this.keepIntermediateFiles = keepIntermediateFiles;
 	}
 
 }

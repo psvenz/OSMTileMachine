@@ -1,5 +1,7 @@
 package osmTileMachine;
 
+import java.io.File;
+
 //import java.io.File;
 
 public class SplitAndRenderStrategy {
@@ -7,80 +9,128 @@ public class SplitAndRenderStrategy {
 //	private static double smallMargin = 0.05; //Degrees
 	private static double largeMargin = 0.9; //Degrees
 
-	public static ActionList CreateActionList(Configuration sessionConfiguration, TileSet RequestedTileSet, String inputFileName) throws Exception
+	public static ActionList CreateActionList(Configuration sessionConfiguration, TileSet RequestedTileSet, String inputFileName, ActionList deleteSourceFilesActionList) throws Exception
 	{
 
 		ActionList actionList = new ActionList();
 
 
-		// Assuming all requested tiles are at zoom level 9
+		// Assuming all requested tiles are at zoom level 10
 
 		TileSet thisZoomLevelTileSet;
 
 		// Add actions to create data for zoomlevel 4
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(4);
 		thisZoomLevelTileSet.tileSetIteratorStart();
+		DeleteFileSetAction z4deleteList = new DeleteFileSetAction();
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, inputFileName, t.toString() + ".pbf");
+			String fileName = t.toString() + ".pbf";
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, inputFileName, fileName);
 			actionList.addItem(extractAction);
+			z4deleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + fileName);
+		}
+		
+		// All z4 data files created. If requested, remove all source files...
+		if (!sessionConfiguration.getKeepDownload()) {
+			actionList.append(deleteSourceFilesActionList);
 		}
 
 
 		// Add actions to create data for zoomlevel 5
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(5);
 		thisZoomLevelTileSet.tileSetIteratorStart();
+		DeleteFileSetAction z5deleteList = new DeleteFileSetAction();
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(4).toString() + ".pbf", t.toString() + ".pbf");
+			String fileName = t.toString() + ".pbf";
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(4).toString() + ".pbf", fileName);
 			actionList.addItem(extractAction);
+			z5deleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + fileName);
+
 		}
+		
+		// Delete files needed to generate zoomlevel 5
+		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
+			actionList.addItem(z4deleteList);
 
-
+		
+		
 		// Add actions to create data for zoomlevel 6
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(6);
 		thisZoomLevelTileSet.tileSetIteratorStart();
+		DeleteFileSetAction z6deleteList = new DeleteFileSetAction();
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(5).toString() + ".pbf", t.toString() + ".pbf");
+			String fileName = t.toString() + ".pbf";
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(5).toString() + ".pbf", fileName);
 			actionList.addItem(extractAction);
+			z6deleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + fileName);
+
 		}
 
+		// Delete files needed to generate zoomlevel 6
+		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
+			actionList.addItem(z5deleteList);
 
+		
 		// Add actions to create data for zoomlevel 7
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(7);
 		thisZoomLevelTileSet.tileSetIteratorStart();
+		DeleteFileSetAction z7deleteList = new DeleteFileSetAction();
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(6).toString() + ".pbf", t.toString() + ".pbf");
+			String fileName = t.toString() + ".pbf";
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(6).toString() + ".pbf", fileName);
 			actionList.addItem(extractAction);
+			z7deleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + fileName);
+
 		}
+
+		// Delete files needed to generate zoomlevel 7
+		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
+			actionList.addItem(z6deleteList);
 
 
 		// Add actions to create data for zoomlevel 8
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(8);
 		thisZoomLevelTileSet.tileSetIteratorStart();
+		DeleteFileSetAction z8deleteList = new DeleteFileSetAction();
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(7).toString() + ".pbf", t.toString() + ".pbf");
+			String fileName = t.toString() + ".pbf";
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(7).toString() + ".pbf", fileName);
 			actionList.addItem(extractAction);
+			z8deleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + fileName);
+
 		}
+
+		// Delete files needed to generate zoomlevel 8
+		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
+			actionList.addItem(z7deleteList);
 
 		
 		// Add actions to create data for zoomlevel 9
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(9);
 		thisZoomLevelTileSet.tileSetIteratorStart();
+		DeleteFileSetAction z9deleteList = new DeleteFileSetAction();
 		while (thisZoomLevelTileSet.tileSetIteratorHasNext())
 		{
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
-			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(8).toString() + ".pbf", t.toString() + ".o5m");
+			String fileName = t.toString() + ".o5m";
+			ExtractAction extractAction = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(8).toString() + ".pbf", fileName);
 			actionList.addItem(extractAction);
+			z9deleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + fileName);
 		}
+
+		// Delete files needed to generate zoomlevel 9
+		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
+			actionList.addItem(z8deleteList);
 
 
 		// Add actions to create data for zoomlevel 10
@@ -97,7 +147,9 @@ public class SplitAndRenderStrategy {
 			actionList.addItem(renderAction);
 		}
 
-
+		// Delete files needed to generate zoomlevel 10
+		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
+			actionList.addItem(z9deleteList);
 
 		// lower zoom levels requested? 
 		if (sessionConfiguration.getLowZoom()){

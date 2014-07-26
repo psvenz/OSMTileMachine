@@ -12,12 +12,18 @@ public class MainClass {
 
 		sessionConfiguration.parseInputArguments(args);
 
+		ActionList deleteDownlodedFileActionList = new ActionList();
+		ActionList deleteUpdatedFileActionList = new ActionList();
 
 		if (sessionConfiguration.getSourceType() == sessionConfiguration.SOURCETYPE_DOWNLOAD)
 		{
 			String newSourceFileName = sessionConfiguration.getWorkingDirectory() + File.separator + "datasource.pbf";
 			mainActionList.addItem(new DownloadAction(newSourceFileName, OpenStreetMapProject.getSourceFileMirrors(sessionConfiguration, sessionConfiguration.getSource())));
 			sessionConfiguration.setSource(newSourceFileName);
+
+			DeleteFileSetAction delFileSetAction = new DeleteFileSetAction();
+			delFileSetAction.addFileName(newSourceFileName);
+			deleteDownlodedFileActionList.addItem(delFileSetAction);
 		}		
 		else if (sessionConfiguration.getSourceType() == sessionConfiguration.SOURCETYPE_URL)
 		{
@@ -25,29 +31,51 @@ public class MainClass {
 			ArrayList<String> addressList = new ArrayList<String>();
 			addressList.add(sessionConfiguration.getSource());
 			mainActionList.addItem(new DownloadAction(newSourceFileName,addressList));
-			sessionConfiguration.setSource(newSourceFileName);			
+			sessionConfiguration.setSource(newSourceFileName);		
+
+			DeleteFileSetAction delFileSetAction = new DeleteFileSetAction();
+			delFileSetAction.addFileName(newSourceFileName);
+			deleteDownlodedFileActionList.addItem(delFileSetAction);
+
 		}
-		
-		
+
+
 		if (sessionConfiguration.getUpdate())
 		{
 			String newSourceFileName = sessionConfiguration.getWorkingDirectory() + File.separator + "datasource_updated.pbf";
 			mainActionList.addItem(new DataUpdateAction(sessionConfiguration.getSource(), newSourceFileName));	
+			
+			if (!sessionConfiguration.getKeepDownload()) {
+				mainActionList.append(deleteDownlodedFileActionList);
+			}
+			
 			sessionConfiguration.setSource(newSourceFileName);
+
+			DeleteFileSetAction delFileSetAction = new DeleteFileSetAction();
+			delFileSetAction.addFileName(newSourceFileName);
+			deleteUpdatedFileActionList.addItem(delFileSetAction);
+
 		}
 
+		//Merge the two actinlist to one common "remove source action list"
+		ActionList deleteSourceFilesActionList = new ActionList();
+		deleteSourceFilesActionList.append (deleteDownlodedFileActionList);
+		deleteSourceFilesActionList.append (deleteUpdatedFileActionList);
+
+		
 		if (sessionConfiguration.getRender())			
 		{
 			TileSet ts = new TileSet();
 			ts.addSet(Geography.getTileSetForRegion(sessionConfiguration.getRequestedArea()));
-
-			ActionList splitAndRenderActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, sessionConfiguration.getSource());
+			
+			
+			
+			ActionList splitAndRenderActionList = SplitAndRenderStrategy.CreateActionList(sessionConfiguration, ts, sessionConfiguration.getSource(), deleteSourceFilesActionList);
 			mainActionList.append(splitAndRenderActionList);
 		}
 
-		System.out.println(mainActionList.getListInHumanReadableFormat());
+		mainActionList.PrintListInHumanReadableFormat(sessionConfiguration);
 
-		
 
 		System.out.println("Executing actionlist...");
 		int i = 0;

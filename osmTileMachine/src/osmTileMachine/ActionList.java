@@ -43,15 +43,15 @@ public class ActionList {
 		return theActionList.remove(0);
 	}
 
-	public String getListInHumanReadableFormat(){
+	public void PrintListInHumanReadableFormat(Configuration sessionConfiguration){
 		String s = "Action list:";
 		s = s + System.getProperty("line.separator");
+		MessagePrinter.debug(sessionConfiguration, s);
 		for (int i=0;i< theActionList.size();i++)
 		{
-			s = s + "Action #" + (i+1) + ": ";
-			s = s + theActionList.get(i).getActionInHumanReadableFormat();
-			s = s + System.getProperty("line.separator");
+			s =  "Action #" + (i+1) + ": " + 
+			theActionList.get(i).getActionInHumanReadableFormat();
+			MessagePrinter.debug(sessionConfiguration, s);
 		}
-		return s;
 	}
 }

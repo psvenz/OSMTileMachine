@@ -5,9 +5,9 @@ import java.io.File;
 //import java.io.File;
 
 public class SplitAndRenderStrategy {
-	private static double smallMargin = 0.03; //Degrees
+	private static double smallMargin = 0.04; //Degrees
 //	private static double smallMargin = 0.05; //Degrees
-	private static double largeMargin = 0.9; //Degrees
+	private static double largeMargin = 2; //Degrees
 
 	public static ActionList CreateActionList(Configuration sessionConfiguration, TileSet RequestedTileSet, String inputFileName, ActionList deleteSourceFilesActionList) throws Exception
 	{

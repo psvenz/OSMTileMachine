@@ -66,6 +66,11 @@ public class RenderAction extends Action{
 	{
 		return  "Z: " + z + " X: " + x + " Y: " + y;
 	}
+
+	public String getScriptFileName() {
+		// TODO Auto-generated method stub
+		return Maperitive.getScriptFileName(this);
+	}
 	
 	
 }

@@ -67,4 +67,12 @@ public class Maperitive {
 			e.printStackTrace();
 		}
 	}
+
+	public static String getScriptFileName(RenderAction renderAction) {
+		// TODO Auto-generated method stub
+		Tile tileToRender = new Tile(renderAction.getX(), renderAction.getY(), renderAction.getZ(), "Temporary tile for maperitive");
+		String scriptFileName = tileToRender.toString() + ".maperitivescript";
+
+		return scriptFileName;
+	}
 }

@@ -1,3 +1,3 @@
-java -jar osmtilemachine.jar -source downloadsweden -update -renderarea Falun -verbose -maxzoom 15
+java -jar osmtilemachine.jar -source downloadsweden -renderarea Falun -verbose -maxzoom 15 -generatelowzoom
 start webroot\index.html
 pause

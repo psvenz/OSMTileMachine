@@ -8,7 +8,7 @@ public class Geography {
 		nameOfRegion = nameOfRegion.trim();
 		if (nameOfRegion.equalsIgnoreCase("dalarna"))
 		{
-			BoundingBox bbox = new BoundingBox(12.12, 59.85, 16.75, 60.28);
+			BoundingBox bbox = new BoundingBox(12.12, 59.85, 16.75, 62.28);
 			tileSet = getTileSetForRegion(bbox);
 		} 
 		
@@ -31,6 +31,17 @@ public class Geography {
 		else if (nameOfRegion.equalsIgnoreCase("scandinavia"))
 		{
 			BoundingBox bbox = new BoundingBox(4.8, 54.54, 31.6, 71.11);
+			tileSet = getTileSetForRegion(bbox);
+		}
+
+		else if (nameOfRegion.equalsIgnoreCase("vanernvatternmalarentest"))
+		{
+			BoundingBox bbox = new BoundingBox(12, 57.6, 19, 59.9);
+			tileSet = getTileSetForRegion(bbox);
+		}
+		else if (nameOfRegion.equalsIgnoreCase("bodensee"))
+		{
+			BoundingBox bbox = new BoundingBox(8.75, 47.3, 9.77, 47.9);
 			tileSet = getTileSetForRegion(bbox);
 		}
 

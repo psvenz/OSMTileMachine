@@ -12,7 +12,12 @@ public class Osmconvert {
 			e.addArgument("--complex-ways");
 		}
 		
-		e.addArgument("--drop-author");
+		if (extractAction.getAuthorStrategy() == ExtractAction.AUTHORSTRATEGY_DROP){
+			e.addArgument("--drop-author");
+		}
+		if (extractAction.getAuthorStrategy() == ExtractAction.AUTHORSTRATEGY_FAKE){
+			e.addArgument("--fake-author");
+		}
 		
 		e.addArgument("-o=" + extractAction.getOutputFileName());
 		e.run();

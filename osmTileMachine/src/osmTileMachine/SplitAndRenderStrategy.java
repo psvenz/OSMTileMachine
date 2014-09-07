@@ -124,11 +124,11 @@ public class SplitAndRenderStrategy {
 			DeleteFileSetAction z10_eachTileDeleteList = new DeleteFileSetAction();
 			Tile t = thisZoomLevelTileSet.tileSetIteratorGetTile();
 
-			ExtractAction extractActionLargeClip = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(8).toString() + ".pbf", t.toString() + "_largecut.o5m");
-			z10_eachTileDeleteList.addFileName(   sessionConfiguration.getWorkingDirectory() + File.separator +                                                                                                            t.toString() + "_largecut.o5m");
+			ExtractAction extractActionLargeClip = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(largeMargin), ExtractAction.CUTMETHOD_CLIP, t.getLowerZoomLevelTile(8).toString() + ".pbf", t.toString() + "_largecut.pbf", ExtractAction.AUTHORSTRATEGY_FAKE);
+			z10_eachTileDeleteList.addFileName(   sessionConfiguration.getWorkingDirectory() + File.separator +                                                                                                            t.toString() + "_largecut.pbf");
 			actionList.addItem(extractActionLargeClip);
 
-			ExtractAction extractActionCompleteRelations = new ExtractAction(ExtractAction.TOOL_OSMCONVERT, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.toString() + "_largecut.o5m", t.toString() + ".osm");
+			ExtractAction extractActionCompleteRelations = new ExtractAction(ExtractAction.TOOL_OSMOSIS, t.getBoundingBoxWithMargin(smallMargin), ExtractAction.CUTMETHOD_COMPLEXWAYS, t.toString() + "_largecut.pbf", t.toString() + ".osm");
 			z10_eachTileDeleteList.addFileName(   sessionConfiguration.getWorkingDirectory() + File.separator +                                                                                                           t.toString() + ".osm");
 			actionList.addItem(extractActionCompleteRelations);
 

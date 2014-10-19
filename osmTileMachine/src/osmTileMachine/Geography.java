@@ -44,6 +44,17 @@ public class Geography {
 			BoundingBox bbox = new BoundingBox(8.75, 47.3, 9.77, 47.9);
 			tileSet = getTileSetForRegion(bbox);
 		}
+		else if (nameOfRegion.equalsIgnoreCase("frankfurt"))
+		{
+			BoundingBox bbox = new BoundingBox(7.7, 49.8, 10, 50.6);
+			tileSet = getTileSetForRegion(bbox);
+		}
+
+		else if (nameOfRegion.equalsIgnoreCase("holland"))
+		{
+			BoundingBox bbox = new BoundingBox(3, 50.7, 8, 53.7);
+			tileSet = getTileSetForRegion(bbox);
+		}
 
 		else if (nameOfRegion.equalsIgnoreCase("falun"))
 		{

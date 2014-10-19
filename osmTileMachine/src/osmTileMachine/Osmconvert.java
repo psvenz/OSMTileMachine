@@ -6,8 +6,10 @@ public class Osmconvert {
 		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 		e.setCommand("osmconvert");
 		e.addArgument(extractAction.getInputFileName());
-		e.addArgument(boundaryBoxToArgument(extractAction.getBoundingBox()));
-
+		if (extractAction.getCutMethod() != ExtractAction.CUTMETHOD_NOCUT) {
+				e.addArgument(boundaryBoxToArgument(extractAction.getBoundingBox()));
+		}
+		
 		if (extractAction.getCutMethod() == ExtractAction.CUTMETHOD_COMPLEXWAYS){
 			e.addArgument("--complex-ways");
 		}

@@ -1,5 +1,7 @@
 package osmTileMachine;
 
+import java.io.File;
+
 public class ExtractAction extends Action{
 
 	//	int getActionType() {
@@ -8,6 +10,7 @@ public class ExtractAction extends Action{
 
 	public final static int TOOL_OSMCONVERT = 1;
 	public final static int TOOL_OSMOSIS = 2;
+	public final static int CUTMETHOD_NOCUT = 3;
 	
 	public final static int CUTMETHOD_CLIP = 1;
 	public final static int CUTMETHOD_COMPLEXWAYS = 2;
@@ -53,7 +56,29 @@ public class ExtractAction extends Action{
 	void runAction(Configuration sessionConfiguration) throws Exception {
 		if (this.getTool() == TOOL_OSMCONVERT)
 		{
-			Osmconvert.runExtractAction(sessionConfiguration, this);
+			//Workaround for osmconvert not able to handle input files larger than 2GB with o5m input using complexways method.
+			File f = new File(sessionConfiguration.getWorkingDirectory() + File.separator + this.inputFileName);
+			long fileSize =  f.length();
+			if ((fileSize > 2*1000*1000*1000) && cutMethod == CUTMETHOD_COMPLEXWAYS) {
+								//kör en extra osmconvert från z10_largecut.o5m till z10_largecut.pbf
+				//osmosis    COMPLEXWAYS producerar z10.osm
+				String intermediateFileName = outputFileName + ".intermediate.pbf";
+				ExtractAction extraExtractAction = new ExtractAction(TOOL_OSMCONVERT, this.boundingBox, CUTMETHOD_NOCUT, this.inputFileName, intermediateFileName, AUTHORSTRATEGY_FAKE);
+				Osmconvert.runExtractAction(sessionConfiguration, extraExtractAction);
+
+				this.setInputFileName(intermediateFileName);
+				Osmosis.runExtractAction(sessionConfiguration, this);
+				
+				if (sessionConfiguration.getKeepIntermediateFiles()==false) {
+					DeleteFileSetAction dAction = new DeleteFileSetAction();
+					dAction.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + intermediateFileName);
+					dAction.runAction(sessionConfiguration);
+				}
+			}
+			else {
+			//Business as usual
+				Osmconvert.runExtractAction(sessionConfiguration, this);
+			}
 		} else if (this.getTool() == TOOL_OSMOSIS) {
 			Osmosis.runExtractAction(sessionConfiguration, this);
 		}

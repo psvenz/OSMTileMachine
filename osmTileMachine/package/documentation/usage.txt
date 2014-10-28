@@ -45,6 +45,10 @@ Parameter description:
 			
 		-webroot xxxxx
 			Specifies a custom webroot directory. for example c:\webroot
+		
+		-minfilesize yyy
+			Removes all rendered png images on the maxzoom level with smaller filesize then yyy bytes. (tune for removal of one colored images). 
+			Saves up to 75% diskspace on oceans, middle of lakes etc, pure land etc...
 			
 		-keepdownloaded
 			If a download is ordered, the file will be kept. If not set, the downloaded file will be removed when it is no longer needed.

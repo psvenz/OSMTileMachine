@@ -136,6 +136,9 @@ public class SplitAndRenderStrategy {
 			z10_eachTileDeleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + renderAction.getScriptFileName());
 			actionList.addItem(renderAction);
 			
+			DeleteEmptyTilesAction deleteEmptyTilesAction = new DeleteEmptyTilesAction(sessionConfiguration.getMinFileSize(), t, sessionConfiguration.getMaxZoom()); 
+			if (sessionConfiguration.getMinFileSize() > 0) actionList.addItem(deleteEmptyTilesAction);
+			
 			if (sessionConfiguration.getKeepIntermediateFiles() == false)
 				actionList.addItem(z10_eachTileDeleteList);
 		}

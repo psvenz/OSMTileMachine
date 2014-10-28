@@ -1,5 +1,7 @@
 package osmTileMachine;
 
+import java.io.File;
+
 
 public class RenderAction extends Action{
 	public final static int TOOL_MAPERITIVE = 1;
@@ -70,6 +72,12 @@ public class RenderAction extends Action{
 	public String getScriptFileName() {
 		// TODO Auto-generated method stub
 		return Maperitive.getScriptFileName(this);
+	}
+
+	public static String getImageFileName(Tile t,
+			Configuration sessionConfiguration) {
+		// TODO Auto-generated method stub
+		return sessionConfiguration.getWebrootDirectoryName() + File.separator + "Tiles" + File.separator + t.getZ() + File.separator + t.getX() + File.separator + t.getY() + ".png";
 	}
 	
 	

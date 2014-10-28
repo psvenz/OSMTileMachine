@@ -17,3 +17,6 @@ Required tools and location:
 					
 6. Java				Java SE JRE version 7 needed.
 					Download Java from www.java.com
+					
+7. osmosis			Place in path, follow installation instructions.
+					Download from http://wiki.openstreetmap.org/wiki/Osmosis

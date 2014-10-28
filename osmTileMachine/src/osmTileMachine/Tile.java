@@ -111,6 +111,7 @@ public class Tile {
 		// TODO Auto-generated method stub
 		return z + File.separator + x + File.separator + y + ".png";
 	}
+
 	public Tile getNextHigherZoomTile(int i) {
 		// TODO Auto-generated method stub
 		if (i==1)
@@ -127,6 +128,32 @@ public class Tile {
 			// quadrant 4			
 			return getTile(this.getLonMin() + this.getLonWidth()*0.75, this.getLatMin() + this.getLatWidth()*0.75, this.z+1);
 		}
+	}
+
+	public TileSet getAllHigherZoomTiles(int requestedZ) throws Exception {
+		int z = this.z;
+
+		TileSet tileSet = new TileSet();
+		tileSet.add(this);
+
+		while (z < requestedZ)
+		{
+			TileSet intermediateTileSet = new TileSet();
+			tileSet.tileSetIteratorStart();
+
+			while (tileSet.tileSetIteratorHasNext()){	
+				Tile tile;
+				tile = tileSet.tileSetIteratorGetTile();
+				
+				intermediateTileSet.add(tile.getNextHigherZoomTile(1));
+				intermediateTileSet.add(tile.getNextHigherZoomTile(2));
+				intermediateTileSet.add(tile.getNextHigherZoomTile(3));
+				intermediateTileSet.add(tile.getNextHigherZoomTile(4));
+			}
+			z++;
+			tileSet = intermediateTileSet;
+		}
+		return tileSet;
 	}
 }
 

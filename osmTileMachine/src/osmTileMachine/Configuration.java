@@ -11,6 +11,7 @@ public class Configuration {
 	public final int SOURCETYPE_URL = 2;
 	public final int SOURCETYPE_LOCALFILE = 3;
 
+	private int minFileSize = 0;
 	private int sourceType;
 	private boolean updateSource;
 	private boolean render;
@@ -111,6 +112,26 @@ public class Configuration {
 				setFirstAction(Integer.parseInt(args[i+1]));
 				i++;
 			}
+
+			
+			
+			
+			else if (arg.toLowerCase().contentEquals("-minfilesize"))
+			{
+				if (i+1 == args.length) // nothing follows -minfilesize 
+				{
+					throw new ParseException("minfilesize argument missing", i);
+				}
+				setMinFileSize(Integer.parseInt(args[i+1]));
+				i++;
+			}
+
+			
+			
+			
+			
+			
+			
 			else if (arg.toLowerCase().contentEquals("-webroot"))
 			{
 				if (i+1 == args.length) // nothing follows 
@@ -147,6 +168,10 @@ public class Configuration {
 		}
 		if (enableDebugOutput) System.out.println("Successfully parsed all input arguments.");
 
+	}
+	private void setMinFileSize(int i) {
+		// TODO Auto-generated method stub
+		minFileSize = i;
 	}
 	private void setMaxZoom(int i) {
 		// TODO Auto-generated method stub
@@ -281,6 +306,10 @@ public class Configuration {
 	}
 	private void setKeepIntermediateFiles(boolean keepIntermediateFiles) {
 		this.keepIntermediateFiles = keepIntermediateFiles;
+	}
+	public int getMinFileSize() {
+		// TODO Auto-generated method stub
+		return minFileSize;
 	}
 
 }

@@ -6,7 +6,7 @@ import java.io.File;
 
 public class SplitAndRenderStrategy {
 	private static double smallMargin = 0.04; //Degrees
-//	private static double smallMargin = 0.05; //Degrees
+	//	private static double smallMargin = 0.05; //Degrees
 	private static double largeMargin = 2; //Degrees
 
 	public static ActionList CreateActionList(Configuration sessionConfiguration, TileSet RequestedTileSet, String inputFileName, ActionList deleteSourceFilesActionList) throws Exception
@@ -31,7 +31,7 @@ public class SplitAndRenderStrategy {
 			actionList.addItem(extractAction);
 			z4deleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + fileName);
 		}
-		
+
 		// All z4 data files created. If requested, remove all source files...
 		if (!sessionConfiguration.getKeepDownload()) {
 			actionList.append(deleteSourceFilesActionList);
@@ -51,13 +51,13 @@ public class SplitAndRenderStrategy {
 			z5deleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + fileName);
 
 		}
-		
+
 		// Delete files needed to generate zoomlevel 5
 		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
 			actionList.addItem(z4deleteList);
 
-		
-		
+
+
 		// Add actions to create data for zoomlevel 6
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(6);
 		thisZoomLevelTileSet.tileSetIteratorStart();
@@ -76,7 +76,7 @@ public class SplitAndRenderStrategy {
 		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
 			actionList.addItem(z5deleteList);
 
-		
+
 		// Add actions to create data for zoomlevel 7
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(7);
 		thisZoomLevelTileSet.tileSetIteratorStart();
@@ -114,7 +114,7 @@ public class SplitAndRenderStrategy {
 		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
 			actionList.addItem(z7deleteList);
 
-		
+
 
 		// Add actions to create data for zoomlevel 10
 		thisZoomLevelTileSet = RequestedTileSet.getAllParentTiles(10);
@@ -135,9 +135,16 @@ public class SplitAndRenderStrategy {
 			RenderAction renderAction = new RenderAction(RenderAction.TOOL_MAPERITIVE, t.getX(), t.getY(), t.getZ(), getHighestRenderLevel(), sessionConfiguration.getRuleSetFilename(), sessionConfiguration.getWebrootDirectoryName(), t.toString() + ".osm");
 			z10_eachTileDeleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + renderAction.getScriptFileName());
 			actionList.addItem(renderAction);
-			
-			DeleteEmptyTilesAction deleteEmptyTilesAction = new DeleteEmptyTilesAction(sessionConfiguration.getMinFileSize(), t, sessionConfiguration.getMaxZoom()); 
-			if (sessionConfiguration.getMinFileSize() > 0) actionList.addItem(deleteEmptyTilesAction);
+
+
+			if (sessionConfiguration.getMinFileSize() > 0) 
+			{
+				for (int i=13; i<=sessionConfiguration.getMaxZoom();i++)
+				{
+					DeleteEmptyTilesAction deleteEmptyTilesAction = new DeleteEmptyTilesAction(sessionConfiguration.getMinFileSize(), t,i); 
+					actionList.addItem(deleteEmptyTilesAction);
+				}
+			}
 			
 			if (sessionConfiguration.getKeepIntermediateFiles() == false)
 				actionList.addItem(z10_eachTileDeleteList);
@@ -147,8 +154,8 @@ public class SplitAndRenderStrategy {
 		if (sessionConfiguration.getKeepIntermediateFiles() == false) 
 			actionList.addItem(z8deleteList);
 
-		
-		
+
+
 		// lower zoom levels requested? 
 		if (sessionConfiguration.getLowZoom()){
 			TileSet z9 = RequestedTileSet.getAllParentTiles(9);
@@ -161,7 +168,7 @@ public class SplitAndRenderStrategy {
 			TileSet z2 = RequestedTileSet.getAllParentTiles(2);
 			TileSet z1 = RequestedTileSet.getAllParentTiles(1);
 			TileSet z0 = RequestedTileSet.getAllParentTiles(0);
-			
+
 			actionList.addItem(new GenerateLowZoomLevelAction(z9, " z9"));
 			actionList.addItem(new GenerateLowZoomLevelAction(z8, " z8"));
 			actionList.addItem(new GenerateLowZoomLevelAction(z7, " z7"));
@@ -172,7 +179,7 @@ public class SplitAndRenderStrategy {
 			actionList.addItem(new GenerateLowZoomLevelAction(z2, " z2"));
 			actionList.addItem(new GenerateLowZoomLevelAction(z1, " z1"));
 			actionList.addItem(new GenerateLowZoomLevelAction(z0, " z0"));
-			
+
 		}
 
 
@@ -190,9 +197,9 @@ public class SplitAndRenderStrategy {
 
 	public static int getMaxZoomLevel(Configuration sessionConfiguration, RenderAction renderAction) {
 		return sessionConfiguration.getMaxZoom();
-//		return 13; //Limited in proof of concept demo
+		//		return 13; //Limited in proof of concept demo
 
-	/*	File inputFile = new File( sessionConfiguration.getWorkingDirectory() + "\\" +renderAction.getDataFileName());
+		/*	File inputFile = new File( sessionConfiguration.getWorkingDirectory() + "\\" +renderAction.getDataFileName());
 		long sizeKB = inputFile.length()/1024;
 		if (sizeKB > 10000)
 		{
@@ -205,6 +212,6 @@ public class SplitAndRenderStrategy {
 		else {
 			return 12;
 		}*/
-		
+
 	}
 }

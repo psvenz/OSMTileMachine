@@ -86,7 +86,7 @@ public class DeleteEmptyTilesAction extends Action{
 
 	@Override
 	String getActionInHumanReadableFormat() {
-		return "DeleteEmptyTilesAction: minsize=" + this.minFileSize + " tile: " + this.tile.toString();
+		return "DeleteEmptyTilesAction: minsize=" + this.minFileSize + " tile: " + this.tile.toString() + " zoom: " + deleteZoomLevel ;
 	}
 
 }

@@ -1,0 +1,227 @@
+// Example of Maperitive rendering rules for OSMTileMachine
+
+features
+	points
+		place : place
+	lines
+		road : highway 
+		waterway : waterway
+	areas
+		landuse : landuse
+		waterarea : natural=water OR waterway
+		building : building
+		barrier : barrier
+		parking : amenity=parking
+		recreation : leisure
+
+properties
+	map-background-color : #ffffee
+	map-sea-color : #3333ff
+	text-color : #000000
+	text-halo-color : #ffffff
+	text-halo-width : 40%
+	font-size : 14
+	font-family : Clear Sans
+	font-weight : bold
+
+rules
+	target : place
+		for : place=city
+			define
+				min-zoom : 7
+				max-zoom : 14
+
+		elsefor : place=suburb
+			define
+				min-zoom : 13
+				max-zoom : 16
+		elsefor : place=town
+			define
+				min-zoom : 13
+				max-zoom : 15
+		elsefor : place=village
+			define
+				min-zoom : 14
+				max-zoom : 16
+
+		elsefor : place=neighbourhood
+			define
+				min-zoom : 15
+				max-zoom : 16
+		elsefor : place=locality
+			define
+				min-zoom : 15
+				max-zoom : 17
+		elsefor : place=hamlet
+			define
+				min-zoom : 15
+				max-zoom : 17
+
+		elsefor : place=isolated_dwelling
+			define
+				min-zoom : 15
+				max-zoom : 17
+
+		else
+			stop
+		define
+			text-color : #000000
+		draw : text
+	
+
+	target : building
+		define
+			line-style : none
+			min-zoom : 13
+			fill-color : #857469
+		draw : fill
+
+	target : road
+
+
+
+
+		for : highway=footway or footway=designated
+			define
+				min-zoom : 17
+				line-color : #ee3333
+				line-width : 17:1;19:2
+				line-opacity : 1
+				line-style : dash
+		elsefor : highway=cycleway or cycleway=designated
+			define
+				min-zoom : 15
+				line-color : #3333dd
+				line-width : 13:1;16:2
+				line-opacity : 1
+				line-style : dash
+		elsefor : highway=path
+			define
+				min-zoom : 13
+				line-color : #000000
+				line-width : 1
+				line-opacity : 0.5
+				line-style : dash
+		elsefor : highway=track
+			define
+				min-zoom : 13
+				line-color : #774422
+				line-width : 13:1;16:2
+				line-opacity : 1
+				line-style : dash
+
+		elsefor : highway=residential or highway=service or highway=living_street or highway=road or highway=services or highway=turning_loop or highway=raceway
+			define
+				min-zoom : 12
+				line-color : #ffffff
+				line-width : 13:1;15:3;19:5
+				border-style : solid
+				border-color : #000000
+				border-width : 20%
+
+		elsefor : highway=unclassified
+			define
+				min-zoom : 9
+				line-color : #ffffff
+				line-width : 9:1;15:3;19:10
+				border-style : solid
+				border-color : #000000
+				border-width : 20%
+
+		elsefor : highway=tertiary or highway=tertiary_link
+			define
+				min-zoom : 9
+				line-color : #eeee77
+				line-width : 9:1;15:3;19:10
+				border-style : solid
+				border-color : #000000
+				border-width : 20%
+		elsefor : highway=secondary or highway=secondary_link
+			define
+				min-zoom : 7
+				line-color : #eebb55
+				line-width : 7:1;14:3;18:10
+				border-style : solid
+				border-color : #000000
+				border-width : 20%
+
+		elsefor : highway=primary or highway=primary_link
+			define
+				min-zoom : 5
+				line-color : #ff5555
+				line-width : 7:1;12:3;18:10
+				border-style : solid
+				border-color : #000000
+				border-width : 20%
+		elsefor : highway=motorway or highway=trunk or highway=motorway_link or highway=trunk_link
+			define
+				min-zoom : 5
+				line-color : #ff3333
+				line-width : 6:1;10:3;16:10
+				border-style : solid
+				border-color : #000000
+				border-width : 20%
+		else
+			stop
+		draw : line
+
+	target : barrier
+		define
+			min-zoom : 15
+			line-color : #222222
+			line-width : 0.5		
+		draw : line
+
+	target : parking
+		define
+			min-zoom : 12	
+			line-width : 0.5
+			line-color : #dc9833
+			line-opacity : 0.3
+			fill-color : #f8f8c1
+
+		draw : fill
+
+	target : waterarea
+		define
+			line-style : none
+			fill-color : #4a66ff
+		draw : fill
+
+
+	target : waterway
+		define
+			min-zoom : 12
+			line-color : #4a66ff
+			line-width : 13:0.5;17:2
+		draw : line
+
+
+
+
+
+	target : recreation 
+		for : leisure=park
+			define
+				line-style : none
+				fill-color : #bbffbb
+			draw : fill
+		else
+			define
+				line-style : none
+				fill-color : #e0f0e0
+			draw : fill
+	target : landuse
+		for : landuse=forest OR natural=wood
+			define
+				line-style : none
+				fill-color : #66aa66
+			draw : fill
+		else
+
+			define
+				line-style : none
+				fill-color : #cfcfcf
+			draw : fill
+		
+		

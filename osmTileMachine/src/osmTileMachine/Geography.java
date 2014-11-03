@@ -11,7 +11,7 @@ public class Geography {
 			BoundingBox bbox = new BoundingBox(12.12, 59.85, 16.75, 62.28);
 			tileSet = getTileSetForRegion(bbox);
 		} 
-		
+
 		else if (nameOfRegion.equalsIgnoreCase("vänern"))
 		{
 			BoundingBox bbox = new BoundingBox(12.306, 58.38, 14.094, 59.42);
@@ -61,6 +61,22 @@ public class Geography {
 			BoundingBox bbox = new BoundingBox(15.1364136,60.3812903, 16.1553955, 60.7591595);
 			tileSet = getTileSetForRegion(bbox);
 		}
+		else if (nameOfRegion.startsWith("box="))
+		{
+			int comma1 = nameOfRegion.indexOf(",", 0);
+			int comma2 = nameOfRegion.indexOf(",", comma1+1);
+			int comma3 = nameOfRegion.indexOf(",", comma2+1);
+		
+			String minLonString = nameOfRegion.substring(4, comma1); 
+			String minLatString = nameOfRegion.substring(comma1+1, comma2); 
+			String maxLonString = nameOfRegion.substring(comma2+1, comma3); 
+			String maxLatString = nameOfRegion.substring(comma3+1, nameOfRegion.length()); 
+			
+			BoundingBox bbox = new BoundingBox(Double.parseDouble(minLonString), Double.parseDouble(minLatString),Double.parseDouble(maxLonString), Double.parseDouble(maxLatString));
+			tileSet = getTileSetForRegion(bbox);
+			
+		}
+
 
 
 		return tileSet;

@@ -31,7 +31,13 @@ Parameter description:
 			Scandinavia
 			Niemisel
 			Vänern
+
+			Or custom area as below:
+			box=minLON,minLAT,maxLON,maxLAT			
 			
+			Example (Nuernberg):
+			box=10.5,49,11.5,50
+
 		-generatelowzoom
 			will create zoom levels 0-9 from level 10 tiles by stiching four tiles together to one and size reduced to 50%.
 		

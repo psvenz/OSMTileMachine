@@ -261,8 +261,8 @@ public class Configuration {
 	}
 	public String getRuleSetFilename() {
 
-		return System.getProperty("user.dir") + "\\rules\\mtbmap.se.rules";
-
+//		return System.getProperty("user.dir") + "\\rules\\mtbmap.se.rules";
+		return System.getProperty("user.dir") + "\\rules\\default.mrules";
 	}
 	
 	public String getWebrootDirectoryName() {

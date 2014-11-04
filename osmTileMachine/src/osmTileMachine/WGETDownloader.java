@@ -93,6 +93,8 @@ public class WGETDownloader {
 
 
 	private static String findFastestMirror (Configuration sessionConfiguration, ArrayList<String> mirrors) throws Exception{
+		if (mirrors.size()==1) return mirrors.get(0);
+		
 		if (sessionConfiguration.getDebugOutput())
 		{
 			MessagePrinter.debug(sessionConfiguration, "Attempting WGET download with the following mirrors:");

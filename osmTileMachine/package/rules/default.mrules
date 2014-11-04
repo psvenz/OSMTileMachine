@@ -15,8 +15,8 @@ features
 		recreation : leisure
 
 properties
-	map-background-color : #ffffee
-	map-sea-color : #3333ff
+	map-background-color : #fcfaeb
+	map-sea-color : #65a4d0 white 10%
 	text-color : #000000
 	text-halo-color : #ffffff
 	text-halo-width : 40%
@@ -30,6 +30,7 @@ rules
 			define
 				min-zoom : 7
 				max-zoom : 14
+				font-size : 10:25;13:14
 
 		elsefor : place=suburb
 			define
@@ -37,8 +38,9 @@ rules
 				max-zoom : 16
 		elsefor : place=town
 			define
-				min-zoom : 13
+				min-zoom : 10
 				max-zoom : 15
+				font-size : 10:25;13:14
 		elsefor : place=village
 			define
 				min-zoom : 14
@@ -46,7 +48,7 @@ rules
 
 		elsefor : place=neighbourhood
 			define
-				min-zoom : 15
+				min-zoom : 14
 				max-zoom : 16
 		elsefor : place=locality
 			define
@@ -54,7 +56,7 @@ rules
 				max-zoom : 17
 		elsefor : place=hamlet
 			define
-				min-zoom : 15
+				min-zoom : 14
 				max-zoom : 17
 
 		elsefor : place=isolated_dwelling
@@ -83,9 +85,9 @@ rules
 
 		for : highway=footway or footway=designated
 			define
-				min-zoom : 17
+				min-zoom : 16
 				line-color : #ee3333
-				line-width : 17:1;19:2
+				line-width : 16:1;17:2
 				line-opacity : 1
 				line-style : dash
 		elsefor : highway=cycleway or cycleway=designated
@@ -110,7 +112,7 @@ rules
 				line-opacity : 1
 				line-style : dash
 
-		elsefor : highway=residential or highway=service or highway=living_street or highway=road or highway=services or highway=turning_loop or highway=raceway
+		elsefor : highway=residential or (highway=service AND (NOT service=parking_aisle)) or highway=living_street or highway=road or highway=services or highway=turning_loop or highway=raceway
 			define
 				min-zoom : 12
 				line-color : #ffffff
@@ -119,45 +121,54 @@ rules
 				border-color : #000000
 				border-width : 20%
 
+		elsefor : (highway=service AND service=parking_aisle)
+			define
+				min-zoom : 15
+				line-color : #ffffff
+				line-width : 15:2;19:4
+				border-style : solid
+				border-color : #000000
+				border-width : 20%
+
 		elsefor : highway=unclassified
 			define
-				min-zoom : 9
+				min-zoom : 12
 				line-color : #ffffff
 				line-width : 9:1;15:3;19:10
 				border-style : solid
 				border-color : #000000
 				border-width : 20%
 
-		elsefor : highway=tertiary or highway=tertiary_link
+		elsefor : highway=tertiary  or highway=tertiary_link
 			define
-				min-zoom : 9
+				min-zoom : 11
 				line-color : #eeee77
-				line-width : 9:1;15:3;19:10
+				line-width : 11:2;15:3;19:10
 				border-style : solid
 				border-color : #000000
 				border-width : 20%
-		elsefor : highway=secondary or highway=secondary_link
+		elsefor : highway=secondary or highway=primary_link
 			define
 				min-zoom : 7
 				line-color : #eebb55
-				line-width : 7:1;14:3;18:10
+				line-width : 7:2;14:3;18:10
 				border-style : solid
 				border-color : #000000
 				border-width : 20%
 
-		elsefor : highway=primary or highway=primary_link
+		elsefor : highway=primary or highway=motorway_link or highway=trunk_link
 			define
 				min-zoom : 5
-				line-color : #ff5555
-				line-width : 7:1;12:3;18:10
+				line-color : #ff9155
+				line-width : 6:1;11:4;17:10
 				border-style : solid
 				border-color : #000000
 				border-width : 20%
-		elsefor : highway=motorway or highway=trunk or highway=motorway_link or highway=trunk_link
+		elsefor : highway=motorway or highway=trunk
 			define
 				min-zoom : 5
 				line-color : #ff3333
-				line-width : 6:1;10:3;16:10
+				line-width : 6:1;10:5;16:10
 				border-style : solid
 				border-color : #000000
 				border-width : 20%
@@ -174,27 +185,32 @@ rules
 
 	target : parking
 		define
-			min-zoom : 12	
+			min-zoom : 15	
 			line-width : 0.5
 			line-color : #dc9833
 			line-opacity : 0.3
-			fill-color : #f8f8c1
+			fill-color : #f3f298
 
 		draw : fill
 
 	target : waterarea
 		define
 			line-style : none
-			fill-color : #4a66ff
+			fill-color : #65a4d0 
 		draw : fill
+
 
 
 	target : waterway
 		define
 			min-zoom : 12
-			line-color : #4a66ff
+			line-color : #65a4d0 
 			line-width : 13:0.5;17:2
 		draw : line
+
+
+
+
 
 
 
@@ -204,24 +220,32 @@ rules
 		for : leisure=park
 			define
 				line-style : none
-				fill-color : #bbffbb
+				fill-color : #caff99
 			draw : fill
 		else
 			define
-				line-style : none
-				fill-color : #e0f0e0
+				line-style : solid
+				line-width : 1
+				line-opacity : 0.3
+				fill-color : #daffa9
 			draw : fill
 	target : landuse
 		for : landuse=forest OR natural=wood
 			define
 				line-style : none
-				fill-color : #66aa66
+				fill-color : #9ade84
+			draw : fill
+
+		elsefor : landuse=residential
+			define
+				line-style : none
+				fill-color : #dfdfcf 
 			draw : fill
 		else
 
 			define
 				line-style : none
-				fill-color : #cfcfcf
+				fill-color : #cfd4df
 			draw : fill
 		
 		

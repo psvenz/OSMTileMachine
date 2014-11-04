@@ -208,27 +208,6 @@ rules
 			line-width : 13:0.5;17:2
 		draw : line
 
-
-
-
-
-
-
-
-
-	target : recreation 
-		for : leisure=park
-			define
-				line-style : none
-				fill-color : #caff99
-			draw : fill
-		else
-			define
-				line-style : solid
-				line-width : 1
-				line-opacity : 0.3
-				fill-color : #daffa9
-			draw : fill
 	target : landuse
 		for : landuse=forest OR natural=wood
 			define
@@ -248,4 +227,18 @@ rules
 				fill-color : #cfd4df
 			draw : fill
 		
+
+	target : recreation 
+		for : leisure=park
+			define
+				line-style : none
+				fill-color : #caff99
+			draw : fill
+		else
+			define
+				line-style : solid
+				line-width : 1
+				line-opacity : 0.3
+				fill-color : #daffa9
+			draw : fill
 		

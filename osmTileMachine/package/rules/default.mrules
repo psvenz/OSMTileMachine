@@ -30,7 +30,7 @@ rules
 			define
 				min-zoom : 7
 				max-zoom : 14
-				font-size : 10:25;13:14
+				font-size : 10:15;13:14
 
 		elsefor : place=suburb
 			define
@@ -40,7 +40,7 @@ rules
 			define
 				min-zoom : 10
 				max-zoom : 15
-				font-size : 10:25;13:14
+				font-size : 10:15;13:14
 		elsefor : place=village
 			define
 				min-zoom : 14

@@ -24,6 +24,7 @@ public class Configuration {
 	private boolean keepIntermediateFiles;
 	private String webrootDirectoryName;
 	private boolean lowZoom;
+	private String ruleSetFilename;
 
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
@@ -142,6 +143,17 @@ public class Configuration {
 				i++;
 			}
 
+			
+			else if (arg.toLowerCase().contentEquals("-rules"))
+			{
+				if (i+1 == args.length) // nothing follows 
+				{
+					throw new ParseException("rules argument missing", i);
+				}
+				setRuleSetFilename(args[i+1]);
+				i++;
+			}
+
 
 			else if (arg.toLowerCase().contentEquals("-maxzoom"))
 			{
@@ -226,8 +238,13 @@ public class Configuration {
 		setLowZoom(false);
 		setKeepDownload(false);
 		setKeepIntermediateFiles(false);
+		setRuleSetFilename(System.getProperty("user.dir") + "\\rules\\default.mrules");
 	}
 
+	private void setRuleSetFilename(String string) {
+		// TODO Auto-generated method stub
+		ruleSetFilename = System.getProperty("user.dir") + "\\rules\\" + string;
+	}
 	private void setLowZoom(boolean b) {
 		// TODO Auto-generated method stub
 		lowZoom = b;
@@ -259,10 +276,10 @@ public class Configuration {
 		// TODO Auto-generated method stub
 		return enableDebugOutput;
 	}
+	
 	public String getRuleSetFilename() {
-
-//		return System.getProperty("user.dir") + "\\rules\\mtbmap.se.rules";
-		return System.getProperty("user.dir") + "\\rules\\default.mrules";
+		return ruleSetFilename;
+//		return System.getProperty("user.dir") + "\\rules\\default.mrules";
 	}
 	
 	public String getWebrootDirectoryName() {

@@ -29,7 +29,7 @@
 
 	// create the tile layer with correct attribution
 //	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-//	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+//	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors. ';
 //	var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 3, attribution: osmAttrib});		
 
 	map.setView(new L.LatLng(59.33, 18.04),10);
@@ -38,7 +38,7 @@
 
 		L.tileLayer('Tiles/{z}/{x}/{y}.png', {
 			minZoom: 0, maxZoom: 17,
-			attribution: 'Map data © OpenStreetMap contributors'
+			attribution: 'Map data © OpenStreetMap contributors. Generated with <a href="http://maperitive.net">Maperitive</a> using <a href="https://github.com/psvenz/OSMTileMachine">OSMTileMachine</a>'
 		}).addTo(map);
 
 	</script>

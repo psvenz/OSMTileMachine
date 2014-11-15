@@ -63,14 +63,14 @@ public class Geography {
 		}
 		else if (nameOfRegion.startsWith("box="))
 		{
-			int comma1 = nameOfRegion.indexOf(",", 0);
-			int comma2 = nameOfRegion.indexOf(",", comma1+1);
-			int comma3 = nameOfRegion.indexOf(",", comma2+1);
+			int separator1 = nameOfRegion.indexOf(";", 0);
+			int separator2 = nameOfRegion.indexOf(";", separator1+1);
+			int separator3 = nameOfRegion.indexOf(";", separator2+1);
 		
-			String minLonString = nameOfRegion.substring(4, comma1); 
-			String minLatString = nameOfRegion.substring(comma1+1, comma2); 
-			String maxLonString = nameOfRegion.substring(comma2+1, comma3); 
-			String maxLatString = nameOfRegion.substring(comma3+1, nameOfRegion.length()); 
+			String minLonString = nameOfRegion.substring(4, separator1); 
+			String minLatString = nameOfRegion.substring(separator1+1, separator2); 
+			String maxLonString = nameOfRegion.substring(separator2+1, separator3); 
+			String maxLatString = nameOfRegion.substring(separator3+1, nameOfRegion.length()); 
 			
 			BoundingBox bbox = new BoundingBox(Double.parseDouble(minLonString), Double.parseDouble(minLatString),Double.parseDouble(maxLonString), Double.parseDouble(maxLatString));
 			tileSet = getTileSetForRegion(bbox);

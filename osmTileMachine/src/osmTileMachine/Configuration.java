@@ -238,13 +238,14 @@ public class Configuration {
 		setLowZoom(false);
 		setKeepDownload(false);
 		setKeepIntermediateFiles(false);
-		setRuleSetFilename(System.getProperty("user.dir") + "\\rules\\default.mrules");
+		setRuleSetFilename("default.mrules");
 	}
 
 	private void setRuleSetFilename(String string) {
 		// TODO Auto-generated method stub
-		ruleSetFilename = System.getProperty("user.dir") + "\\rules\\" + string;
+		ruleSetFilename = System.getProperty("user.dir") + "\\rules\\" + string;	
 	}
+	
 	private void setLowZoom(boolean b) {
 		// TODO Auto-generated method stub
 		lowZoom = b;

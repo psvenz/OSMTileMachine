@@ -1,6 +1,3 @@
-Example usage:
-osmTileMachine -source sweden -download -update -renderarea Falun -debug 
-
 Parameter description: 
 
 		-source xxxxx
@@ -51,6 +48,9 @@ Parameter description:
 			
 		-webroot xxxxx
 			Specifies a custom webroot directory. for example c:\webroot
+		
+		-rules xxxxx
+			Specifies a custom rendering ruleset (style). File must be placed in the rules folder. For example blackandwhite.mrules
 		
 		-minfilesize yyy
 			Removes all rendered png images on the maxzoom level with smaller filesize then yyy bytes. (tune for removal of one colored images). 

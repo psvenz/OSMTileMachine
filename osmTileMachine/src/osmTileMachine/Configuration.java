@@ -49,7 +49,7 @@ public class Configuration {
 
 			else if (arg.toLowerCase().contentEquals("-renderarea"))
 			{
-				if (i+1 == args.length) // nothing follows -operatingmode 
+				if (i+1 == args.length) // nothing follows  
 				{
 					throw new ParseException("area argument missing", i);
 				}

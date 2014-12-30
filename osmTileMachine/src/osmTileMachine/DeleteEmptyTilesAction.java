@@ -17,6 +17,14 @@ public class DeleteEmptyTilesAction extends Action{
 
 	@Override
 	void runAction(Configuration sessionConfiguration) throws Exception {
+		// Detect that last rendered tile were skipped
+		if (sessionConfiguration.getLazyUpdate() && sessionConfiguration.getLazyUpdadateLastStatus() == sessionConfiguration.LAZYUPDATELASTSTATUS_SKIPPED)
+		{
+			MessagePrinter.debug(sessionConfiguration, "DeleteEmptyTiles: Skipped");
+			return;
+		}
+		
+		
 		diskFileSizes = new Hashtable<String, Long>();
 		TileSet ts = tile.getAllHigherZoomTiles(deleteZoomLevel);
 		ts.tileSetIteratorStart();
@@ -34,7 +42,7 @@ public class DeleteEmptyTilesAction extends Action{
 			{
 				for (int yDelta = -windowSize;yDelta <= windowSize; yDelta++)
 				{
-					String fileName = RenderAction.getImageFileName(new Tile(t.getX()+xDelta,t.getY()+yDelta,t.getZ(),""), sessionConfiguration);
+					String fileName = RenderAction.getImageFileName(new Tile(t.getX()+xDelta,t.getY()+yDelta,t.getZ(),""), sessionConfiguration.getWebrootDirectoryName(), sessionConfiguration);
 
 
 					Long fileSize = lookupFileSize(fileName);
@@ -43,7 +51,7 @@ public class DeleteEmptyTilesAction extends Action{
 				}
 			}
 
-			String fileName = RenderAction.getImageFileName(t, sessionConfiguration);
+			String fileName = RenderAction.getImageFileName(t, sessionConfiguration.getWebrootDirectoryName(), sessionConfiguration);
 			File dFile = new File(fileName);
 
 

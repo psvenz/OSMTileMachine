@@ -6,6 +6,10 @@ import java.text.ParseException;
 
 public class Configuration {
 
+	public final int LAZYUPDATELASTSTATUS_RENDERED = 1;
+	public final int LAZYUPDATELASTSTATUS_SKIPPED = 2;
+
+	
 	public final int SOURCETYPE_UNSPECIFIED = 0;
 	public final int SOURCETYPE_DOWNLOAD = 1;
 	public final int SOURCETYPE_URL = 2;
@@ -26,6 +30,7 @@ public class Configuration {
 	private boolean lowZoom;
 	private String ruleSetFilename;
 	private boolean lazyUpdate;
+	private int LazyUpdadateLastStatus;
 
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
@@ -346,6 +351,12 @@ public class Configuration {
 	public int getMinFileSize() {
 		// TODO Auto-generated method stub
 		return minFileSize;
+	}
+	public int getLazyUpdadateLastStatus() {
+		return LazyUpdadateLastStatus;
+	}
+	public void setLazyUpdadateLastStatus(int lazyUpdadateLastStatus) {
+		LazyUpdadateLastStatus = lazyUpdadateLastStatus;
 	}
 
 }

@@ -57,7 +57,7 @@ public class MainClass {
 
 		}
 
-		//Merge the two actinlist to one common "remove source action list"
+		//Merge the two actionlist to one common "remove source action list"
 		ActionList deleteSourceFilesActionList = new ActionList();
 		deleteSourceFilesActionList.append (deleteDownlodedFileActionList);
 		deleteSourceFilesActionList.append (deleteUpdatedFileActionList);
@@ -89,11 +89,13 @@ public class MainClass {
 			}
 			else
 			{
-				mainActionList.getNextAction().runAction(sessionConfiguration);
-				System.out.println("Done");
+				Action a = 	mainActionList.getNextAction();
+				System.out.println(a.toString());
+				a.runAction(sessionConfiguration);
 			}
 			i++;
 		}
+		System.out.println("Done");
 	}
 }
 

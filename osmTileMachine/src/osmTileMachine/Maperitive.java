@@ -7,8 +7,6 @@ import java.io.IOException;
 
 public class Maperitive {
 
-	public static final int DYNAMIC_ZMAX = 1000;
-
 	public static void runRenderAction(Configuration sessionConfiguration,
 			RenderAction renderAction) 
 	{
@@ -16,13 +14,7 @@ public class Maperitive {
 		File scriptFile = new File(sessionConfiguration.getWorkingDirectory() + File.separator + tileToRender.toString() + ".maperitivescript");
 		String content;
 
-		int zMax = renderAction.getzMax();
-		if (renderAction.getzMax() == Maperitive.DYNAMIC_ZMAX)
-		{
-			zMax = SplitAndRenderStrategy.getMaxZoomLevel(sessionConfiguration, renderAction);
-			System.out.print("zMax for "+renderAction.toString()+ ": " +zMax + "\r\n");
-		}
-		
+		int zMax = renderAction.getzMax();		
 		content = "use-script-dir" + "\r\n"
 				+ "clear-map" + "\r\n"
 				+ "use-ruleset location=" + '"' + sessionConfiguration.getRuleSetFilename() + '"' + "\r\n"
@@ -33,7 +25,7 @@ public class Maperitive {
 				+ (tileToRender.getLonMax()-0.0001) + ","
 				+ (tileToRender.getLatMax()-0.0001) + "\r\n"
 				+ "change-dir " + renderAction.getOutputDirectoryName() + "\r\n"
-				+ "generate-tiles minzoom=" + renderAction.getZ() + " maxzoom=" + zMax + "\r\n";
+				+ "generate-tiles minzoom=" + renderAction.getzMin() + " maxzoom=" + zMax + "\r\n";
 		//Create output directory
 		File dir = new File(renderAction.getOutputDirectoryName());
 		dir.mkdir();

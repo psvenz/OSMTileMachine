@@ -15,7 +15,7 @@ Parameter description:
 				Any filename inside the workdir directory (pbf filetype)
 		
 		-update
-			Updating the openstreetmap data source file and produces an up-to-the-minute fresh data file with the help from osmupdate tool.
+			Updating the openstreetmap data source file and produces an up-to-the-minute fresh data file with the help from osmupdate tool. 
 		
 		-renderarea yyyyy
 			Splits the updated data source file into smaller and smaller data files until each file could fit into memory of the render tool, then 
@@ -61,3 +61,6 @@ Parameter description:
 
 		-keepintermediate
 			During extraction, a lot of datafiles are produced. Use this flag to keep the files.  If not set, all produces intermediate files will be deleted when they are no longer needed.
+
+		-lazyupdate
+			Renders in two stages: first down to zoom level 14, if none of the png files have changed size abort rendering of deeper zoom levels.

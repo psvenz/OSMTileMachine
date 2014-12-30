@@ -132,14 +132,14 @@ public class SplitAndRenderStrategy {
 			z10_eachTileDeleteList.addFileName(   sessionConfiguration.getWorkingDirectory() + File.separator +                                                                                                           t.toString() + ".osm");
 			actionList.addItem(extractActionCompleteRelations);
 
-			RenderAction renderAction = new RenderAction(RenderAction.TOOL_MAPERITIVE, t.getX(), t.getY(), t.getZ(), getHighestRenderLevel(), sessionConfiguration.getRuleSetFilename(), sessionConfiguration.getWebrootDirectoryName(), t.toString() + ".osm");
+			RenderAction renderAction = new RenderAction(RenderAction.TOOL_MAPERITIVE, t.getX(), t.getY(), t.getZ(), sessionConfiguration.getMaxZoom(), sessionConfiguration.getRuleSetFilename(), sessionConfiguration.getWebrootDirectoryName(), t.toString() + ".osm");
 			z10_eachTileDeleteList.addFileName(sessionConfiguration.getWorkingDirectory() + File.separator + renderAction.getScriptFileName());
 			actionList.addItem(renderAction);
 
 
-			if (sessionConfiguration.getMinFileSize() > 0) 
+			if (sessionConfiguration.getMinFileSize() > 0 && sessionConfiguration.getMaxZoom() >= 15 ) 
 			{
-				for (int i=13; i<=sessionConfiguration.getMaxZoom();i++)
+				for (int i=15; i<=sessionConfiguration.getMaxZoom();i++)
 				{
 					DeleteEmptyTilesAction deleteEmptyTilesAction = new DeleteEmptyTilesAction(sessionConfiguration.getMinFileSize(), t,i); 
 					actionList.addItem(deleteEmptyTilesAction);
@@ -189,9 +189,6 @@ public class SplitAndRenderStrategy {
 
 	public static int getLowestRenderLevel() {
 		return 10;
-	}
-	private static int getHighestRenderLevel() {
-		return Maperitive.DYNAMIC_ZMAX;
 	}
 
 

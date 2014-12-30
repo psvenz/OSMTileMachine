@@ -25,6 +25,7 @@ public class Configuration {
 	private String webrootDirectoryName;
 	private boolean lowZoom;
 	private String ruleSetFilename;
+	private boolean lazyUpdate;
 
 	public void parseInputArguments(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
@@ -103,6 +104,14 @@ public class Configuration {
 			{
 				setLowZoom(true);
 			}
+
+			
+			else if (arg.toLowerCase().contentEquals("-lazyupdate"))
+			{
+				setLazyUpdate(true);
+			}
+
+			
 			
 			else if (arg.toLowerCase().contentEquals("-firstaction"))
 			{
@@ -223,6 +232,11 @@ public class Configuration {
 		return sourceType;
 	}
 
+	public boolean getLazyUpdate()
+	{
+		return lazyUpdate;
+	}
+
 	private void setSourceType(int i) {
 		// TODO Auto-generated method stub
 		sourceType = i;
@@ -239,8 +253,12 @@ public class Configuration {
 		setKeepDownload(false);
 		setKeepIntermediateFiles(false);
 		setRuleSetFilename("default.mrules");
+		setLazyUpdate(false);
 	}
 
+	private void setLazyUpdate(boolean b) {
+		this.lazyUpdate = b;
+	}
 	private void setRuleSetFilename(String string) {
 		// TODO Auto-generated method stub
 		ruleSetFilename = System.getProperty("user.dir") + "\\rules\\" + string;	

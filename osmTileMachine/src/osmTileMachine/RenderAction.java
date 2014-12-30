@@ -10,7 +10,7 @@ public class RenderAction extends Action{
 //		return ACTIONTYPE_RENDERACTION;
 //	}
 
-	private int x, y, z, zMax, tool;
+	private int x, y, z, zMax, tool, zMin;
 	private String ruleSetFileName, outputDirectoryName;
 	private String dataFileName;
 	
@@ -21,6 +21,7 @@ public class RenderAction extends Action{
 		this.y = y;
 		this.z = z;
 		this.zMax = zMax;
+		this.zMin = z;
 		this.dataFileName = dataFileName;
 		this.ruleSetFileName = ruleSetFileName;
 		this.outputDirectoryName = outputDirectoryName;
@@ -29,7 +30,24 @@ public class RenderAction extends Action{
 	void runAction(Configuration sessionConfiguration) throws Exception {
 		if (this.tool == TOOL_MAPERITIVE)
 		{
-			Maperitive.runRenderAction(sessionConfiguration, this);
+			if ((this.zMax <= 14) || (sessionConfiguration.getLazyUpdate() == false))
+			{
+				//Lazyupdate disabled or requested zMax is 14 or less, just render...
+				Maperitive.runRenderAction(sessionConfiguration, this);
+			}
+			else 
+			{
+				//Requested zMax deeper than 14, render in two steps z-14 first, then 14-zMax if criterion is met
+				int requestedZmax = this.zMax;
+				this.zMax = 14;
+				Maperitive.runRenderAction(sessionConfiguration, this);
+
+				// Insert logic to skip deeper levels conditionally here...
+				this.zMin = 15;
+				this.zMax = requestedZmax;
+				Maperitive.runRenderAction(sessionConfiguration, this);				
+			}
+
 		}
 			
 	}
@@ -63,7 +81,11 @@ public class RenderAction extends Action{
 	public int getzMax() {
 		return zMax;
 	}
-	
+
+	public int getzMin() {
+		return zMin;
+	}
+
 	public String toString()
 	{
 		return  "Z: " + z + " X: " + x + " Y: " + y;

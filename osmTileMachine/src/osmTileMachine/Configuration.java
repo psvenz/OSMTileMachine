@@ -110,6 +110,11 @@ public class Configuration {
 				setLowZoom(true);
 			}
 
+			else if (arg.toLowerCase().contentEquals("-disablegeneratelowzoom"))
+			{
+				setLowZoom(true);
+			}
+
 			
 			else if (arg.toLowerCase().contentEquals("-lazyupdate"))
 			{
@@ -254,11 +259,12 @@ public class Configuration {
 		setUpdate(false);
 		setMaxZoom(13);
 		webrootDirectoryName = System.getProperty("user.dir") +"\\" + "webroot";
-		setLowZoom(false);
+		setLowZoom(true);
 		setKeepDownload(false);
 		setKeepIntermediateFiles(false);
 		setRuleSetFilename("default.mrules");
 		setLazyUpdate(false);
+		
 	}
 
 	private void setLazyUpdate(boolean b) {

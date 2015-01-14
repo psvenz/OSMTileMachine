@@ -36,6 +36,8 @@ public class RenderAction extends Action{
 			}
 			else 
 			{
+				MessagePrinter.notify(sessionConfiguration, "Lazyupdate status: Evaluating png file sizes at zoom level 14");
+
 				//Requested zMax deeper than 14, render in two steps z-14 first, then 14-zMax if criterion is met
 				int requestedZmax = this.zMax;
 				String requestedOutputDirectoryName = this.outputDirectoryName; // Render into the workdirectory first...
@@ -76,7 +78,7 @@ public class RenderAction extends Action{
 
 			if (fileSize1.equals(fileSize2) == false) 
 				{
-				MessagePrinter.debug(sessionConfiguration, "File size difference found in " + t.toString());
+				MessagePrinter.notify(sessionConfiguration, "Lazyupdate status: File size difference found in " + t.toString());
 				sessionConfiguration.setLazyUpdadateLastStatus(sessionConfiguration.LAZYUPDATELASTSTATUS_RENDERED);
 				deleteFolder(workDir + File.separator + "Tiles", true);
 				return false;
@@ -84,7 +86,7 @@ public class RenderAction extends Action{
 			
 
 		}
-		MessagePrinter.debug(sessionConfiguration, "No difference found in tiles in 1) " + workDir + " and 2) " + targetDir + " (lazyupdate: skipping re-rendering");
+		MessagePrinter.notify(sessionConfiguration, "lazyupdate status: No difference found in tiles in 1) " + workDir + " and 2) " + targetDir + " (lazyupdate: skipping re-rendering)");
 		sessionConfiguration.setLazyUpdadateLastStatus(sessionConfiguration.LAZYUPDATELASTSTATUS_SKIPPED);
 		deleteFolder(workDir + File.separator + "Tiles", true);
 		return true;

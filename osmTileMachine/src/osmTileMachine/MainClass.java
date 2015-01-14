@@ -90,12 +90,12 @@ public class MainClass {
 			else
 			{
 				Action a = 	mainActionList.getNextAction();
-				System.out.println(a.toString());
+				System.out.println(" " + a.getActionInHumanReadableFormat());
 				a.runAction(sessionConfiguration);
 			}
 			i++;
 		}
-		System.out.println("Done");
+		System.out.println("OSMTileMachine completed.");
 	}
 }
 

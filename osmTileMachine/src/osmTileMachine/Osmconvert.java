@@ -22,6 +22,7 @@ public class Osmconvert {
 		}
 		
 		e.addArgument("-o=" + extractAction.getOutputFileName());
+		e.addArgument("--hash-memory=900");
 		e.run();
 		
 		if (e.ExitValue() == 0) 

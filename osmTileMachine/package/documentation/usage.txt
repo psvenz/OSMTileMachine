@@ -27,7 +27,7 @@ Parameter description:
 			Dalarna
 			Scandinavia
 			Niemisel
-			Vänern
+			vanernvatternmalarentest
 
 			Or custom area as below:
 			box=minLON;minLAT;maxLON;maxLAT			

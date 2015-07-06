@@ -11,7 +11,7 @@ features
 		waterway : waterway
 		cliff : natural=cliff
 	areas
-		landuse : landuse
+		landuse : landuse or natural=wood
 		building : building
 		
 		barrier : barrier

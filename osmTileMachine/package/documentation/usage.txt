@@ -35,6 +35,10 @@ Parameter description:
 			Example (Nuernberg):
 			box=10.5;49;11.5;50
 
+			An osm file can also be used as source of region. Node placement will determine what tiles to render.
+			use with:
+			
+			file=mtbscale_germany.osm
 
 		-verbose will give a verbose output in console
 

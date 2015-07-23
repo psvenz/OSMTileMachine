@@ -1,5 +1,11 @@
 package osmTileMachine;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Geography {
 
 	public static TileSet getTileSetForRegion(String nameOfRegion)
@@ -66,17 +72,87 @@ public class Geography {
 			int separator1 = nameOfRegion.indexOf(";", 0);
 			int separator2 = nameOfRegion.indexOf(";", separator1+1);
 			int separator3 = nameOfRegion.indexOf(";", separator2+1);
-		
+
 			String minLonString = nameOfRegion.substring(4, separator1); 
 			String minLatString = nameOfRegion.substring(separator1+1, separator2); 
 			String maxLonString = nameOfRegion.substring(separator2+1, separator3); 
 			String maxLatString = nameOfRegion.substring(separator3+1, nameOfRegion.length()); 
-			
+
 			BoundingBox bbox = new BoundingBox(Double.parseDouble(minLonString), Double.parseDouble(minLatString),Double.parseDouble(maxLonString), Double.parseDouble(maxLatString));
 			tileSet = getTileSetForRegion(bbox);
-			
+
+		}
+		else if (nameOfRegion.startsWith("file="))
+		{
+
+			String fileName = nameOfRegion.substring(5, nameOfRegion.length()); 
+			try {
+				tileSet = getTileSetForFileArea(fileName);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
+
+
+		return tileSet;
+	}
+
+
+	private static TileSet getTileSetForFileArea(String fileName) throws IOException {
+		TileSet tileSet = new TileSet();
+
+		// Open the file
+		FileInputStream fstream = new FileInputStream(fileName);
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+		String strLine;
+
+		//Read File Line By Line
+		while ((strLine = br.readLine()) != null)   {
+			// Print the content on the console
+			//determine if is is a node
+			if (strLine.trim().substring(0, 6).equals("<node "))
+			{
+				double lat = 0;
+				double lon = 0;
+				String remainingLine = strLine.trim().substring(6, strLine.trim().length());
+
+				//extract one parameter at a time
+				while (remainingLine.length()>4)
+				{
+					int firstQuotePos = remainingLine.indexOf('"', 0);
+					int secondQuotePos = remainingLine.indexOf('"', firstQuotePos+1);
+					String extractedParameter = remainingLine.substring(0, secondQuotePos+1);
+
+					String ParameterKey = remainingLine.substring(0, firstQuotePos-1);
+					String ParameterValue = remainingLine.substring(firstQuotePos+1, secondQuotePos);
+					
+//					System.out.println ("key:"+ParameterKey + "ENDKEY... Value:" + ParameterValue + "ENDVALUE");
+	
+					if (ParameterKey.equals("lat")) lat = Double.parseDouble(ParameterValue);
+					if (ParameterKey.equals("lon")) lon = Double.parseDouble(ParameterValue);
+					
+					
+					remainingLine = remainingLine.substring(secondQuotePos+1, remainingLine.length()).trim();
+				}
+				
+				if (lat != 0 && lon != 0)
+				{
+//					System.out.println("Node detected at lat=" + lat + " lon=" +lon);
+					tileSet.add(Tile.getTile(lon, lat, SplitAndRenderStrategy.getLowestRenderLevel()));
+				}
+			}
+
+
+			//Extract lat
+			//Extract lon
+			//Create tile from lat,lon pair
+			//Add to tile to tileset
+		}
+
+		br.close();
 
 
 		return tileSet;

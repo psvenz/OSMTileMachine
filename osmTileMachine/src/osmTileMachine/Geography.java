@@ -141,7 +141,23 @@ public class Geography {
 				if (lat != 0 && lon != 0)
 				{
 //					System.out.println("Node detected at lat=" + lat + " lon=" +lon);
-					tileSet.add(Tile.getTile(lon, lat, SplitAndRenderStrategy.getLowestRenderLevel()));
+					Tile t = Tile.getTile(lon, lat, SplitAndRenderStrategy.getLowestRenderLevel());
+					int tX = t.getX();
+					int tY = t.getY();
+					int tZ = t.getZ();
+					
+					tileSet.add(t);
+					
+					//Add surrounding tiles as well
+					tileSet.add(new Tile(tX+1,tY+1 ,tZ,"surrounding"));
+					tileSet.add(new Tile(tX+1,tY   ,tZ,"surrounding"));
+					tileSet.add(new Tile(tX+1,tY-1 ,tZ,"surrounding"));
+					tileSet.add(new Tile(tX  ,tY+1 ,tZ,"surrounding"));
+					tileSet.add(new Tile(tX  ,tY-1 ,tZ,"surrounding"));
+					tileSet.add(new Tile(tX-1,tY+1 ,tZ,"surrounding"));
+					tileSet.add(new Tile(tX-1,tY   ,tZ,"surrounding"));
+					tileSet.add(new Tile(tX-1,tY-1 ,tZ,"surrounding"));
+
 				}
 			}
 

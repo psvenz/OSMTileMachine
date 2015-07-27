@@ -67,6 +67,13 @@ public class Geography {
 			BoundingBox bbox = new BoundingBox(15.1364136,60.3812903, 16.1553955, 60.7591595);
 			tileSet = getTileSetForRegion(bbox);
 		}
+
+		else if (nameOfRegion.equalsIgnoreCase("LKP")) //Linköping
+		{
+			BoundingBox bbox = new BoundingBox(15.0430, 58.1185, 16.0579, 58.6634);
+			tileSet = getTileSetForRegion(bbox);
+		}
+		
 		else if (nameOfRegion.startsWith("box="))
 		{
 			int separator1 = nameOfRegion.indexOf(";", 0);

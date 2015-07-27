@@ -2,7 +2,6 @@ package osmTileMachine;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -131,7 +130,6 @@ public class Geography {
 				{
 					int firstQuotePos = remainingLine.indexOf('"', 0);
 					int secondQuotePos = remainingLine.indexOf('"', firstQuotePos+1);
-					String extractedParameter = remainingLine.substring(0, secondQuotePos+1);
 
 					String ParameterKey = remainingLine.substring(0, firstQuotePos-1);
 					String ParameterValue = remainingLine.substring(firstQuotePos+1, secondQuotePos);

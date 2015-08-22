@@ -1,8 +1,14 @@
 package osmTileMachine;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 public class Osmconvert {
 	public static void runExtractAction(Configuration sessionConfiguration, ExtractAction extractAction) throws Exception
 	{
+		
+
+		
 		ExternalToolLauncher e = new ExternalToolLauncher(sessionConfiguration);
 		e.setCommand("osmconvert");
 		e.addArgument(extractAction.getInputFileName());
@@ -38,9 +44,14 @@ public class Osmconvert {
 
 	private static String boundaryBoxToArgument(BoundingBox boundingBox)
 	{
-		return "-b=" + boundingBox.getMinLon() + 
-				"," + boundingBox.getMinLat() + 
-				"," + boundingBox.getMaxLon() + 
-				"," + boundingBox.getMaxLat(); 
+		DecimalFormat coordinateFormat = new DecimalFormat("###.#############");
+		DecimalFormatSymbols coordinateFormatSymbols = coordinateFormat.getDecimalFormatSymbols();
+		coordinateFormatSymbols.setDecimalSeparator('.');
+		coordinateFormat.setDecimalFormatSymbols(coordinateFormatSymbols);
+
+		return "-b=" + coordinateFormat.format(boundingBox.getMinLon()) + 
+				"," + coordinateFormat.format(boundingBox.getMinLat()) + 
+				"," + coordinateFormat.format(boundingBox.getMaxLon()) + 
+				"," + coordinateFormat.format(boundingBox.getMaxLat()); 
 	}
 }

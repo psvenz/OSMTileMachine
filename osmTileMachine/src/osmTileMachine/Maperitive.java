@@ -4,12 +4,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class Maperitive {
 
 	public static void runRenderAction(Configuration sessionConfiguration,
 			RenderAction renderAction) 
 	{
+		DecimalFormat coordinateFormat = new DecimalFormat("###.#############");
+		DecimalFormatSymbols coordinateFormatSymbols = coordinateFormat.getDecimalFormatSymbols();
+		coordinateFormatSymbols.setDecimalSeparator('.');
+		coordinateFormat.setDecimalFormatSymbols(coordinateFormatSymbols);
+
 		Tile tileToRender = new Tile(renderAction.getX(), renderAction.getY(), renderAction.getZ(), "Temporary tile for maperitive");
 		File scriptFile = new File(sessionConfiguration.getWorkingDirectory() + File.separator + tileToRender.toString() + ".maperitivescript");
 		String content;
@@ -20,10 +27,10 @@ public class Maperitive {
 				+ "use-ruleset location=" + '"' + sessionConfiguration.getRuleSetFilename() + '"' + "\r\n"
 				+ "load-source " + renderAction.getDataFileName() +  "\r\n"
 				+ "set-geo-bounds " 
-				+ (tileToRender.getLonMin()+0.0001) + ","
-				+ (tileToRender.getLatMin()+0.0001) + ","
-				+ (tileToRender.getLonMax()-0.0001) + ","
-				+ (tileToRender.getLatMax()-0.0001) + "\r\n"
+				+ coordinateFormat.format((tileToRender.getLonMin()+0.0001)) + ","
+				+  coordinateFormat.format((tileToRender.getLatMin()+0.0001)) + ","
+				+  coordinateFormat.format((tileToRender.getLonMax()-0.0001)) + ","
+				+  coordinateFormat.format((tileToRender.getLatMax()-0.0001)) + "\r\n"
 				+ "change-dir " + renderAction.getOutputDirectoryName() + "\r\n"
 				+ "generate-tiles minzoom=" + renderAction.getzMin() + " maxzoom=" + zMax + "\r\n";
 		//Create output directory

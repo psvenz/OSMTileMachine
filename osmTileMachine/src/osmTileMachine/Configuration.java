@@ -264,7 +264,7 @@ public class Configuration {
 		setKeepIntermediateFiles(false);
 		setRuleSetFilename("default.mrules");
 		setLazyUpdate(false);
-		
+		System.setProperty("http.agent", " OSMTileMachine ");	
 	}
 
 	private void setLazyUpdate(boolean b) {

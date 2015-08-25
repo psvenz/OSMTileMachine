@@ -57,4 +57,8 @@ public final class OpenStreetMapProject {
 	{
 		return url.contains("http://planet.openstreetmap.org");
 	}
+
+	public static String getOpenStreetmapTileURL(Tile source1Tile) {
+		return "http://a.tile.openstreetmap.org/" + source1Tile.getZ() +"/" + source1Tile.getX() + "/" + source1Tile.getY() + ".png";
+	}
 }

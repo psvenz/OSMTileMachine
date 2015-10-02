@@ -32,7 +32,7 @@ public class Configuration {
 	private boolean lazyUpdate;
 	private int LazyUpdadateLastStatus;
 
-	public void parseInputArguments(String[] args) throws ParseException {
+	public void parseInputArguments(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		if (args.length == 0)
 		{
@@ -181,6 +181,7 @@ public class Configuration {
 					throw new ParseException("maxzoom argument missing", i);
 				}
 				setMaxZoom(Integer.parseInt(args[i+1]));
+				if (this.maxZoom < 9) throw new Exception("Input argument out of bounds: maxzoom minimum value is 9");
 				i++;
 			}
 

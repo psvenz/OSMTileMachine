@@ -277,10 +277,10 @@ public class GenerateLowZoomLevelAction extends Action{
 			g.setColor(new Color(1f,0f,0f,0f)); //Red color and fully Transparent
 			g.fillRect(0, 0, 512, 512);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
-			g.drawImage(imgQ[1], 0, 255, null);
+			g.drawImage(imgQ[1], 0, 256, null);
 			g.drawImage(imgQ[2], 0, 0, null);
-			g.drawImage(imgQ[3], 255, 255, null);
-			g.drawImage(imgQ[4], 255, 0, null);
+			g.drawImage(imgQ[3], 256, 256, null);
+			g.drawImage(imgQ[4], 256, 0, null);
 
 			
 //			g.drawImage(imgQ[1], 0, 255, 256, 512, 0, 0, 255, 255, new Color(0f,0f,1f,0.1f), null);

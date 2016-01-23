@@ -1,2 +1,2 @@
-java -jar osmtilemachine.jar -source downloadsweden -rules mtbmap-nextgeneration.mrules -renderarea file=mtbscalesweden.osm -maxzoom 13 -firstaction 140 -verbose
+java -jar osmtilemachine.jar -source downloadsweden default.mrules -renderarea stockholm -maxzoom 15 -verbose
 pause

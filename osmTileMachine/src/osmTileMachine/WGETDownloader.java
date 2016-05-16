@@ -46,9 +46,11 @@ public class WGETDownloader {
 //		String pathf = f.getCanonicalFile().toString();
 //		tool.setCommand(pathf);
 		tool.setCommand(wgetFileName);
-
-		tool.addArgument("--dot-style=giga");	
-		tool.addArgument("-O");
+		tool.addArgument("--dot-style=mega");	
+		tool.addArgument("--timeout=60");	
+		tool.addArgument("--retry-connrefused");	
+		tool.addArgument("--tries=inf");
+		tool.addArgument("-O");	
 		tool.addArgument(fileName);
 		tool.addArgument(fastestMirrorURL);
 		tool.run();
@@ -79,6 +81,8 @@ public class WGETDownloader {
 		}
 		e.addArgument("--help");
 		e.run();
+		
+		int r = e.ExitValue();
 
 		if (e.ExitValue() == 0) 
 		{

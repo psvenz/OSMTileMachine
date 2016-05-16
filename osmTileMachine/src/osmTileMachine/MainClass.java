@@ -96,6 +96,7 @@ public class MainClass {
 			i++;
 		}
 		System.out.println("OSMTileMachine completed.");
+		System.exit(0);
 	}
 }
 
